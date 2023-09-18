@@ -1,0 +1,16 @@
+@layer components {
+  .slideLeft {
+    transition-property: transform;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in;
+    transform: translateX(0);
+  }
+
+  .fadeIn {
+    transition-property: opacity;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in;
+    transition-delay: 200ms;
+    opacity: 1;
+  }
+}
