@@ -8,7 +8,8 @@ const inputFlag = args.indexOf('-i');
 const inputFileArg = args[inputFlag + 1];
 const inputFilePath = path.resolve(inputFileArg);
 
-const outputFilePath = path.resolve(
+const outputFilePath = path.join(
+  __dirname,
   './src/components/base/icons/icomoon/icomoon.ts',
 );
 
