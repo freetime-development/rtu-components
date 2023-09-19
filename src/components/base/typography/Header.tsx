@@ -19,11 +19,11 @@ const defaultVariant = 'h1';
 export const typographyVariants = cva('', {
   variants: {
     variant: {
-      h1: ['font-bold, leading-tight, font-3xl'],
-      h2: ['font-bold, leading-tight, font-2xl'],
-      h3: ['font-bold, leading-tight, font-xl'],
-      h4: ['font-bold, leading-tight, font-md'],
-      h5: ['font-bold, leading-tight, font-sm'],
+      h1: ['font-bold', 'leading-tight', 'font-4xl'],
+      h2: ['font-bold', 'leading-tight', 'font-3xl'],
+      h3: ['font-bold', 'leading-tight', 'font-2xl'],
+      h4: ['font-bold', 'leading-tight', 'font-xl'],
+      h5: ['font-bold', 'leading-tight', 'font-md'],
     },
   },
   defaultVariants: {
