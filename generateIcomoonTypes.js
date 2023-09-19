@@ -1,14 +1,19 @@
 #!/usr/bin/env node
 const fs = require('fs');
+const path = require('path');
 
 const args = process.argv.slice(2);
 
 const inputFlag = args.indexOf('-i');
 const inputFileArg = args[inputFlag + 1];
+const inputFilePath = path.resolve(__dirname, '../../', inputFileArg);
+const inputFilePath2 = path.resolve(inputFileArg);
+
+console.log('inputFilePath', inputFilePath, inputFilePath2);
 
 const selection = JSON.parse(
   fs.readFileSync(
-    inputFileArg || './public/fonts/icomoon/selection.json',
+    inputFilePath || './public/fonts/icomoon/selection.json',
     'utf8',
   ),
 );
