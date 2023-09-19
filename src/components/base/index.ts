@@ -5,3 +5,4 @@ export * from './inputs';
 export * from './layout';
 export * from './loaders';
 export * from './icons';
+export * from './typography';
