@@ -1,9 +1,8 @@
 import { Controller } from 'react-hook-form';
-import { BaseInput, Field, Validation } from '..';
+import { BaseInput, Field, Validation, BaseInputProps } from '..';
 import { useFormError } from '@/utils';
 
-interface InputProps
-  extends Omit<React.HTMLProps<HTMLInputElement>, 'defaultValue'> {
+interface InputProps extends Omit<BaseInputProps, 'defaultValue' | 'ref'> {
   name: string;
   validation?: Validation;
   defaultValue?: string | number | null;
@@ -23,6 +22,7 @@ export const Input = ({
   defaultValue,
   label,
   onFocus,
+  ...rest
 }: InputProps) => {
   const rules = validation?.rules;
   const errorMessage = validation?.errorMessage;
@@ -54,6 +54,7 @@ export const Input = ({
               onChange={field.onChange}
               onBlur={field.onBlur}
               onFocus={onFocus}
+              {...rest}
             />
           </Field>
         );

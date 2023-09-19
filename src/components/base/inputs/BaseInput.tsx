@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 import { useClassNames } from '@/utils/useClassNames';
 
 type InputVariantProps = VariantProps<typeof inputVariants>;
-type InputProps = Omit<
+export type BaseInputProps = Omit<
   React.HTMLProps<HTMLInputElement>,
   'onChange' | 'onFocus'
 > &
@@ -31,7 +31,7 @@ const inputVariants = cva(
   },
 );
 
-export const BaseInput = forwardRef<HTMLInputElement, InputProps>(
+export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
   (
     {
       Icon,
