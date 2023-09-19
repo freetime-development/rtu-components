@@ -10,7 +10,7 @@ export type ButtonProps = DetailedHTMLProps<
   ButtonVariantProps;
 
 export const buttonVariants = cva(
-  'flex relative gap-2 rounded-lg font-semibold disabled:opacity-40 disabled:pointer-events-none max-w-xs focus:outline-0 justify-center items-center',
+  'flex relative gap-2 rounded-lg font-semibold disabled:opacity-40 disabled:pointer-events-none focus:outline-0 justify-center items-center',
   {
     variants: {
       intent: {
