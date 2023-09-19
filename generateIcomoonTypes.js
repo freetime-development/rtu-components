@@ -8,10 +8,7 @@ const inputFlag = args.indexOf('-i');
 const inputFileArg = args[inputFlag + 1];
 const inputFilePath = path.resolve(inputFileArg);
 
-const outputFilePath = path.join(
-  __dirname,
-  './src/components/base/icons/icomoon/icomoon.ts',
-);
+const outputFilePath = './src/components/base/icons/icomoon/icomoon.ts';
 
 const selection = JSON.parse(
   fs.readFileSync(
