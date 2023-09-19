@@ -6,8 +6,8 @@ const args = process.argv.slice(2);
 
 const inputFlag = args.indexOf('-i');
 const inputFileArg = args[inputFlag + 1];
-const inputFilePath = path.resolve(__dirname, '../../', inputFileArg);
-const inputFilePath2 = path.resolve(inputFileArg);
+const inputFilePath = path.resolve(inputFileArg);
+const inputFilePath2 = path.resolve(process.cwd(), inputFileArg);
 
 console.log('inputFilePath', inputFilePath, inputFilePath2);
 
