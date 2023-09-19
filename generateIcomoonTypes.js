@@ -8,6 +8,10 @@ const inputFlag = args.indexOf('-i');
 const inputFileArg = args[inputFlag + 1];
 const inputFilePath = path.resolve(inputFileArg);
 
+const outputFilePath = path.resolve(
+  './src/components/base/icons/icomoon/icomoon.ts',
+);
+
 const selection = JSON.parse(
   fs.readFileSync(
     inputFilePath || './public/fonts/icomoon/selection.json',
@@ -17,7 +21,7 @@ const selection = JSON.parse(
 const iconNames = selection.icons.map(icon => icon.properties.name);
 
 fs.writeFileSync(
-  './src/components/base/icons/icomoon/icomoon.ts',
+  outputFilePath,
   `export const iconNames = ${JSON.stringify(
     iconNames,
   )} as const \nexport type IconName = (typeof iconNames)[number]`,
