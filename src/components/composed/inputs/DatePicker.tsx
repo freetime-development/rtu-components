@@ -62,7 +62,7 @@ export const DatePicker: FC<DatePickerProps> = props => {
         <div className="relative" ref={ref}>
           <Input
             {...dynamicDatepickerInputProps}
-            className={open ? 'rounded-b-none' : 'rounded-b-lg'}
+            inputClassName={open ? 'rounded-b-none' : 'rounded-b-lg'}
           />
           {open && (
             <div
