@@ -28,6 +28,9 @@ export const Input = ({
   label,
   errorBorder,
   onFocus,
+  Error,
+  hint,
+  Hint,
   ...rest
 }: InputProps) => {
   const rules = validation?.rules;
@@ -45,6 +48,9 @@ export const Input = ({
             name={name}
             label={label ?? name}
             error={error}
+            Error={Error}
+            hint={hint}
+            Hint={Hint}
             tooltip={tooltip}
             className={containerClassName}
           >
