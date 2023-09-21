@@ -45,7 +45,7 @@ export const Field = ({
 export function ErrorOrHint({ error, hint, Error, Hint }: ErrorOrHintProps) {
   return (
     <Transition
-      show={Boolean(error)}
+      show={Boolean(error) || Boolean(hint)}
       enter="transition-opacity duration-300"
       enterFrom="opacity-0"
       enterTo="opacity-100"
@@ -58,7 +58,7 @@ export function ErrorOrHint({ error, hint, Error, Hint }: ErrorOrHintProps) {
       ) : (
         <span className="py-1 text-xs text-error">{error}</span>
       )}
-      {hint && !error && (
+      {(hint || Hint) && !error && (
         <>
           {Hint ? (
             <>{Hint}</>
