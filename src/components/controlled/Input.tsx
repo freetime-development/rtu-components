@@ -1,18 +1,18 @@
 import { Controller } from 'react-hook-form';
-import { BaseInput, Field, Validation, BaseInputProps } from '..';
+import { BaseInput, Field, Validation, BaseInputProps, FieldProps } from '..';
 import { useFormError } from '@/utils';
 
-interface InputProps
-  extends Omit<BaseInputProps, 'defaultValue' | 'ref' | 'className'> {
-  name: string;
-  validation?: Validation;
-  defaultValue?: string | number | null;
-  tooltip?: string | null;
-  Icon?: () => JSX.Element;
-  containerClassName?: string;
-  inputClassName?: string;
-  errorBorder?: boolean;
-}
+type InputProps = Omit<BaseInputProps, 'defaultValue' | 'ref' | 'className'> &
+  FieldProps & {
+    name: string;
+    validation?: Validation;
+    defaultValue?: string | number | null;
+    tooltip?: string | null;
+    Icon?: () => JSX.Element;
+    containerClassName?: string;
+    inputClassName?: string;
+    errorBorder?: boolean;
+  };
 
 export const Input = ({
   placeholder,

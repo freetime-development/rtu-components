@@ -1,20 +1,30 @@
 import { Transition } from '@headlessui/react';
-import { PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Tooltip } from '..';
 
-interface FieldProps extends PropsWithChildren {
-  name: string;
-  className?: string;
-  label?: string;
+export type FieldProps = PropsWithChildren &
+  ErrorOrHintProps & {
+    name: string;
+    className?: string;
+    label?: string;
+    tooltip?: string | null;
+  };
+
+interface ErrorOrHintProps {
   error?: string;
-  tooltip?: string | null;
+  hint?: string;
+  Error?: React.ReactNode;
+  Hint?: React.ReactNode;
 }
 
 export const Field = ({
   name,
   label,
   error,
+  Error,
+  hint,
+  Hint,
   children,
   className,
   tooltip,
@@ -26,13 +36,13 @@ export const Field = ({
 
         {children}
 
-        <ErrorMessage error={error} />
+        <ErrorOrHint error={error} hint={hint} Error={Error} Hint={Hint} />
       </label>
     </div>
   );
 };
 
-export function ErrorMessage({ error }: { error?: string }) {
+export function ErrorOrHint({ error, hint, Error, Hint }: ErrorOrHintProps) {
   return (
     <Transition
       show={Boolean(error)}
@@ -43,7 +53,20 @@ export function ErrorMessage({ error }: { error?: string }) {
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <span className="py-1 text-xs text-error">{error}</span>
+      {error && Error ? (
+        <>{Error}</>
+      ) : (
+        <span className="py-1 text-xs text-error">{error}</span>
+      )}
+      {hint && !error && (
+        <>
+          {Hint ? (
+            <>{Hint}</>
+          ) : (
+            <span className="py-1 text-xs text-gray">{hint}</span>
+          )}
+        </>
+      )}
     </Transition>
   );
 }
