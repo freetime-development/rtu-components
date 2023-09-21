@@ -11,6 +11,7 @@ interface InputProps
   Icon?: () => JSX.Element;
   containerClassName?: string;
   inputClassName?: string;
+  errorBorder?: boolean;
 }
 
 export const Input = ({
@@ -25,6 +26,7 @@ export const Input = ({
   validation,
   defaultValue,
   label,
+  errorBorder,
   onFocus,
   ...rest
 }: InputProps) => {
@@ -48,6 +50,7 @@ export const Input = ({
           >
             <BaseInput
               ref={field.ref}
+              error={errorBorder ? Boolean(error) : false}
               id={name}
               type={type}
               name={name}
