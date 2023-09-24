@@ -33,7 +33,15 @@ export function getParam(key: string, params?: string): string | null {
   return param;
 }
 
-export function getParams(key: string, params?: string): string[] {
+export function getParams(keys: string[], params?: string): (string | null)[] {
+  const searchParams = new URLSearchParams(params || window.location.search);
+  const urlParams = keys.map(key => searchParams.get(key));
+  console.log('params', urlParams, params);
+
+  return urlParams;
+}
+
+export function getMultiParam(key: string, params?: string): string[] {
   const searchParams = new URLSearchParams(params || window.location.search);
   const param = searchParams.getAll(key);
 
