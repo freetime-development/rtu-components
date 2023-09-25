@@ -30,15 +30,13 @@ export const Field = ({
   tooltip,
 }: FieldProps) => {
   return (
-    <div className="w-full">
-      <label htmlFor={name} className={twMerge(className, 'flex flex-col')}>
-        {label && <Label label={label} tooltip={tooltip} />}
+    <label htmlFor={name} className={twMerge(className, 'flex flex-col')}>
+      {label && <Label label={label} tooltip={tooltip} />}
 
-        {children}
+      {children}
 
-        <ErrorOrHint error={error} hint={hint} Error={Error} Hint={Hint} />
-      </label>
-    </div>
+      <ErrorOrHint error={error} hint={hint} Error={Error} Hint={Hint} />
+    </label>
   );
 };
 
