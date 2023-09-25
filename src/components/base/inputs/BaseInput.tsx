@@ -12,6 +12,7 @@ export type BaseInputProps = Omit<
   InputVariantProps & {
     Icon?: () => JSX.Element;
     name: string;
+    containerClassName?: string;
     error?: boolean;
     onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -46,6 +47,7 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
       error,
       orientation,
       className,
+      containerClassName,
     },
     ref,
   ) => {
@@ -56,7 +58,7 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
     );
 
     return (
-      <div className={classNames}>
+      <div className={containerClassName}>
         {Icon && (
           <div
             className={twMerge(
@@ -88,6 +90,7 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
                 ? 'rounded-r-none border-r-0'
                 : 'rounded-l-none border-l-0'
               : '',
+            className,
           )}
         />
       </div>
