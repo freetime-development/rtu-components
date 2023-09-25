@@ -53,12 +53,12 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
   ) => {
     const classNames = useClassNames(
       error ? 'error' : 'custom',
-      className,
+      containerClassName,
       inputVariants({ orientation }),
     );
 
     return (
-      <div className={containerClassName}>
+      <div className={classNames}>
         {Icon && (
           <div
             className={twMerge(
