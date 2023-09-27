@@ -22,14 +22,14 @@ export const Modal: FC<ModalProps> = ({
     <Dialog
       open={isOpen}
       onClose={onClose}
-      className="absolute inset-0 z-50 overflow-y-auto overflow-x-hidden bg-black/30"
+      className="w-screen h-screen inset-0 overflow-y-auto overflow-x-hidden bg-black/30"
     >
       <div
         className={twMerge(
           `w-full h-full flex items-center justify-center ${className}`,
         )}
       >
-        <Dialog.Panel className=" mx-5 my-7 rounded-lg bg-white p-5 pt-7 shadow-md md:max-w-6xl md:p-10">
+        <Dialog.Panel className="mx-5 my-7 rounded-lg bg-white p-5 pt-7 shadow-md md:max-w-6xl md:p-10">
           {title && (
             <Dialog.Title className="mb-8 text-center text-3xl font-bold">
               {title}
