@@ -25,7 +25,9 @@ export const Modal: FC<ModalProps> = ({
       className="absolute inset-0 z-50 overflow-y-auto overflow-x-hidden bg-black/30"
     >
       <div
-        className={twMerge(`flex items-center justify-center, ${className}`)}
+        className={twMerge(
+          `w-full h-full flex items-center justify-center ${className}`,
+        )}
       >
         <Dialog.Panel className=" mx-5 my-7 rounded-lg bg-white p-5 pt-7 shadow-md md:max-w-6xl md:p-10">
           {title && (
