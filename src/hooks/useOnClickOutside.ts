@@ -1,10 +1,15 @@
+/* eslint-disable consistent-return */
 import { RefObject, useEffect } from 'react';
 
 export function useOnClickOutside(
   ref: RefObject<HTMLDivElement>,
   onClick: () => void,
+  disabled = false,
 ) {
   useEffect(() => {
+    if (disabled) {
+      return;
+    }
     function handleClickOutside(event: any) {
       if (ref.current && !ref.current.contains(event.target)) {
         onClick();
@@ -14,5 +19,5 @@ export function useOnClickOutside(
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [ref, onClick]);
+  }, [ref, onClick, disabled]);
 }
