@@ -1,11 +1,13 @@
 import { Dialog } from '@headlessui/react';
 import { FC, PropsWithChildren } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type ModalProps = PropsWithChildren & {
   isOpen: boolean;
   title?: string;
   description?: React.ReactNode;
   onClose: () => void;
+  className?: string;
 };
 
 export const Modal: FC<ModalProps> = ({
@@ -14,6 +16,7 @@ export const Modal: FC<ModalProps> = ({
   title,
   description,
   onClose,
+  className,
 }) => {
   return (
     <Dialog
@@ -21,7 +24,9 @@ export const Modal: FC<ModalProps> = ({
       onClose={onClose}
       className="absolute inset-0 z-50 overflow-y-auto overflow-x-hidden bg-black/30"
     >
-      <div className="flex items-start justify-center">
+      <div
+        className={twMerge(`flex items-center justify-center, ${className}`)}
+      >
         <Dialog.Panel className=" mx-5 my-7 rounded-lg bg-white p-5 pt-7 shadow-md md:max-w-6xl md:p-10">
           {title && (
             <Dialog.Title className="mb-8 text-center text-3xl font-bold">
