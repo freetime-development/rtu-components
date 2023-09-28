@@ -6,3 +6,4 @@ export * from './BaseTimePicker';
 export * from './Boolean';
 export * from './Checkbox';
 export * from './Radio';
+export * from './BaseTextarea';

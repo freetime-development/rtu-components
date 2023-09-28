@@ -3,7 +3,6 @@
 @import './rc_tooltip';
 @import './rt_datepicker';
 @import './transition';
-@import './material';
 
 @tailwind base;
 @tailwind components;
