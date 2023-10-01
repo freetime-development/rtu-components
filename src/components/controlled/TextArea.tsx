@@ -55,7 +55,7 @@ export const TextArea = ({
         return (
           <Field
             name={name}
-            label={label ?? name}
+            label={label}
             error={error}
             Error={Error}
             hint={hint}

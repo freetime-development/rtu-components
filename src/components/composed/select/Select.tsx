@@ -12,7 +12,7 @@ import { useFormError } from '@/utils';
 
 interface SelectProps {
   name: string;
-  label: string;
+  label?: string;
   isLoading?: boolean;
   disabled?: boolean;
   options: Option[];
