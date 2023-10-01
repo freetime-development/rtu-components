@@ -9,6 +9,7 @@ interface ComboBoxProps {
   options: Option[];
   value: string | null;
   name: string;
+  inputClassName?: string;
   placeholder?: string;
   error?: string;
   defaultIcon?: string;
@@ -37,6 +38,7 @@ export const ComboBox = forwardRef(
       value,
       name,
       placeholder,
+      inputClassName,
       error,
       onChange,
       setQuery,
@@ -95,6 +97,7 @@ export const ComboBox = forwardRef(
                   open ? 'rounded-b-none' : 'rounded-b-lg',
                   error ? 'border-red focus:border-red' : 'border-gray-9/10',
                   selectedOption?.icon || defaultIcon ? 'px-9' : 'pr-9',
+                  inputClassName,
                 )}
                 placeholder={placeholder}
                 displayValue={(value: string) => {

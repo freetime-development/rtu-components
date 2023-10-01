@@ -18,6 +18,9 @@ interface SelectProps {
   options: Option[];
   categories?: Category[];
   placeholder?: string;
+  fieldClassName?: string;
+  containerClassName?: string;
+  inputClassName?: string;
   tooltip?: string | null;
   initialQuery?: string;
   defaultIcon?: string;
@@ -35,6 +38,9 @@ export const Select = ({
   options,
   categories,
   placeholder = 'Select',
+  fieldClassName,
+  containerClassName,
+  inputClassName,
   initialQuery,
   defaultIcon,
   tooltip,
@@ -70,7 +76,13 @@ export const Select = ({
   );
 
   return (
-    <Field name={name} label={label} error={error} tooltip={tooltip}>
+    <Field
+      name={name}
+      label={label}
+      error={error}
+      tooltip={tooltip}
+      className={fieldClassName}
+    >
       <ComboBox
         ref={field.ref}
         disabled={disabled}
