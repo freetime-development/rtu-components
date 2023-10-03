@@ -4,6 +4,6 @@ export * from './BaseDatePicker';
 export * from './BaseInput';
 export * from './BaseTimePicker';
 export * from './Boolean';
-export * from './Checkbox';
+export * from './BaseCheckbox';
 export * from './Radio';
 export * from './BaseTextarea';

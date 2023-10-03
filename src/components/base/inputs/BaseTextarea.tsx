@@ -54,7 +54,7 @@ export const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps>(
           onFocus={onFocus}
           disabled={disabled}
           className={twMerge(
-            'flex-grow appearance-none rounded-lg bg-transparent p-3 text-gray-9',
+            'flex-grow outline-none appearance-none rounded-lg bg-transparent p-3 text-gray-9',
             error && 'text-error',
             className,
           )}

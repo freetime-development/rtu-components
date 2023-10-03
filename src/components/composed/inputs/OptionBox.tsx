@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { Box, Checkbox } from '@/components';
+import { Box, BaseCheckbox } from '@/components';
 
 interface OptionBoxProps {
   name: string;
@@ -20,7 +20,7 @@ export const OptionBox = forwardRef<HTMLInputElement, OptionBoxProps>(
         className={twMerge(className, 'block cursor-pointer')}
       >
         <Box className="flex-row rounded-lg bg-white p-3 hover:bg-gray-9/10">
-          <Checkbox
+          <BaseCheckbox
             ref={ref}
             name={name}
             disabled={disabled}
