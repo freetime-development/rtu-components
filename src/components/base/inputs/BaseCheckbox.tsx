@@ -7,7 +7,7 @@ export interface BaseCheckboxProps extends HTMLProps<HTMLInputElement> {
   checked: boolean;
   disabled?: boolean;
   className?: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   error?: boolean;
   CheckedIcon?: ReactNode;
 }
