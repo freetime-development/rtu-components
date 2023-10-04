@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { useController } from 'react-hook-form';
 import {
   Category,
@@ -29,6 +29,9 @@ interface SelectProps {
   defaultValue?: string[] | string | number | null;
   onChange?: (value: string) => void;
   async?: boolean;
+  LoadingIcon?: ReactNode;
+  ClearIcon?: ReactNode;
+  DefaultIcon?: ReactNode;
 }
 
 export const Select = ({
@@ -50,6 +53,9 @@ export const Select = ({
   label,
   onChange,
   async,
+  LoadingIcon,
+  ClearIcon,
+  DefaultIcon,
 }: SelectProps) => {
   const rules = validation?.rules;
   const errorMessage = validation?.errorMessage;
@@ -96,6 +102,9 @@ export const Select = ({
         onChange={handleOnChange}
         setQuery={setQuery}
         clear={clear}
+        LoadingIcon={LoadingIcon}
+        ClearIcon={ClearIcon}
+        DefaultIcon={DefaultIcon}
       />
     </Field>
   );

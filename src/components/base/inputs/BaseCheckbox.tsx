@@ -1,39 +1,64 @@
-import { forwardRef } from 'react';
+import { ChangeEvent, HTMLProps, ReactNode, forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
+import { CheckboxSvg } from './CheckboxSvg';
 
-export interface BaseCheckboxProps extends React.HTMLProps<HTMLInputElement> {
+export interface BaseCheckboxProps extends HTMLProps<HTMLInputElement> {
   name: string;
   checked: boolean;
   disabled?: boolean;
   className?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   error?: boolean;
+  CheckedIcon?: ReactNode;
 }
 
 export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>(
   (
-    { label, name, disabled, className, checked, onChange, error, ...rest },
+    {
+      label,
+      name,
+      disabled,
+      className,
+      checked,
+      onChange,
+      error,
+      CheckedIcon = <CheckboxSvg width={16} height={16} />,
+      ...rest
+    },
     ref,
   ) => {
     return (
-      <input
-        ref={ref}
-        id={name}
-        type="checkbox"
-        name={name}
-        disabled={disabled}
-        checked={checked}
-        onChange={onChange}
+      <span
         className={twMerge(
-          'relative box-content h-4 w-4 cursor-pointer appearance-none rounded-[4px] border border-gray-2 bg-white',
-          'focus:black shadow-black ring-gray-7 checked:bg-black focus:ring-1',
-          checked && 'checked border-black',
-          error && 'border-error ring-error focus:border-error',
+          'relative block box-content cursor-pointer user-select-none',
+          'h-4 w-4 rounded-[4px] border border-gray-300 bg-white text-primary',
+          checked && 'checked border-primary bg-primary-50',
+          error && 'border-error focus:ring-error focus:border-error',
           disabled ? 'cursor-default' : '',
           className,
         )}
-        {...rest}
-      />
+      >
+        <input
+          ref={ref}
+          id={name}
+          type="checkbox"
+          name={name}
+          disabled={disabled}
+          checked={checked}
+          onChange={onChange}
+          className={twMerge(
+            'absolute top-0 z-1 left-0 outline-none appearance-none cursor-inherit',
+            'h-4 w-4 rounded-[4px]',
+            'focus:ring-2 ring-primary focus:ring-primary',
+            checked && 'checked border-primary bg-primary-50',
+            error && 'border-error focus:ring-error focus:border-error',
+            disabled ? 'cursor-default' : '',
+            className,
+          )}
+          {...rest}
+        />
+        {checked && <>{CheckedIcon}</>}
+      </span>
     );
   },
 );

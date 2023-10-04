@@ -1,6 +1,6 @@
 {
   "name": "rtu-components",
-  "version": "0.2.38",
+  "version": "0.2.39",
   "types": "./dist/types/index.d.ts",
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",
@@ -22,7 +22,7 @@
     "release": "modern release",
     "new": "modern new",
     "upgrade": "modern upgrade",
-    "storybook": "storybook dev -p 6006 && pnpm build-css:watch",
+    "storybook": "storybook dev -p 6006",
     "build-css": "tailwindcss -i ./src/css/main.css -o ./dist/main.css",
     "build-css:watch": "tailwindcss -i ./src/css/main.css -o ./dist/main.css --watch",
     "build-storybook": "storybook build"

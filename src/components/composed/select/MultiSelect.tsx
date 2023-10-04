@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useCallback } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { useController } from 'react-hook-form';
 import { useFormError } from '@/utils';
 import {
@@ -27,6 +27,9 @@ interface MultiSelectProps {
   defaultValue?: string[] | string | number | null;
   async?: boolean;
   onChange?: (value: string) => void;
+  LoadingIcon?: ReactNode;
+  ClearIcon?: ReactNode;
+  DefaultIcon?: ReactNode;
 }
 
 export const MultiSelect = ({
@@ -44,6 +47,9 @@ export const MultiSelect = ({
   label,
   async,
   onChange,
+  LoadingIcon,
+  ClearIcon,
+  DefaultIcon,
 }: MultiSelectProps) => {
   const rules = validation?.rules;
   const errorMessage = validation?.errorMessage;
@@ -102,6 +108,9 @@ export const MultiSelect = ({
         onChange={handleOnChange}
         setQuery={setQuery}
         clear={clear}
+        LoadingIcon={LoadingIcon}
+        ClearIcon={ClearIcon}
+        DefaultIcon={DefaultIcon}
       />
       <div>
         {selectedOptions.map(option => {

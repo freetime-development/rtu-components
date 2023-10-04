@@ -26,8 +26,11 @@
     outline: none;
   }
 
+  *:focus {
+    outline: none;
+  }
+/*
   input[type='checkbox'] {
-    background-color: white;
     transition: background-color 150ms ease-in-out;
   }
 
@@ -40,14 +43,13 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     content: '\ea10';
-    color: #fff;
     font-size: 10px;
     position: absolute;
     right: 3px;
-    top: 4px;
+    top: 3px;
     transform: scale(0);
     transition: 150ms transform ease-in-out;
-  }
+  } */
 
   input[type='radio'] {
     background: white;

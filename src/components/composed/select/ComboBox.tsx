@@ -1,6 +1,6 @@
 import { Combobox, Transition } from '@headlessui/react';
 import classNames from 'classnames';
-import { ForwardedRef, forwardRef } from 'react';
+import { ForwardedRef, ReactNode, forwardRef } from 'react';
 import { Option } from '@/components/types';
 
 interface ComboBoxProps {
@@ -16,6 +16,9 @@ interface ComboBoxProps {
   onChange: (value: string) => void;
   setQuery: (query: string) => void;
   clear: () => void;
+  LoadingIcon?: ReactNode;
+  ClearIcon?: ReactNode;
+  DefaultIcon?: ReactNode;
 }
 
 const ANIMATION_DURATION = 150;
@@ -44,6 +47,9 @@ export const ComboBox = forwardRef(
       setQuery,
       clear,
       defaultIcon,
+      LoadingIcon,
+      ClearIcon,
+      DefaultIcon,
     }: ComboBoxProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
@@ -131,11 +137,7 @@ export const ComboBox = forwardRef(
                     leaveTo="opacity-0"
                   >
                     <div className="absolute right-3 top-3.5 text-gray-7">
-                      {value ? (
-                        <i className="icon-clear" />
-                      ) : (
-                        <i className="icon-chevron-down" />
-                      )}
+                      {value ? <>{ClearIcon}</> : <>{DefaultIcon}</>}
                     </div>
                   </Transition>
                 </Combobox.Button>
@@ -149,9 +151,13 @@ export const ComboBox = forwardRef(
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <div className="absolute right-0 flex h-full w-10 items-center justify-center">
-                  <div className="h-5 w-5 animate-spin rounded-full border-2 border-solid border-gray-9/20 border-t-transparent" />
-                </div>
+                {LoadingIcon ? (
+                  <>{LoadingIcon}</>
+                ) : (
+                  <div className="absolute right-0 flex h-full w-10 items-center justify-center">
+                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-solid border-gray-9/20 border-t-transparent" />
+                  </div>
+                )}
               </Transition>
             </Combobox.Button>
 
