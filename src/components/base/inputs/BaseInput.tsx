@@ -48,6 +48,7 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
       orientation,
       className,
       containerClassName,
+      ...rest
     },
     ref,
   ) => {
@@ -92,6 +93,7 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
               : '',
             className,
           )}
+          {...rest}
         />
       </div>
     );
