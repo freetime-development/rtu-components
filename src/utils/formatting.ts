@@ -10,12 +10,14 @@ export function formatCurrency(
   currency: string,
   amount: number,
   locales: string | string[],
+  options?: Intl.NumberFormatOptions,
 ) {
   return formatNum(
     amount,
     {
       style: 'currency',
       currency,
+      ...options,
     },
     locales,
   );
