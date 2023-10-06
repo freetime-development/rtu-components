@@ -17,6 +17,7 @@ export type BaseFileInputProps = PropsWithChildren &
       removeFile: (id: string) => void,
     ) => JSX.Element;
     disablePreview?: boolean;
+    aggregate?: boolean;
     onSuccess?: (files: File[]) => void;
     removeFile?: (id: string) => void;
     value: File[];
@@ -39,6 +40,7 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
       multiple,
       disablePreview,
       renderPreview,
+      aggregate,
       onSuccess,
       removeFile,
       ...rest
@@ -52,10 +54,7 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
     const inputRef = useRef<HTMLInputElement>(null);
     const [files, setFiles] = useState<File[]>(value ?? []);
 
-    console.log('value', value, files);
-
     useEffect(() => {
-      console.log('valueChanged', value);
       setFiles(value);
     }, [value]);
 
@@ -70,9 +69,10 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
         return;
       }
 
-      const files = Array.from(fileList);
-      setFiles(files);
-      onSuccess?.(files);
+      const arr = Array.from(fileList);
+      const newArray = aggregate ? [...files, ...arr] : arr;
+      setFiles(newArray);
+      onSuccess?.(newArray);
     };
 
     const handleRemoveFile = (id: string) => {

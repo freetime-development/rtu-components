@@ -19,6 +19,7 @@ type FileInputProps = Omit<
     fieldClassName?: string;
     inputClassName?: string;
     errorBorder?: boolean;
+    aggregate?: boolean;
   };
 
 export const FileInput = ({
@@ -33,6 +34,7 @@ export const FileInput = ({
   label,
   errorBorder,
   onFocus,
+  aggregate,
   Error,
   hint,
   Hint,
@@ -44,10 +46,10 @@ export const FileInput = ({
   const { field } = useController({ name, rules, defaultValue: [] });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('handleChange', e.target.files);
     const files = Array.from(e.target.files ?? []);
 
-    field.onChange(files);
+    const newFiles = aggregate ? [...field.value, ...files] : files;
+    field.onChange(newFiles);
   };
 
   const handleRemoveFile = (id: string) => {
