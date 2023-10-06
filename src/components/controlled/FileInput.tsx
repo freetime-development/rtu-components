@@ -41,9 +41,10 @@ export const FileInput = ({
   const rules = validation?.rules;
   const errorMessage = validation?.errorMessage;
   const error = useFormError(name, errorMessage);
-  const { field } = useController({ name, rules });
+  const { field } = useController({ name, rules, defaultValue: [] });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('handleChange', e.target.files);
     const files = Array.from(e.target.files ?? []);
 
     field.onChange(files);

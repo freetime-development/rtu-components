@@ -19,6 +19,7 @@ export const Content: FC<ContentProps> = ({
   removeFile,
   disablePreview,
 }) => {
+  console.log('files', files);
   if (!files.length || disablePreview) {
     return <>{initialView}</>;
   }

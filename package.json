@@ -1,6 +1,6 @@
 {
   "name": "rtu-components",
-  "version": "0.2.54",
+  "version": "0.2.58",
   "types": "./dist/types/index.d.ts",
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",

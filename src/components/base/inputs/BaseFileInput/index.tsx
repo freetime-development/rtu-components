@@ -50,9 +50,12 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
       className ?? '',
     );
     const inputRef = useRef<HTMLInputElement>(null);
-    const [files, setFiles] = useState<File[]>(value);
+    const [files, setFiles] = useState<File[]>(value ?? []);
+
+    console.log('value', value, files);
 
     useEffect(() => {
+      console.log('valueChanged', value);
       setFiles(value);
     }, [value]);
 
@@ -79,6 +82,7 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
     return (
       <button
         ref={ref}
+        type="button"
         className={classNames}
         onClick={handleClick}
         disabled={disabled}
