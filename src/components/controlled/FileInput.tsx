@@ -8,7 +8,7 @@ import {
 } from '..';
 import { useFormError } from '@/utils';
 
-type InputProps = Omit<BaseFileInputProps, 'ref'> &
+type FileInputProps = Omit<BaseFileInputProps, 'ref'> &
   FieldProps & {
     name: string;
     validation?: Validation;
@@ -18,7 +18,7 @@ type InputProps = Omit<BaseFileInputProps, 'ref'> &
     errorBorder?: boolean;
   };
 
-export const Input = ({
+export const FileInput = ({
   placeholder,
   tooltip,
   fieldClassName,
@@ -35,7 +35,7 @@ export const Input = ({
   hint,
   Hint,
   ...rest
-}: InputProps) => {
+}: FileInputProps) => {
   const rules = validation?.rules;
   const errorMessage = validation?.errorMessage;
   const error = useFormError(name, errorMessage);
@@ -79,4 +79,4 @@ export const Input = ({
   );
 };
 
-Input.displayName = 'Input';
+FileInput.displayName = 'Input';

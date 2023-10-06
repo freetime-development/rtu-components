@@ -91,3 +91,5 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
     );
   },
 );
+
+BaseFileInput.displayName = 'BaseFileInput';
