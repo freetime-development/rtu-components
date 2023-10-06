@@ -1,4 +1,10 @@
-import { PropsWithChildren, forwardRef, useRef, useState } from 'react';
+import {
+  PropsWithChildren,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Content } from './Content';
 import { useClassNames } from '@/utils/useClassNames';
 
@@ -45,6 +51,10 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
     );
     const inputRef = useRef<HTMLInputElement>(null);
     const [files, setFiles] = useState<File[]>(value);
+
+    useEffect(() => {
+      setFiles(value);
+    }, [value]);
 
     const handleClick = () => {
       inputRef.current?.click();
