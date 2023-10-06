@@ -10,7 +10,7 @@ import { useFormError } from '@/utils';
 
 type FileInputProps = Omit<
   BaseFileInputProps,
-  'ref' | 'onChange' | 'defaultValue'
+  'ref' | 'onChange' | 'defaultValue' | 'value'
 > &
   FieldProps & {
     name: string;
@@ -73,7 +73,7 @@ export const FileInput = ({
         type={type}
         name={name}
         className={inputClassName}
-        // value={field.value}
+        value={field.value}
         disabled={disabled}
         placeholder={placeholder}
         onChange={handleChange}

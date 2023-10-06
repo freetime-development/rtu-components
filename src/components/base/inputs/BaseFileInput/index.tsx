@@ -3,7 +3,7 @@ import { Content } from './Content';
 import { useClassNames } from '@/utils/useClassNames';
 
 export type BaseFileInputProps = PropsWithChildren &
-  Omit<React.HTMLProps<HTMLInputElement>, 'onClick'> & {
+  Omit<React.HTMLProps<HTMLInputElement>, 'onClick' | 'value'> & {
     error?: boolean;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     renderPreview?: (
@@ -13,6 +13,7 @@ export type BaseFileInputProps = PropsWithChildren &
     disablePreview?: boolean;
     onSuccess?: (files: File[]) => void;
     removeFile?: (id: string) => void;
+    value: File[];
   };
 
 export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
@@ -43,7 +44,7 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
       className ?? '',
     );
     const inputRef = useRef<HTMLInputElement>(null);
-    const [files, setFiles] = useState<File[]>([]);
+    const [files, setFiles] = useState<File[]>(value);
 
     const handleClick = () => {
       inputRef.current?.click();
@@ -86,7 +87,6 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
             id={name}
             type="file"
             name={name}
-            value={value}
             onChange={onChange ?? handleChange}
             className={'hidden'}
             {...rest}
