@@ -1,4 +1,4 @@
-import { Controller } from 'react-hook-form';
+import { useController } from 'react-hook-form';
 import {
   Field,
   Validation,
@@ -8,7 +8,10 @@ import {
 } from '..';
 import { useFormError } from '@/utils';
 
-type FileInputProps = Omit<BaseFileInputProps, 'ref'> &
+type FileInputProps = Omit<
+  BaseFileInputProps,
+  'ref' | 'onChange' | 'defaultValue'
+> &
   FieldProps & {
     name: string;
     validation?: Validation;
@@ -27,7 +30,6 @@ export const FileInput = ({
   type = 'text',
   name,
   validation,
-  defaultValue,
   label,
   errorBorder,
   onFocus,
@@ -39,43 +41,41 @@ export const FileInput = ({
   const rules = validation?.rules;
   const errorMessage = validation?.errorMessage;
   const error = useFormError(name, errorMessage);
+  const { field } = useController({ name, rules });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+
+    field.onChange(files);
+  };
 
   return (
-    <Controller
+    <Field
       name={name}
-      defaultValue={defaultValue}
-      rules={rules}
-      render={({ field }) => {
-        return (
-          <Field
-            name={name}
-            label={label}
-            error={error}
-            Error={Error}
-            hint={hint}
-            Hint={Hint}
-            tooltip={tooltip}
-            className={fieldClassName}
-          >
-            <BaseFileInput
-              //   ref={field.ref}
-              error={errorBorder ? Boolean(error) : false}
-              id={name}
-              type={type}
-              name={name}
-              className={inputClassName}
-              value={field.value}
-              disabled={disabled}
-              placeholder={placeholder}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-              onFocus={onFocus}
-              {...rest}
-            />
-          </Field>
-        );
-      }}
-    />
+      label={label}
+      error={error}
+      Error={Error}
+      hint={hint}
+      Hint={Hint}
+      tooltip={tooltip}
+      className={fieldClassName}
+    >
+      <BaseFileInput
+        //   ref={field.ref}
+        error={errorBorder ? Boolean(error) : false}
+        id={name}
+        type={type}
+        name={name}
+        className={inputClassName}
+        value={field.value}
+        disabled={disabled}
+        placeholder={placeholder}
+        onChange={handleChange}
+        onBlur={field.onBlur}
+        onFocus={onFocus}
+        {...rest}
+      />
+    </Field>
   );
 };
 
