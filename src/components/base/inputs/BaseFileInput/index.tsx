@@ -2,7 +2,7 @@ import { PropsWithChildren, forwardRef, useRef, useState } from 'react';
 import { Content } from './Content';
 import { useClassNames } from '@/utils/useClassNames';
 
-type BaseFileInputProps = PropsWithChildren &
+export type BaseFileInputProps = PropsWithChildren &
   Omit<React.HTMLProps<HTMLInputElement>, 'onClick'> & {
     error?: boolean;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
