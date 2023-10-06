@@ -49,6 +49,12 @@ export const FileInput = ({
     field.onChange(files);
   };
 
+  const handleRemoveFile = (id: string) => {
+    const files = field.value.filter((file: File) => file.name !== id);
+
+    field.onChange(files);
+  };
+
   return (
     <Field
       name={name}
@@ -67,10 +73,11 @@ export const FileInput = ({
         type={type}
         name={name}
         className={inputClassName}
-        value={field.value}
+        // value={field.value}
         disabled={disabled}
         placeholder={placeholder}
         onChange={handleChange}
+        removeFile={handleRemoveFile}
         onBlur={field.onBlur}
         onFocus={onFocus}
         {...rest}

@@ -6,9 +6,13 @@ export type BaseFileInputProps = PropsWithChildren &
   Omit<React.HTMLProps<HTMLInputElement>, 'onClick'> & {
     error?: boolean;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    renderPreview?: (files: File[]) => JSX.Element;
+    renderPreview?: (
+      files: File[],
+      removeFile: (id: string) => void,
+    ) => JSX.Element;
     disablePreview?: boolean;
     onSuccess?: (files: File[]) => void;
+    removeFile?: (id: string) => void;
   };
 
 export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
@@ -29,6 +33,7 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
       disablePreview,
       renderPreview,
       onSuccess,
+      removeFile,
       ...rest
     },
     ref,
@@ -56,7 +61,7 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
       onSuccess?.(files);
     };
 
-    const removeFile = (id: string) => {
+    const handleRemoveFile = (id: string) => {
       setFiles(files?.filter(file => file.name !== id) ?? null);
     };
 
@@ -72,7 +77,7 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
             files={files}
             initialView={children}
             renderPreview={renderPreview}
-            removeFile={removeFile}
+            removeFile={removeFile ?? handleRemoveFile}
             disablePreview={disablePreview}
           />
           <input
@@ -82,7 +87,7 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
             type="file"
             name={name}
             value={value}
-            onChange={handleChange}
+            onChange={onChange ?? handleChange}
             className={'hidden'}
             {...rest}
           />

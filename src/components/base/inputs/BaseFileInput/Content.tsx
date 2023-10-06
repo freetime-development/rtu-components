@@ -4,7 +4,10 @@ import { Preview } from './Preview';
 interface ContentProps {
   files: File[];
   initialView?: React.ReactNode;
-  renderPreview?: (files: File[]) => JSX.Element;
+  renderPreview?: (
+    files: File[],
+    removeFile: (id: string) => void,
+  ) => JSX.Element;
   removeFile: (id: string) => void;
   disablePreview?: boolean;
 }
@@ -23,7 +26,7 @@ export const Content: FC<ContentProps> = ({
   return (
     <>
       {renderPreview ? (
-        renderPreview(files)
+        renderPreview(files, removeFile)
       ) : (
         <Preview files={files} removeFile={removeFile} />
       )}
