@@ -5,7 +5,6 @@ import { useOnClickOutside } from '@/hooks';
 import {
   BaseDatePicker,
   BaseDatePickerProps,
-  BaseInputProps,
   Icon,
   Input,
   InputProps,
@@ -15,7 +14,7 @@ type DatePickerProps = {
   inputProps: InputProps & {
     defautValue?: string;
   };
-  datepickerProps: Omit<BaseDatePickerProps, 'value' | 'onChange'>;
+  datepickerProps?: Omit<BaseDatePickerProps, 'value' | 'onChange'>;
   isStatic?: boolean;
 };
 
@@ -41,9 +40,9 @@ export const DatePicker: FC<DatePickerProps> = ({
   };
 
   const props = {
+    Icon: () => <Icon name="calendar" />,
     ...restInputProps,
     ...controlProps,
-    Icon: () => <Icon name="calendar" />,
   };
 
   const dtProps = {
