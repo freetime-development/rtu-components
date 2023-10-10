@@ -18,6 +18,18 @@
   background-color: transparent;
 }
 
+.rt-datepicker .react-datepicker__aria-live {
+  position: absolute;
+  clip-path: circle(0);
+  border: 0;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  width: 1px;
+  white-space: nowrap;
+}
+
 .rt-datepicker .react-datepicker__header,
 .rt-datepicker .react-datepicker__day-name {
   background-color: transparent;
@@ -101,6 +113,7 @@
   text-decoration-color: gray;
   color: var(--text-gray-2);
   cursor: default;
+  pointer-events: none;
 }
 
 .rt-datepicker .react-datepicker__day--disabled:hover {

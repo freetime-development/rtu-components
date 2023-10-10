@@ -1,18 +1,39 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { BaseDatePicker } from '../src/components';
+import { FormProvider, useForm } from 'react-hook-form';
+import { DatePicker } from '../src/components';
 
-type Story = StoryObj<typeof BaseDatePicker>;
+type Story = StoryObj<typeof DatePicker>;
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
-const meta: Meta<typeof BaseDatePicker> = {
-  title: 'Form/Base/DatePicker',
-  component: BaseDatePicker,
+const meta: Meta<typeof DatePicker> = {
+  title: 'General/DatePicker',
+  component: DatePicker,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      story: {
+        inline: false,
+        iframeHeight: 500,
+      },
+    },
+  },
+  decorators: [
+    Story => {
+      const form = useForm();
+      return (
+        <FormProvider {...form}>
+          <Story />
+        </FormProvider>
+      );
+    },
+  ],
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Primary: Story = {
   args: {
-    name: 'datepicker',
+    inputProps: {
+      name: 'datepicker',
+    },
   },
 };
 

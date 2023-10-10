@@ -2,7 +2,10 @@ import { Controller } from 'react-hook-form';
 import { BaseInput, Field, Validation, BaseInputProps, FieldProps } from '..';
 import { useFormError } from '@/utils';
 
-type InputProps = Omit<BaseInputProps, 'defaultValue' | 'ref' | 'className'> &
+export type InputProps = Omit<
+  BaseInputProps,
+  'defaultValue' | 'ref' | 'className'
+> &
   FieldProps & {
     name: string;
     validation?: Validation;

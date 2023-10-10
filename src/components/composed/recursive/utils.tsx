@@ -1,4 +1,5 @@
 import { useFormContext } from 'react-hook-form';
+import { da, pl } from 'date-fns/locale';
 import { Validation } from '../../types';
 import { INode, Tree } from './types';
 import {
@@ -113,14 +114,18 @@ export function useElementByType(node: Tree) {
       element = (
         <DatePicker
           key={field.name}
-          name={field.name}
-          label={field.label}
-          disabled={field.disabled}
-          placeholder={field.placeholder ?? undefined}
-          skipFilterDays={true}
-          defaultValue={field.defaultValue ?? ''}
-          validation={validation}
-          tooltip={field.tooltip}
+          inputProps={{
+            name: field.name,
+            label: field.label,
+            disabled: field.disabled,
+            placeholder: field.placeholder ?? undefined,
+            defaultValue: field.defaultValue ?? '',
+            validation,
+            tooltip: field.tooltip,
+          }}
+          datepickerProps={{
+            skipFilterDays: true,
+          }}
         />
       );
 

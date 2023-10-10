@@ -2,39 +2,32 @@ import classNames from 'classnames';
 import { FC, useRef, useState } from 'react';
 import { useController } from 'react-hook-form';
 import { useOnClickOutside } from '@/hooks';
-import { BaseDatePicker, Icon, Input, Validation } from '@/components';
+import {
+  BaseDatePicker,
+  BaseDatePickerProps,
+  BaseInputProps,
+  Icon,
+  Input,
+  InputProps,
+} from '@/components';
 
-interface DatePickerProps {
-  name: string;
-  label?: string;
-  locale?: string;
-  placeholder?: string;
-  errorMessage?: string;
-  defaultValue?: string | null;
-  tooltip?: string | null;
-  disabled?: boolean;
-  className?: string;
-  excludeDates?: Date[];
-  highlightDates?: Array<Date | { [key: string]: Date[] }>;
-  skipFilterDays?: boolean;
-  validation?: Validation;
+type DatePickerProps = {
+  inputProps: InputProps & {
+    defautValue?: string;
+  };
+  datepickerProps: Omit<BaseDatePickerProps, 'value' | 'onChange'>;
   isStatic?: boolean;
-  selectedFirstDate?: string;
-}
+};
 
-export const DatePicker: FC<DatePickerProps> = props => {
-  const { name, defaultValue = '', isStatic = false } = props;
+export const DatePicker: FC<DatePickerProps> = ({
+  inputProps,
+  datepickerProps,
+  isStatic = false,
+}) => {
+  const { defaultValue = '', ...restInputProps } = inputProps;
   const ref = useRef(null);
   const [open, setOpen] = useState(false);
-  const { field } = useController({ name, defaultValue });
-
-  const datepickerProps = {
-    ...props,
-    locale: 'en',
-    value: field.value,
-    onChange: field.onChange,
-    Icon: () => <Icon name="calendar" />,
-  };
+  const { field } = useController({ name: inputProps.name, defaultValue });
 
   useOnClickOutside(ref, () => setOpen(false));
 
@@ -42,8 +35,24 @@ export const DatePicker: FC<DatePickerProps> = props => {
     setOpen(true);
   };
 
-  const dynamicDatepickerInputProps = {
+  const controlProps = {
+    value: field.value,
+    onChange: field.onChange,
+  };
+
+  const props = {
+    ...restInputProps,
+    ...controlProps,
+    Icon: () => <Icon name="calendar" />,
+  };
+
+  const dtProps = {
     ...datepickerProps,
+    ...controlProps,
+  };
+
+  const dynamicDatepickerInputProps = {
+    ...props,
     onFocus,
   };
 
@@ -52,17 +61,17 @@ export const DatePicker: FC<DatePickerProps> = props => {
       {isStatic ? (
         <div
           className={classNames('flex flex-col gap-4', {
-            'pointer-events-none opacity-50': props.disabled,
+            'pointer-events-none opacity-50': inputProps.disabled,
           })}
         >
           <Input {...props} />
-          <BaseDatePicker {...datepickerProps} />
+          <BaseDatePicker {...dtProps} />
         </div>
       ) : (
         <div className="relative" ref={ref}>
           <Input
             {...dynamicDatepickerInputProps}
-            inputClassName={open ? 'rounded-b-none' : 'rounded-b-lg'}
+            containerClassName={open ? 'rounded-b-none' : 'rounded-b-lg'}
           />
           {open && (
             <div
@@ -71,7 +80,7 @@ export const DatePicker: FC<DatePickerProps> = props => {
               )}
             >
               <div className="m-4">
-                <BaseDatePicker {...datepickerProps} />
+                <BaseDatePicker {...dtProps} />
               </div>
             </div>
           )}
