@@ -1,9 +1,10 @@
 import { Combobox, Transition } from '@headlessui/react';
 import classNames from 'classnames';
-import { ForwardedRef, ReactNode, forwardRef } from 'react';
+import { ForwardedRef, HTMLProps, ReactNode, forwardRef } from 'react';
 import { Option } from '@/components/types';
 
-interface ComboBoxProps {
+export interface BaseSelectProps
+  extends Omit<HTMLProps<HTMLInputElement>, 'value' | 'onChange'> {
   isLoading?: boolean;
   disabled?: boolean;
   options: Option[];
@@ -12,7 +13,6 @@ interface ComboBoxProps {
   inputClassName?: string;
   placeholder?: string;
   error?: string;
-  defaultIcon?: string;
   onChange: (value: string) => void;
   setQuery: (query: string) => void;
   clear: () => void;
@@ -32,7 +32,7 @@ function GroupLabel({ label }: { label: string }) {
   );
 }
 
-export const ComboBox = forwardRef(
+export const BaseSelect = forwardRef(
   (
     {
       isLoading,
@@ -46,11 +46,10 @@ export const ComboBox = forwardRef(
       onChange,
       setQuery,
       clear,
-      defaultIcon,
       LoadingIcon,
       ClearIcon,
       DefaultIcon,
-    }: ComboBoxProps,
+    }: BaseSelectProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const selectedOption = options.find(o => o.value === value);
@@ -80,17 +79,8 @@ export const ComboBox = forwardRef(
           <>
             <Combobox.Button as="div" className="relative flex w-full">
               <div className="absolute flex h-full w-10 items-center justify-center">
-                {selectedOption?.icon ? (
+                {selectedOption?.icon && (
                   <i className={classNames('h-6 w-6', selectedOption.icon)} />
-                ) : (
-                  defaultIcon && (
-                    <i
-                      className={classNames(
-                        'absolute flex h-full w-12 items-center justify-center text-2xl',
-                        defaultIcon,
-                      )}
-                    />
-                  )
                 )}
               </div>
               <Combobox.Input
@@ -102,7 +92,7 @@ export const ComboBox = forwardRef(
                   !disabled && 'hover:border-gray-9/20 focus:border-gray-9/20',
                   open ? 'rounded-b-none' : 'rounded-b-lg',
                   error ? 'border-red focus:border-red' : 'border-gray-9/10',
-                  selectedOption?.icon || defaultIcon ? 'px-9' : 'pr-9',
+                  selectedOption?.icon ? 'px-9' : 'pr-9',
                   inputClassName,
                 )}
                 placeholder={placeholder}
@@ -225,4 +215,4 @@ export const ComboBox = forwardRef(
   },
 );
 
-ComboBox.displayName = 'ComboBox';
+BaseSelect.displayName = 'BaseSelect';

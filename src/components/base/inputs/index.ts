@@ -8,3 +8,4 @@ export * from './BaseCheckbox';
 export * from './Radio';
 export * from './BaseTextarea';
 export * from './BaseFileInput';
+export * from './BaseSelect';

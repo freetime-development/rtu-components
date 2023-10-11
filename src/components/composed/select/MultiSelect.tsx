@@ -5,32 +5,32 @@ import { useFormError } from '@/utils';
 import {
   Box,
   Category,
-  ComboBox,
+  BaseSelect,
   Field,
   Option,
   Validation,
   useSelect,
+  BaseSelectProps,
+  FieldProps,
 } from '@/components';
 
-interface MultiSelectProps {
-  name: string;
-  label: string;
-  isLoading?: boolean;
-  disabled?: boolean;
-  options: Option[];
-  categories?: Category[];
-  placeholder?: string;
-  tooltip?: string | null;
-  initialQuery?: string;
-  defaultIcon?: string;
-  validation?: Validation;
-  defaultValue?: string[] | string | number | null;
-  async?: boolean;
-  onChange?: (value: string) => void;
-  LoadingIcon?: ReactNode;
-  ClearIcon?: ReactNode;
-  DefaultIcon?: ReactNode;
-}
+type MultiSelectProps = BaseSelectProps &
+  FieldProps & {
+    name: string;
+    isLoading?: boolean;
+    options: Option[];
+    categories?: Category[];
+    placeholder?: string;
+    fieldClassName?: string;
+    initialQuery?: string;
+    validation?: Validation;
+    defaultValue?: string[] | string | number | null;
+    async?: boolean;
+    onChange?: (value: string) => void;
+    LoadingIcon?: ReactNode;
+    ClearIcon?: ReactNode;
+    DefaultIcon?: ReactNode;
+  };
 
 export const MultiSelect = ({
   name,
@@ -40,7 +40,7 @@ export const MultiSelect = ({
   categories,
   placeholder = 'Select',
   initialQuery,
-  defaultIcon,
+  fieldClassName,
   tooltip,
   validation,
   defaultValue = [],
@@ -94,8 +94,14 @@ export const MultiSelect = ({
   );
 
   return (
-    <Field name={name} label={label} error={error} tooltip={tooltip}>
-      <ComboBox
+    <Field
+      name={name}
+      label={label}
+      error={error}
+      tooltip={tooltip}
+      className={fieldClassName}
+    >
+      <BaseSelect
         ref={field.ref}
         disabled={disabled}
         isLoading={isLoading}
@@ -103,7 +109,6 @@ export const MultiSelect = ({
         value={value}
         name={name}
         placeholder={placeholder}
-        defaultIcon={defaultIcon}
         error={error}
         onChange={handleOnChange}
         setQuery={setQuery}

@@ -2,37 +2,36 @@ import { ReactNode, useCallback } from 'react';
 import { useController } from 'react-hook-form';
 import {
   Category,
-  ComboBox,
+  BaseSelect,
   Field,
   Option,
   Validation,
   useSelect,
+  BaseSelectProps,
+  FieldProps,
 } from '@/components';
 import { useFormError } from '@/utils';
 
-interface SelectProps {
-  name: string;
-  label?: string;
-  isLoading?: boolean;
-  disabled?: boolean;
-  options: Option[];
-  categories?: Category[];
-  placeholder?: string;
-  fieldClassName?: string;
-  containerClassName?: string;
-  inputClassName?: string;
-  tooltip?: string | null;
-  initialQuery?: string;
-  defaultIcon?: string;
-  valueAs?: 'string' | 'number';
-  validation?: Validation;
-  defaultValue?: string[] | string | number | null;
-  onChange?: (value: string) => void;
-  async?: boolean;
-  LoadingIcon?: ReactNode;
-  ClearIcon?: ReactNode;
-  DefaultIcon?: ReactNode;
-}
+type SelectProps = BaseSelectProps &
+  FieldProps & {
+    name: string;
+    isLoading?: boolean;
+    options: Option[];
+    categories?: Category[];
+    fieldClassName?: string;
+    containerClassName?: string;
+    inputClassName?: string;
+    tooltip?: string | null;
+    initialQuery?: string;
+    valueAs?: 'string' | 'number';
+    validation?: Validation;
+    defaultValue?: string[] | string | number | null;
+    onChange?: (value: string) => void;
+    async?: boolean;
+    LoadingIcon?: ReactNode;
+    ClearIcon?: ReactNode;
+    DefaultIcon?: ReactNode;
+  };
 
 export const Select = ({
   name,
@@ -45,7 +44,6 @@ export const Select = ({
   containerClassName,
   inputClassName,
   initialQuery,
-  defaultIcon,
   tooltip,
   valueAs = 'string',
   validation,
@@ -89,7 +87,7 @@ export const Select = ({
       tooltip={tooltip}
       className={fieldClassName}
     >
-      <ComboBox
+      <BaseSelect
         ref={field.ref}
         disabled={disabled}
         isLoading={isLoading}
@@ -97,7 +95,6 @@ export const Select = ({
         value={!field.value ? '' : String(field.value)}
         name={name}
         placeholder={placeholder}
-        defaultIcon={defaultIcon}
         error={error}
         onChange={handleOnChange}
         setQuery={setQuery}
