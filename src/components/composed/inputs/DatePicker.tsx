@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { FC, useRef, useState } from 'react';
 import { useController } from 'react-hook-form';
+import { set } from 'date-fns';
 import { useOnClickOutside } from '@/hooks';
 import {
   BaseDatePicker,
@@ -55,6 +56,14 @@ export const DatePicker: FC<DatePickerProps> = ({
     onFocus,
   };
 
+  const dynamicDatepickerProps = {
+    ...dtProps,
+    onChange: (value: string) => {
+      field.onChange(value);
+      setOpen(false);
+    },
+  };
+
   return (
     <>
       {isStatic ? (
@@ -67,7 +76,7 @@ export const DatePicker: FC<DatePickerProps> = ({
           <BaseDatePicker {...dtProps} />
         </div>
       ) : (
-        <div className="relative" ref={ref}>
+        <div className="relative w-full" ref={ref}>
           <Input
             {...dynamicDatepickerInputProps}
             containerClassName={open ? 'rounded-b-none' : 'rounded-b-lg'}
@@ -79,7 +88,7 @@ export const DatePicker: FC<DatePickerProps> = ({
               )}
             >
               <div className="m-4">
-                <BaseDatePicker {...dtProps} />
+                <BaseDatePicker {...dynamicDatepickerProps} />
               </div>
             </div>
           )}
