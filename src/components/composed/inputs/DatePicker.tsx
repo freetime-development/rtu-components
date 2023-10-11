@@ -78,7 +78,9 @@ export const DatePicker: FC<DatePickerProps> = ({
         <div className="relative w-full" ref={ref}>
           <Input
             {...dynamicDatepickerInputProps}
-            containerClassName={open ? 'rounded-b-none' : 'rounded-b-lg'}
+            containerClassName={`${open ? 'rounded-b-none' : 'rounded-b-lg'} ${
+              dynamicDatepickerInputProps.containerClassName
+            }`}
           />
           {open && (
             <div
