@@ -6,12 +6,19 @@ import ReactDatePicker, {
 } from 'react-datepicker';
 import { Button, Icon } from '@/components';
 
+export type {
+  ReactDatePickerProps,
+  ReactDatePickerCustomHeaderProps,
+  CalendarContainerProps,
+} from 'react-datepicker';
+
 const defaultFormat = 'yyyy-MM-dd';
 
 export interface BaseDatePickerProps
   extends Omit<ReactDatePickerProps, 'onChange'> {
   skipFilterDays?: boolean;
   onChange: (value: string) => void;
+  dateFormat?: string;
 }
 
 export const BaseDatePicker: FC<BaseDatePickerProps> = props => {
@@ -19,10 +26,11 @@ export const BaseDatePicker: FC<BaseDatePickerProps> = props => {
   const [datePickerValue, setDatePickerValue] = useState<string | null>(
     value && isValid(new Date(value)) ? value : null,
   );
+  const dateFormat = props.dateFormat || defaultFormat;
 
   const handleDatePickerChange = (newDate: Date) => {
-    onChange(format(newDate, defaultFormat));
-    setDatePickerValue(format(newDate, defaultFormat));
+    onChange(format(newDate, dateFormat));
+    setDatePickerValue(format(newDate, dateFormat));
   };
 
   const filterDate = (date: Date) => {
@@ -51,7 +59,7 @@ export const BaseDatePicker: FC<BaseDatePickerProps> = props => {
       onChange={handleDatePickerChange}
       calendarClassName="rt-datepicker"
       filterDate={filterDate}
-      dateFormat={defaultFormat}
+      dateFormat={dateFormat}
       renderCustomHeader={headerProps => <DatePickerHeader {...headerProps} />}
       {...rest}
     />
