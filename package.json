@@ -1,6 +1,6 @@
 {
   "name": "rtu-components",
-  "version": "0.2.69",
+  "version": "0.2.71",
   "types": "./dist/types/index.d.ts",
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",
@@ -44,6 +44,7 @@
     "classnames": "^2.3.2",
     "date-fns": "^2.30.0",
     "debounce": "^1.2.1",
+    "luxon": "^3.4.3",
     "postcss": "^8.4.30",
     "postcss-import": "^15.1.0",
     "prettier-plugin-tailwindcss": "^0.5.4",
@@ -82,6 +83,7 @@
     "@storybook/react-webpack5": "^7.4.5",
     "@types/debounce": "^1.2.2",
     "@types/jest": "~29.2.6",
+    "@types/luxon": "^3.3.2",
     "@types/node": "~16.11.68",
     "@types/react": "^18.2.23",
     "@types/react-datepicker": "^4.15.1",

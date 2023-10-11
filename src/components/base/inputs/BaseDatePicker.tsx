@@ -1,4 +1,4 @@
-import { format, isPast, isToday, isValid } from 'date-fns';
+import { DateTime } from 'luxon';
 import { FC, useEffect, useState } from 'react';
 import ReactDatePicker, {
   ReactDatePickerCustomHeaderProps,
@@ -21,44 +21,41 @@ export interface BaseDatePickerProps
   dateFormat?: string;
 }
 
+function getValidDate(value?: string, format: string = defaultFormat) {
+  if (!value) {
+    return null;
+  }
+  const date = DateTime.fromFormat(value, format);
+
+  return date.isValid ? date.toJSDate() : null;
+}
+
 export const BaseDatePicker: FC<BaseDatePickerProps> = props => {
   const { value, onChange, ...rest } = props;
-  const [datePickerValue, setDatePickerValue] = useState<string | null>(
-    value && isValid(new Date(value)) ? value : null,
-  );
   const dateFormat = props.dateFormat || defaultFormat;
+  const sanitizedDate = getValidDate(value, dateFormat);
+  const [date, setDate] = useState<Date | null>(sanitizedDate);
 
   const handleDatePickerChange = (newDate: Date) => {
-    onChange(format(newDate, dateFormat));
-    setDatePickerValue(format(newDate, dateFormat));
-  };
-
-  const filterDate = (date: Date) => {
-    if (props.skipFilterDays) {
-      return true;
-    }
-
-    if (isToday(date)) {
-      return true;
-    }
-
-    return !isPast(date);
+    const formattedDate = DateTime.fromJSDate(newDate).toFormat(dateFormat);
+    onChange(formattedDate);
+    setDate(newDate);
   };
 
   // prevents invalid user input
   useEffect(() => {
-    if (value && isValid(new Date(value)) && value !== datePickerValue) {
-      setDatePickerValue(value);
+    const sanitizedDate = getValidDate(value, dateFormat);
+    if (sanitizedDate && sanitizedDate !== date) {
+      setDate(sanitizedDate);
     }
-  }, [value, datePickerValue]);
+  }, [value, date]);
 
   return (
     <ReactDatePicker
       inline
-      selected={datePickerValue ? new Date(datePickerValue) : null}
+      selected={date}
       onChange={handleDatePickerChange}
       calendarClassName={props.calendarClassName ?? 'rt-datepicker'}
-      filterDate={filterDate}
       dateFormat={dateFormat}
       renderCustomHeader={headerProps => <DatePickerHeader {...headerProps} />}
       {...rest}
@@ -86,7 +83,7 @@ const DatePickerHeader: FC<ReactDatePickerCustomHeaderProps> = ({
         <Icon name="arrow-left2" />
       </Button>
 
-      <span>{format(date, 'MMMM yyyy')}</span>
+      <span>{DateTime.fromJSDate(date).toFormat('MMMM yyyy')}</span>
 
       <Button
         size="small"
