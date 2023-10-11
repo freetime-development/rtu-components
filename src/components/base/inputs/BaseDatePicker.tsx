@@ -57,7 +57,7 @@ export const BaseDatePicker: FC<BaseDatePickerProps> = props => {
       inline
       selected={datePickerValue ? new Date(datePickerValue) : null}
       onChange={handleDatePickerChange}
-      calendarClassName="rt-datepicker"
+      calendarClassName={props.calendarClassName ?? 'rt-datepicker'}
       filterDate={filterDate}
       dateFormat={dateFormat}
       renderCustomHeader={headerProps => <DatePickerHeader {...headerProps} />}
