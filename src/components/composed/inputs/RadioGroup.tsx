@@ -22,7 +22,7 @@ interface RadioGroupProps<O> {
   name: string;
   label?: string;
   validation?: Validation;
-  defaultValue?: string[] | null;
+  defaultValue?: string | null;
   renderOption?: <T>(
     props: RenderRadioOptionProps & O,
     ref: RefCallback<T> | null,
@@ -32,7 +32,7 @@ interface RadioGroupProps<O> {
 export function RadioGroup<O extends Option>({
   options,
   tooltip,
-  defaultValue,
+  defaultValue = null,
   className,
   validation,
   name,
@@ -60,9 +60,9 @@ export function RadioGroup<O extends Option>({
   const handleChange = useCallback(
     (value: string | null) => {
       if (value) {
-        onChange([value]);
+        onChange(value);
       } else {
-        onChange([]);
+        onChange(null);
       }
     },
     [onChange],
