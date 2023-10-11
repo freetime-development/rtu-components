@@ -14,8 +14,8 @@ interface RenderRadioOptionProps extends Omit<RadioOptionProps, 'onChange'> {
   onChange: (value: string | null) => void;
 }
 
-interface RadioGroupProps {
-  options: Option[];
+interface RadioGroupProps<O> {
+  options: O[];
   tooltip?: string | null;
   className?: string;
   disabled?: boolean;
@@ -24,12 +24,12 @@ interface RadioGroupProps {
   validation?: Validation;
   defaultValue?: string[] | null;
   renderOption?: <T>(
-    props: RenderRadioOptionProps,
+    props: RenderRadioOptionProps & O,
     ref: RefCallback<T> | null,
   ) => React.ReactNode;
 }
 
-export const RadioGroup = ({
+export function RadioGroup<O extends Option>({
   options,
   tooltip,
   defaultValue,
@@ -39,7 +39,7 @@ export const RadioGroup = ({
   label,
   disabled,
   renderOption,
-}: RadioGroupProps) => {
+}: RadioGroupProps<O>) {
   const rules = validation?.rules;
   const errorMessage = validation?.errorMessage;
   const error = useFormError(name, errorMessage);
@@ -113,6 +113,6 @@ export const RadioGroup = ({
       </div>
     </Field>
   );
-};
+}
 
 RadioGroup.displayName = 'RadioGroup';
