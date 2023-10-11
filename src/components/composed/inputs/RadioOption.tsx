@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { Radio } from '../../base/inputs/Radio';
 
-interface RadioProps {
+export interface RadioOptionProps {
   label: string;
   name: string;
   value: string | null;
@@ -11,7 +11,7 @@ interface RadioProps {
   checked: boolean;
 }
 
-export const RadioOption = forwardRef<HTMLInputElement, RadioProps>(
+export const RadioOption = forwardRef<HTMLInputElement, RadioOptionProps>(
   ({ label, name, value, onChange, checked, clear, disabled }, ref) => {
     const id = `${name}:${value}`;
 
