@@ -10,17 +10,21 @@ import {
   Validation,
 } from '@/components';
 
+interface RenderRadioOptionProps extends Omit<RadioOptionProps, 'onChange'> {
+  onChange: (value: string | null) => void;
+}
+
 interface RadioGroupProps {
   options: Option[];
   tooltip?: string | null;
   className?: string;
   disabled?: boolean;
   name: string;
-  label: string;
-  validation: Validation;
-  defaultValue: string[] | null;
+  label?: string;
+  validation?: Validation;
+  defaultValue?: string[] | null;
   renderOption?: <T>(
-    props: RadioOptionProps,
+    props: RenderRadioOptionProps,
     ref: RefCallback<T> | null,
   ) => React.ReactNode;
 }
@@ -48,8 +52,15 @@ export const RadioGroup = ({
 
   const handleOnChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.value) {
-        onChange([e.target.value]);
+      handleChange(e.target.value);
+    },
+    [onChange],
+  );
+
+  const handleChange = useCallback(
+    (value: string | null) => {
+      if (value) {
+        onChange([value]);
       } else {
         onChange([]);
       }
@@ -76,7 +87,7 @@ export const RadioGroup = ({
               {
                 ...option,
                 name,
-                onChange: handleOnChange,
+                onChange: handleChange,
                 clear,
                 disabled,
                 checked: value === null ? false : value?.includes(option.value),

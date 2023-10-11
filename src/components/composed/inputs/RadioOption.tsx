@@ -18,13 +18,13 @@ export const RadioOption = forwardRef<HTMLInputElement, RadioOptionProps>(
     return (
       <div className="flex">
         <Radio
+          ref={ref}
           id={id}
           label={label}
           name={name}
           value={value}
           onChange={onChange}
           checked={checked}
-          ref={ref}
           disabled={disabled}
           className="w-full bg-white p-3 text-gray-9 shadow-md hover:bg-gray-9/10"
         />
