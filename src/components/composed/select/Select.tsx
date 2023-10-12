@@ -12,7 +12,10 @@ import {
 } from '@/components';
 import { useFormError } from '@/utils';
 
-type SelectProps = BaseSelectProps &
+type SelectProps = Omit<
+  BaseSelectProps,
+  'value' | 'onChange' | 'setQuery' | 'clear'
+> &
   FieldProps & {
     name: string;
     isLoading?: boolean;
