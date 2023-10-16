@@ -93,7 +93,9 @@ export const BaseSelect = forwardRef(
                   !disabled && 'hover:border-gray/20 focus:border-gray/20',
                   open ? 'rounded-b-none' : 'rounded-b-lg',
                   error ? 'border-error focus:border-error' : 'border-gray/10',
-                  selectedOption?.icon ? 'px-9' : 'pr-9',
+                  selectedOption?.icon || selectedOption?.emoji
+                    ? 'px-9'
+                    : 'pr-9',
                   inputClassName,
                 )}
                 placeholder={placeholder}
