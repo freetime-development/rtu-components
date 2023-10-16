@@ -92,6 +92,7 @@ export const Select = ({
         ref={field.ref}
         name={name}
         error={error}
+        placeholder={placeholder}
         options={filteredOptions}
         value={!field.value ? '' : String(field.value)}
         onChange={handleOnChange}
