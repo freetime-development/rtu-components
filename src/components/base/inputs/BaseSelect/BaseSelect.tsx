@@ -156,7 +156,7 @@ function DefaultSelectedOption({
 
   if (selectedOption.icon) {
     return (
-      <div className="absolute h-full w-10 items-center justify-center">
+      <div className="absolute flex h-full w-10 items-center justify-center">
         <i className={classNames('h-6 w-6', selectedOption.icon)} />
       </div>
     );
@@ -164,8 +164,8 @@ function DefaultSelectedOption({
 
   if (selectedOption.emoji) {
     return (
-      <div className="absolute h-full w-10 items-center justify-center">
-        {selectedOption.emoji}
+      <div className="absolute flex h-full w-10 items-center justify-center">
+        <span className="h-6 w-6">{selectedOption.emoji}</span>
       </div>
     );
   }
