@@ -12,7 +12,7 @@ export interface IconProps
 export const Icon: FC<IconProps> = ({
   name,
   className,
-  size,
+  size = 'md',
   prefix = 'icon',
 }) => {
   return (
