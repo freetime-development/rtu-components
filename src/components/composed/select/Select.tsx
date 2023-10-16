@@ -54,9 +54,7 @@ export const Select = ({
   label,
   onChange,
   async,
-  LoadingIcon,
-  ClearIcon,
-  DefaultIcon,
+  ...rest
 }: SelectProps) => {
   const rules = validation?.rules;
   const errorMessage = validation?.errorMessage;
@@ -92,19 +90,14 @@ export const Select = ({
     >
       <BaseSelect
         ref={field.ref}
-        disabled={disabled}
-        isLoading={isLoading}
+        name={name}
+        error={error}
         options={filteredOptions}
         value={!field.value ? '' : String(field.value)}
-        name={name}
-        placeholder={placeholder}
-        error={error}
         onChange={handleOnChange}
         setQuery={setQuery}
         clear={clear}
-        LoadingIcon={LoadingIcon}
-        ClearIcon={ClearIcon}
-        DefaultIcon={DefaultIcon}
+        {...rest}
       />
     </Field>
   );

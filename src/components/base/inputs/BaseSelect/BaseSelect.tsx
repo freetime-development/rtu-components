@@ -6,7 +6,7 @@ import { BaseSelectOptions } from './BaseSelectOptions';
 import { Option } from '@/components/types';
 
 export interface BaseSelectProps
-  extends Omit<HTMLProps<HTMLInputElement>, 'value' | 'onChange'> {
+  extends Omit<HTMLProps<HTMLInputElement>, 'value' | 'onChange' | 'ref'> {
   isLoading?: boolean;
   disabled?: boolean;
   options: Option[];
@@ -76,7 +76,12 @@ export const BaseSelect = forwardRef(
         {({ open }) => (
           <>
             <Combobox.Button as="div" className="relative flex w-full">
-              <div className="absolute flex h-full w-10 items-center justify-center">
+              <div
+                className={twMerge(
+                  'absolute h-full w-10 items-center justify-center',
+                  selectedOption?.icon ? 'flex' : 'hidden',
+                )}
+              >
                 {selectedOption?.icon && (
                   <i className={classNames('h-6 w-6', selectedOption.icon)} />
                 )}
