@@ -23,6 +23,7 @@ export interface BaseSelectProps
   ClearIcon?: ReactNode;
   DefaultIcon?: ReactNode;
   renderOption?: (option: Option) => ReactNode;
+  renderSelectedOption?: (option?: Option) => ReactNode;
 }
 
 export const BaseSelect = forwardRef(
@@ -44,6 +45,7 @@ export const BaseSelect = forwardRef(
       ClearIcon,
       DefaultIcon,
       renderOption,
+      renderSelectedOption,
     }: BaseSelectProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
@@ -76,16 +78,12 @@ export const BaseSelect = forwardRef(
         {({ open }) => (
           <>
             <Combobox.Button as="div" className="relative flex w-full">
-              <div
-                className={twMerge(
-                  'absolute h-full w-10 items-center justify-center',
-                  selectedOption?.icon ? 'flex' : 'hidden',
-                )}
-              >
-                {selectedOption?.icon && (
-                  <i className={classNames('h-6 w-6', selectedOption.icon)} />
-                )}
-              </div>
+              {renderSelectedOption ? (
+                renderSelectedOption(selectedOption)
+              ) : (
+                <DefaultSelectedOption selectedOption={selectedOption} />
+              )}
+
               <Combobox.Input
                 name={name}
                 ref={ref}
@@ -146,3 +144,31 @@ export const BaseSelect = forwardRef(
 );
 
 BaseSelect.displayName = 'BaseSelect';
+
+function DefaultSelectedOption({
+  selectedOption,
+}: {
+  selectedOption?: Option;
+}) {
+  if (!selectedOption) {
+    return null;
+  }
+
+  if (selectedOption.icon) {
+    return (
+      <div className="absolute h-full w-10 items-center justify-center">
+        <i className={classNames('h-6 w-6', selectedOption.icon)} />
+      </div>
+    );
+  }
+
+  if (selectedOption.emoji) {
+    return (
+      <div className="absolute h-full w-10 items-center justify-center">
+        {selectedOption.emoji}
+      </div>
+    );
+  }
+
+  return null;
+}

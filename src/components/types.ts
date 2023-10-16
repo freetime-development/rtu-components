@@ -20,6 +20,7 @@ export interface Option {
   label: string;
   value: string | null;
   icon?: string;
+  emoji?: string;
   subtext?: string;
 }
 

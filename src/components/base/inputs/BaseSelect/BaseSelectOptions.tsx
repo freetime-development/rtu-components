@@ -43,27 +43,7 @@ export const BaseSelectOptions: FC<Props> = ({
                 {renderOption ? (
                   renderOption(option)
                 ) : (
-                  <>
-                    {option.icon ? (
-                      <>
-                        <i
-                          className={classNames('mx-2 h-6 w-6', option.icon)}
-                        />
-                        <span>{option.label}</span>
-                      </>
-                    ) : (
-                      <>
-                        {option.subtext ? (
-                          <div className="flex flex-col">
-                            <span className="text-sm">{option.label}</span>
-                            <span className="text-xs">{option.subtext}</span>
-                          </div>
-                        ) : (
-                          <span>{option.label}</span>
-                        )}
-                      </>
-                    )}
-                  </>
+                  <DefaultOption option={option} />
                 )}
               </>
             )}
@@ -81,4 +61,35 @@ function GroupLabel({ label }: { label: string }) {
       <span className="flex-grow" />
     </div>
   );
+}
+
+function DefaultOption({ option }: { option: Option }) {
+  if (option.icon) {
+    return (
+      <>
+        <i className={classNames('mx-2 h-6 w-6', option.icon)} />
+        <span>{option.label}</span>
+      </>
+    );
+  }
+
+  if (option.emoji) {
+    return (
+      <>
+        <span className="mr-2">{option.emoji}</span>
+        <span>{option.label}</span>
+      </>
+    );
+  }
+
+  if (option.subtext) {
+    return (
+      <div className="flex flex-col">
+        <span className="text-sm">{option.label}</span>
+        <span className="text-xs">{option.subtext}</span>
+      </div>
+    );
+  }
+
+  return <span>{option.label}</span>;
 }
