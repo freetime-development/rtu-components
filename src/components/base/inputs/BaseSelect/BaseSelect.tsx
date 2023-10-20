@@ -91,7 +91,7 @@ export const BaseSelect = forwardRef(
               {renderSelectedOptions ? (
                 <div
                   className={classNames(
-                    'w-full flex flex-wrap rounded-lg border p-1 min-h-8 text-gray items-center box-content',
+                    'w-full flex flex-wrap rounded-lg border min-h-10 text-gray items-center box-content',
                     !disabled && 'hover:border-gray/20 focus:border-gray/20',
                     open ? 'rounded-b-none' : 'rounded-b-lg',
                     error

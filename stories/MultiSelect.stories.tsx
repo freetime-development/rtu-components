@@ -32,7 +32,6 @@ const meta: Meta<typeof MultiSelect> = {
 export const Primary: Story = {
   args: {
     name: 'multi-select',
-    isLoading: false,
     options: [
       { label: 'option 1', value: 'option-1' },
       { label: 'option 2', value: 'option-2' },

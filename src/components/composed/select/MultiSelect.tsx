@@ -19,7 +19,7 @@ import { Chip } from '@/components/base/buttons/Chip';
 
 type MultiSelectProps = Omit<
   BaseSelectProps,
-  'value' | 'onChange' | 'setQuery' | 'clear'
+  'value' | 'onChange' | 'setQuery' | 'clear' | 'renderSelectedOptions'
 > &
   FieldProps & {
     name: string;
