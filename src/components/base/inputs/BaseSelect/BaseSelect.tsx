@@ -5,6 +5,12 @@ import { twMerge } from 'tailwind-merge';
 import { BaseSelectOptions } from './BaseSelectOptions';
 import { Option } from '@/components/types';
 
+export interface RenderBaseSelectedOptionsProps {
+  open: boolean;
+  disabled?: boolean;
+  error?: string;
+}
+
 export interface BaseSelectProps
   extends Omit<HTMLProps<HTMLInputElement>, 'value' | 'onChange' | 'ref'> {
   isLoading?: boolean;
@@ -24,6 +30,7 @@ export interface BaseSelectProps
   DefaultIcon?: ReactNode;
   renderOption?: (option: Option) => ReactNode;
   renderSelectedOption?: (option?: Option) => ReactNode;
+  renderSelectedOptions?: (props: RenderBaseSelectedOptionsProps) => ReactNode;
 }
 
 export const BaseSelect = forwardRef(
@@ -46,6 +53,7 @@ export const BaseSelect = forwardRef(
       DefaultIcon,
       renderOption,
       renderSelectedOption,
+      renderSelectedOptions,
     }: BaseSelectProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
@@ -84,25 +92,31 @@ export const BaseSelect = forwardRef(
                 <DefaultSelectedOption selectedOption={selectedOption} />
               )}
 
-              <Combobox.Input
-                name={name}
-                ref={ref}
-                onChange={event => setQuery(event.target.value)}
-                className={classNames(
-                  ' w-full rounded-lg border p-3 text-gray',
-                  !disabled && 'hover:border-gray/20 focus:border-gray/20',
-                  open ? 'rounded-b-none' : 'rounded-b-lg',
-                  error ? 'border-error focus:border-error' : 'border-gray/10',
-                  selectedOption?.icon || selectedOption?.emoji
-                    ? 'px-9'
-                    : 'pr-9',
-                  inputClassName,
-                )}
-                placeholder={placeholder}
-                displayValue={(value: string) => {
-                  return options.find(o => o.value === value)?.label || '';
-                }}
-              />
+              {renderSelectedOptions ? (
+                <>{renderSelectedOptions({ open, disabled, error })}</>
+              ) : (
+                <Combobox.Input
+                  name={name}
+                  ref={ref}
+                  onChange={event => setQuery(event.target.value)}
+                  className={classNames(
+                    'w-full rounded-lg border p-3 text-gray',
+                    !disabled && 'hover:border-gray/20 focus:border-gray/20',
+                    open ? 'rounded-b-none' : 'rounded-b-lg',
+                    error
+                      ? 'border-error focus:border-error'
+                      : 'border-gray/10',
+                    selectedOption?.icon || selectedOption?.emoji
+                      ? 'px-9'
+                      : 'pr-9',
+                    inputClassName,
+                  )}
+                  placeholder={placeholder}
+                  displayValue={(value: string) => {
+                    return options.find(o => o.value === value)?.label || '';
+                  }}
+                />
+              )}
 
               <Combobox.Button
                 className={twMerge(
