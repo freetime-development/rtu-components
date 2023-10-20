@@ -5,12 +5,6 @@ import { twMerge } from 'tailwind-merge';
 import { BaseSelectOptions } from './BaseSelectOptions';
 import { Option } from '@/components/types';
 
-export interface RenderBaseSelectedOptionsProps {
-  open: boolean;
-  disabled?: boolean;
-  error?: string;
-}
-
 export interface BaseSelectProps
   extends Omit<HTMLProps<HTMLInputElement>, 'value' | 'onChange' | 'ref'> {
   isLoading?: boolean;
@@ -30,7 +24,7 @@ export interface BaseSelectProps
   DefaultIcon?: ReactNode;
   renderOption?: (option: Option) => ReactNode;
   renderSelectedOption?: (option?: Option) => ReactNode;
-  renderSelectedOptions?: (props: RenderBaseSelectedOptionsProps) => ReactNode;
+  renderSelectedOptions?: () => ReactNode;
 }
 
 export const BaseSelect = forwardRef(
@@ -93,7 +87,18 @@ export const BaseSelect = forwardRef(
               )}
 
               {renderSelectedOptions ? (
-                <>{renderSelectedOptions({ open, disabled, error })}</>
+                <div
+                  className={classNames(
+                    'w-full flex flex-wrap rounded-lg border p-1 h-8 text-gray items-center box-content',
+                    !disabled && 'hover:border-gray/20 focus:border-gray/20',
+                    open ? 'rounded-b-none' : 'rounded-b-lg',
+                    error
+                      ? 'border-error focus:border-error'
+                      : 'border-gray/10',
+                  )}
+                >
+                  {renderSelectedOptions()}
+                </div>
               ) : (
                 <Combobox.Input
                   name={name}

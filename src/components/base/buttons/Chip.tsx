@@ -1,6 +1,5 @@
 import { PropsWithChildren, FC } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { Icon } from '../icons';
 
 interface ChipProps extends PropsWithChildren {
   onRemove: () => void;
@@ -16,7 +15,6 @@ export const Chip: FC<ChipProps> = ({ children, onRemove, className = '' }) => {
       onClick={onRemove}
     >
       {children}
-      <Icon name="cross" className="ml-2 text-gray-2" size="xs" />
     </button>
   );
 };

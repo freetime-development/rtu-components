@@ -14,11 +14,13 @@ import {
   BaseSelectProps,
   FieldProps,
   Icon,
-  RenderBaseSelectedOptionsProps,
 } from '@/components';
 import { Chip } from '@/components/base/buttons/Chip';
 
-type MultiSelectProps = BaseSelectProps &
+type MultiSelectProps = Omit<
+  BaseSelectProps,
+  'value' | 'onChange' | 'setQuery' | 'clear'
+> &
   FieldProps & {
     name: string;
     isLoading?: boolean;
@@ -37,7 +39,7 @@ type MultiSelectProps = BaseSelectProps &
     renderSelectedOptions?: (props: RenderInlineProps) => ReactNode;
   };
 
-interface RenderSelectedOptionsProps extends RenderBaseSelectedOptionsProps {
+interface RenderSelectedOptionsProps {
   selectedOptions: Option[];
   handleRemove: (value: string | null) => void;
 }
@@ -131,11 +133,10 @@ export const MultiSelect = ({
           renderSelectedOptions={
             renderSelectedOptions
               ? renderSelectedOptions
-              : props => (
+              : () => (
                   <RenderChipOptions
                     selectedOptions={selectedOptions}
                     handleRemove={handleRemove}
-                    {...props}
                   />
                 )
           }
@@ -187,26 +188,17 @@ const RenderInlineOptions: FC<RenderInlineProps> = ({
 const RenderChipOptions: FC<RenderSelectedOptionsProps> = ({
   selectedOptions,
   handleRemove,
-  open,
-  disabled,
-  error,
 }) => {
   return (
-    <div
-      className={classNames(
-        'w-full flex flex-wrap rounded-lg border p-1 h-8 text-gray items-center box-content',
-        !disabled && 'hover:border-gray/20 focus:border-gray/20',
-        open ? 'rounded-b-none' : 'rounded-b-lg',
-        error ? 'border-error focus:border-error' : 'border-gray/10',
-      )}
-    >
+    <>
       {selectedOptions.map(option => {
         return (
           <Chip key={option.value} onRemove={() => handleRemove(option.value)}>
             {option.label}
+            <Icon name="cross" className="ml-2" size="xs" />
           </Chip>
         );
       })}
-    </div>
+    </>
   );
 };
