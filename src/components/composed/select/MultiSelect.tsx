@@ -36,7 +36,7 @@ type MultiSelectProps = Omit<
     LoadingIcon?: ReactNode;
     ClearIcon?: ReactNode;
     DefaultIcon?: ReactNode;
-    renderSelectedOptions?: (props: RenderInlineProps) => ReactNode;
+    renderSelectedOptions?: (props: RenderSelectedOptionsProps) => ReactNode;
   };
 
 interface RenderSelectedOptionsProps {
@@ -132,7 +132,7 @@ export const MultiSelect = ({
           DefaultIcon={DefaultIcon}
           renderSelectedOptions={
             renderSelectedOptions
-              ? renderSelectedOptions
+              ? () => renderSelectedOptions({ selectedOptions, handleRemove })
               : () => (
                   <RenderChipOptions
                     selectedOptions={selectedOptions}
