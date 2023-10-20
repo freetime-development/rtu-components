@@ -4,6 +4,7 @@ import { useController } from 'react-hook-form';
 import { useFormError } from '@/utils';
 import {
   Field,
+  FieldProps,
   Option,
   RadioOption,
   RadioOptionProps,
@@ -14,10 +15,11 @@ interface RenderRadioOptionProps extends Omit<RadioOptionProps, 'onChange'> {
   onChange: (value: string | null) => void;
 }
 
-interface RadioGroupProps<O> {
+type RadioGroupProps<O> = FieldProps & {
   options: O[];
   tooltip?: string | null;
   className?: string;
+  fieldClassName?: string;
   disabled?: boolean;
   name: string;
   label?: string;
@@ -27,18 +29,22 @@ interface RadioGroupProps<O> {
     props: RenderRadioOptionProps & O,
     ref: RefCallback<T> | null,
   ) => React.ReactNode;
-}
+};
 
 export function RadioGroup<O extends Option>({
   options,
   tooltip,
   defaultValue = null,
   className,
+  fieldClassName,
   validation,
   name,
   label,
   disabled,
   renderOption,
+  hint,
+  renderHint,
+  renderError,
 }: RadioGroupProps<O>) {
   const rules = validation?.rules;
   const errorMessage = validation?.errorMessage;
@@ -75,10 +81,13 @@ export function RadioGroup<O extends Option>({
   return (
     <Field
       name={name}
-      error={error}
       label={label}
       tooltip={tooltip}
-      className={className}
+      error={error}
+      renderError={renderError}
+      hint={hint}
+      renderHint={renderHint}
+      className={fieldClassName}
     >
       <div className={classNames('flex flex-col')}>
         {options.map((option, i) => {

@@ -3,6 +3,7 @@ import { useController } from 'react-hook-form';
 import {
   FadeIn,
   Field,
+  FieldProps,
   Option,
   OptionBox,
   Validation,
@@ -11,28 +12,33 @@ import {
 } from '@/components';
 import { useFormError } from '@/utils';
 
-interface OptionGroupProps {
+type OptionGroupProps = FieldProps & {
   options: Option[];
   name: string;
   label: string;
+  className?: string;
   tooltip?: string | null;
   disabled?: boolean;
-  className?: string;
+  fieldClassName?: string;
   exclusiveAnswer?: string;
   defaultValue: string[];
   validation: Validation;
-}
+};
 
 export const OptionGroup = ({
   options = [],
   tooltip,
   className,
+  fieldClassName,
   name,
   label,
   defaultValue,
   exclusiveAnswer,
   validation,
   disabled,
+  hint,
+  renderHint,
+  renderError,
 }: OptionGroupProps) => {
   const replicaIndex = useReplicaIndexContext();
   const rules = validation?.rules;
@@ -67,9 +73,12 @@ export const OptionGroup = ({
     <Field
       name={name}
       label={label}
-      error={error}
       tooltip={tooltip}
-      className={className}
+      error={error}
+      renderError={renderError}
+      hint={hint}
+      renderHint={renderHint}
+      className={fieldClassName}
     >
       {options.map((option, i) => (
         <FadeIn key={String(option.value)}>
@@ -78,7 +87,7 @@ export const OptionGroup = ({
             name={String(option.value)}
             label={option.label}
             disabled={disabled}
-            className="py-2"
+            className={className}
             onChange={handleChange}
             checked={value.includes(
               getReplicaName(String(option.value), replicaIndex),

@@ -35,9 +35,9 @@ export const FileInput = ({
   errorBorder,
   onFocus,
   aggregate,
-  Error,
   hint,
-  Hint,
+  renderHint,
+  renderError,
   ...rest
 }: FileInputProps) => {
   const rules = validation?.rules;
@@ -62,11 +62,11 @@ export const FileInput = ({
     <Field
       name={name}
       label={label}
-      error={error}
-      Error={Error}
-      hint={hint}
-      Hint={Hint}
       tooltip={tooltip}
+      error={error}
+      renderError={renderError}
+      hint={hint}
+      renderHint={renderHint}
       className={fieldClassName}
     >
       <BaseFileInput

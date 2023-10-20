@@ -1,30 +1,30 @@
 import { Transition } from '@headlessui/react';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Tooltip } from '..';
 
 export type FieldProps = PropsWithChildren &
-  ErrorOrHintProps & {
+  UnderTextProps & {
     name: string;
     className?: string;
     label?: string;
     tooltip?: string | null;
   };
 
-interface ErrorOrHintProps {
+interface UnderTextProps {
   error?: string;
   hint?: string;
-  Error?: React.ReactNode;
-  Hint?: React.ReactNode;
+  renderError?: (error?: string) => ReactNode;
+  renderHint?: (hint?: string) => ReactNode;
 }
 
 export const Field = ({
   name,
   label,
   error,
-  Error,
+  renderError,
   hint,
-  Hint,
+  renderHint,
   children,
   className,
   tooltip,
@@ -38,12 +38,22 @@ export const Field = ({
 
       {children}
 
-      <ErrorOrHint error={error} hint={hint} Error={Error} Hint={Hint} />
+      <UnderText
+        error={error}
+        hint={hint}
+        renderError={renderError}
+        renderHint={renderHint}
+      />
     </label>
   );
 };
 
-export function ErrorOrHint({ error, hint, Error, Hint }: ErrorOrHintProps) {
+export function UnderText({
+  error,
+  hint,
+  renderError,
+  renderHint,
+}: UnderTextProps) {
   return (
     <Transition
       show={Boolean(error) || Boolean(hint)}
@@ -54,15 +64,15 @@ export function ErrorOrHint({ error, hint, Error, Hint }: ErrorOrHintProps) {
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      {error && Error ? (
-        <>{Error}</>
+      {error && renderError ? (
+        <>{renderError(error)}</>
       ) : (
         <span className="py-1 text-xs text-error">{error}</span>
       )}
-      {(hint || Hint) && !error && (
+      {(hint || renderHint) && !error && (
         <>
-          {Hint ? (
-            <>{Hint}</>
+          {renderHint ? (
+            <>{renderHint(hint)}</>
           ) : (
             <span className="py-1 text-xs text-gray">{hint}</span>
           )}

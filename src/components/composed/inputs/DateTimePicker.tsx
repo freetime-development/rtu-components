@@ -6,20 +6,25 @@ import {
   BaseInput,
   BaseTimePicker,
   Field,
+  FieldProps,
   Icon,
   Validation,
 } from '@/components';
 import { getMeridiemnTime, useOnClickOutside } from '@/hooks';
 import { useFormError } from '@/utils';
 
-interface DateTimePickerProps
-  extends Omit<React.HTMLProps<HTMLInputElement>, 'defaultValue'> {
-  name: string;
-  validation: Validation;
-  defaultValue?: string | null;
-  skipFilterDays?: boolean;
-  tooltip?: string | null;
-}
+type DateTimePickerProps = Omit<
+  React.HTMLProps<HTMLInputElement>,
+  'defaultValue'
+> &
+  FieldProps & {
+    name: string;
+    validation: Validation;
+    defaultValue?: string | null;
+    skipFilterDays?: boolean;
+    tooltip?: string | null;
+    fieldClassName?: string;
+  };
 
 export const DateTimePicker = ({
   name,
@@ -30,6 +35,10 @@ export const DateTimePicker = ({
   disabled,
   skipFilterDays,
   tooltip,
+  fieldClassName,
+  renderError,
+  renderHint,
+  hint,
 }: DateTimePickerProps) => {
   const [open, setOpen] = useState<'date' | 'time' | null>(null);
   const [time, setTime] = useState(
@@ -68,7 +77,16 @@ export const DateTimePicker = ({
 
   return (
     <div className="relative" ref={ref}>
-      <Field name={name} label={label ?? name} error={error} tooltip={tooltip}>
+      <Field
+        name={name}
+        label={label}
+        tooltip={tooltip}
+        error={error}
+        renderError={renderError}
+        hint={hint}
+        renderHint={renderHint}
+        className={fieldClassName}
+      >
         <div className="flex">
           <BaseInput
             ref={field.ref}

@@ -2,24 +2,21 @@ import { FC } from 'react';
 import { Controller } from 'react-hook-form';
 import { BaseCheckbox, BaseCheckboxProps } from '../base';
 import { Validation } from '../types';
-import { Field } from '../composed';
+import { Field, FieldProps } from '../composed';
 import { useFormError } from '@/utils';
 
-interface Props
-  extends Omit<
-    BaseCheckboxProps,
-    'defaultValue' | 'ref' | 'onChange' | 'checked'
-  > {
-  name: string;
-  label?: string;
-  validation?: Validation;
-  defaultValue?: boolean | null;
-  fieldClassName?: string;
-  inputClassName?: string;
-  errorBorder?: boolean;
-}
+type CheckboxProps = FieldProps &
+  Omit<BaseCheckboxProps, 'defaultValue' | 'ref' | 'onChange' | 'checked'> & {
+    name: string;
+    label?: string;
+    validation?: Validation;
+    defaultValue?: boolean | null;
+    fieldClassName?: string;
+    inputClassName?: string;
+    errorBorder?: boolean;
+  };
 
-export const Checkbox: FC<Props> = ({
+export const Checkbox: FC<CheckboxProps> = ({
   name,
   label,
   validation,
@@ -29,6 +26,9 @@ export const Checkbox: FC<Props> = ({
   errorBorder,
   disabled,
   onFocus,
+  hint,
+  renderHint,
+  renderError,
   ...rest
 }) => {
   const rules = validation?.rules;
@@ -42,7 +42,15 @@ export const Checkbox: FC<Props> = ({
       rules={rules}
       render={({ field }) => {
         return (
-          <Field name={name} label={label} className={fieldClassName}>
+          <Field
+            name={name}
+            label={label}
+            error={error}
+            renderError={renderError}
+            hint={hint}
+            renderHint={renderHint}
+            className={fieldClassName}
+          >
             <BaseCheckbox
               ref={field.ref}
               id={name}

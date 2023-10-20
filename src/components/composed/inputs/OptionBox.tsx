@@ -17,7 +17,7 @@ export const OptionBox = forwardRef<HTMLInputElement, OptionBoxProps>(
     return (
       <label
         htmlFor={name}
-        className={twMerge(className, 'block cursor-pointer')}
+        className={twMerge(className, 'block cursor-pointer py-2')}
       >
         <Box className="flex-row rounded-lg bg-white p-3 hover:bg-gray-9/10">
           <BaseCheckbox

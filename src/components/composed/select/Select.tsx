@@ -54,6 +54,9 @@ export const Select = ({
   label,
   onChange,
   async,
+  hint,
+  renderHint,
+  renderError,
   ...rest
 }: SelectProps) => {
   const rules = validation?.rules;
@@ -84,8 +87,11 @@ export const Select = ({
     <Field
       name={name}
       label={label}
-      error={error}
       tooltip={tooltip}
+      error={error}
+      renderError={renderError}
+      hint={hint}
+      renderHint={renderHint}
       className={fieldClassName}
     >
       <BaseSelect

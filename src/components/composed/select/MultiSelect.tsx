@@ -59,6 +59,9 @@ export const MultiSelect = ({
   async,
   onChange,
   renderSelectedOptions,
+  hint,
+  renderHint,
+  renderError,
   ...rest
 }: MultiSelectProps) => {
   const rules = validation?.rules;
@@ -107,8 +110,11 @@ export const MultiSelect = ({
     <Field
       name={name}
       label={label}
-      error={error}
       tooltip={tooltip}
+      error={error}
+      renderError={renderError}
+      hint={hint}
+      renderHint={renderHint}
       className={fieldClassName}
     >
       <div className="flex flex-col flex-wrap">

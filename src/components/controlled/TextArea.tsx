@@ -37,9 +37,9 @@ export const TextArea = ({
   label,
   errorBorder,
   onFocus,
-  Error,
+  renderError,
   hint,
-  Hint,
+  renderHint,
   ...rest
 }: BaseAreaProps) => {
   const rules = validation?.rules;
@@ -56,11 +56,11 @@ export const TextArea = ({
           <Field
             name={name}
             label={label}
-            error={error}
-            Error={Error}
-            hint={hint}
-            Hint={Hint}
             tooltip={tooltip}
+            error={error}
+            renderError={renderError}
+            hint={hint}
+            renderHint={renderHint}
             className={fieldClassName}
           >
             <BaseTextArea

@@ -3,9 +3,9 @@ import { forwardRef } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { Validation } from '../../types';
 import { useFormError } from '@/utils';
-import { Field } from '@/components';
+import { Field, FieldProps } from '@/components';
 
-interface BooleanProps {
+type BooleanProps = FieldProps & {
   className?: string;
   name: string;
   label: string;
@@ -16,7 +16,7 @@ interface BooleanProps {
   state?: boolean | null;
   tooltip?: string | null;
   options?: { label: string; value: string }[];
-}
+};
 
 const defaultOptions = [
   {

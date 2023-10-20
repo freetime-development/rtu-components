@@ -33,9 +33,9 @@ export const Input = ({
   label,
   errorBorder,
   onFocus,
-  Error,
+  renderError,
   hint,
-  Hint,
+  renderHint,
   ...rest
 }: InputProps) => {
   const rules = validation?.rules;
@@ -52,11 +52,11 @@ export const Input = ({
           <Field
             name={name}
             label={label}
-            error={error}
-            Error={Error}
-            hint={hint}
-            Hint={Hint}
             tooltip={tooltip}
+            error={error}
+            renderError={renderError}
+            hint={hint}
+            renderHint={renderHint}
             className={fieldClassName}
           >
             <BaseInput
