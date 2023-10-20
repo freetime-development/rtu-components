@@ -5,6 +5,7 @@ import { Option } from '@/components/types';
 
 interface Props {
   options: Option[];
+  highlightedOptions?: Option[];
   open: boolean;
   transitionDuration: number;
   renderOption?: (option: Option) => ReactNode;
@@ -13,6 +14,7 @@ interface Props {
 export const BaseSelectOptions: FC<Props> = ({
   open,
   options,
+  highlightedOptions,
   transitionDuration,
   renderOption,
 }) => {
@@ -21,7 +23,7 @@ export const BaseSelectOptions: FC<Props> = ({
       <Combobox.Options
         static
         className={classNames(
-          'transition-height absolute z-10 w-full overflow-auto border border-gray-9/20',
+          'transition-height absolute z-10 w-full overflow-auto border rounded-b-lg border-gray-9/20',
           open ? 'max-h-60 rounded-t-none' : 'max-h-0 border-transparent',
         )}
         style={{ transitionDuration: `${transitionDuration * 2}ms` }}
@@ -32,8 +34,12 @@ export const BaseSelectOptions: FC<Props> = ({
             key={`${name}-${option.label}-${i}`}
             value={option.value}
             className={classNames(
-              'flex px-3 ui-active:bg-gray-100 ui-not-active:bg-white',
+              'flex px-3 ui-active:bg-primary-100 ui-not-active:bg-white',
               option.value ? 'border-b border-gray-9/10 p-3' : 'pb-0 pt-3',
+              i === options.length - 1 ? 'border-none' : '',
+              isHighlighted(option, highlightedOptions)
+                ? 'ui-active:bg-primary-100 ui-not-active:bg-primary-50'
+                : '',
             )}
           >
             {option.value === null ? (
@@ -53,6 +59,12 @@ export const BaseSelectOptions: FC<Props> = ({
     </div>
   );
 };
+
+function isHighlighted(option: Option, highlightedOptions?: Option[]) {
+  const match = highlightedOptions?.find(o => o.value === option.value);
+  console.log('match', match);
+  return match;
+}
 
 function GroupLabel({ label }: { label: string }) {
   return (

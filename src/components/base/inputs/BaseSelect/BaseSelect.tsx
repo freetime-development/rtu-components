@@ -1,7 +1,14 @@
 import { Combobox } from '@headlessui/react';
 import classNames from 'classnames';
-import { ForwardedRef, HTMLProps, ReactNode, forwardRef } from 'react';
+import {
+  ForwardedRef,
+  HTMLProps,
+  ReactNode,
+  forwardRef,
+  useState,
+} from 'react';
 import { twMerge } from 'tailwind-merge';
+import { set } from 'date-fns';
 import { BaseSelectOptions } from './BaseSelectOptions';
 import { Option } from '@/components/types';
 
@@ -11,19 +18,19 @@ export interface BaseSelectProps
   disabled?: boolean;
   disableClear?: boolean;
   options: Option[];
+  highlightedOptions?: Option[];
   value: string | null;
   name: string;
   inputClassName?: string;
   placeholder?: string;
   error?: string;
   onChange: (value: string) => void;
-  setQuery: (query: string) => void;
+  setQuery?: (query: string) => void;
   clear: () => void;
   transitionDuration?: number;
   LoadingIcon?: ReactNode;
   ClearIcon?: ReactNode;
   DefaultIcon?: ReactNode;
-  shouldRenderSelectedOptions?: boolean;
   renderOption?: (option: Option) => ReactNode;
   renderSelectedOption?: (option?: Option) => ReactNode;
   renderSelectedOptions?: () => ReactNode;
@@ -35,6 +42,7 @@ export const BaseSelect = forwardRef(
       isLoading,
       disabled,
       options,
+      highlightedOptions,
       disableClear,
       value,
       name,
@@ -48,7 +56,6 @@ export const BaseSelect = forwardRef(
       LoadingIcon,
       ClearIcon,
       DefaultIcon,
-      shouldRenderSelectedOptions = false,
       renderOption,
       renderSelectedOption,
       renderSelectedOptions,
@@ -80,11 +87,7 @@ export const BaseSelect = forwardRef(
     }
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-      if (renderSelectedOptions) {
-        // prevent multi select from setting a query
-        return;
-      }
-      setQuery(e.target.value);
+      setQuery?.(e.target.value);
     }
 
     return (
@@ -98,7 +101,7 @@ export const BaseSelect = forwardRef(
                 <DefaultSelectedOption selectedOption={selectedOption} />
               )}
 
-              {shouldRenderSelectedOptions && renderSelectedOptions ? (
+              {!open && renderSelectedOptions ? (
                 <div
                   className={classNames(
                     'w-full flex flex-wrap rounded-lg border min-h-[2.5rem] pr-10 text-gray items-center box-content',
@@ -172,6 +175,7 @@ export const BaseSelect = forwardRef(
             <BaseSelectOptions
               open={open}
               options={options}
+              highlightedOptions={highlightedOptions}
               transitionDuration={transitionDuration}
               renderOption={renderOption}
             />

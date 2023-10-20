@@ -86,6 +86,7 @@ export const MultiSelect = ({
 
   const handleOnChange = useCallback(
     (value: string) => {
+      setQuery('');
       const alreadyAdded = selectedOptions.find(o => o.value === value);
       if (alreadyAdded) {
         return;
@@ -123,13 +124,13 @@ export const MultiSelect = ({
           isLoading={isLoading}
           placeholder={placeholder}
           options={filteredOptions}
+          highlightedOptions={selectedOptions}
           value={value}
           name={name}
           error={error}
           onChange={handleOnChange}
           setQuery={setQuery}
           clear={clear}
-          shouldRenderSelectedOptions={Boolean(selectedOptions.length)}
           renderSelectedOptions={
             renderSelectedOptions
               ? () => renderSelectedOptions({ selectedOptions, handleRemove })
