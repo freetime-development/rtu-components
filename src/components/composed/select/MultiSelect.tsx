@@ -129,17 +129,16 @@ export const MultiSelect = ({
           onChange={handleOnChange}
           setQuery={setQuery}
           clear={clear}
+          shouldRenderSelectedOptions={Boolean(selectedOptions.length)}
           renderSelectedOptions={
-            selectedOptions && selectedOptions.length > 0
-              ? renderSelectedOptions
-                ? () => renderSelectedOptions({ selectedOptions, handleRemove })
-                : () => (
-                    <RenderChipOptions
-                      selectedOptions={selectedOptions}
-                      handleRemove={handleRemove}
-                    />
-                  )
-              : () => <span className="pl-3 texy-gray">{placeholder}</span>
+            renderSelectedOptions
+              ? () => renderSelectedOptions({ selectedOptions, handleRemove })
+              : () => (
+                  <RenderChipOptions
+                    selectedOptions={selectedOptions}
+                    handleRemove={handleRemove}
+                  />
+                )
           }
           {...rest}
         />

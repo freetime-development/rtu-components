@@ -23,6 +23,7 @@ export interface BaseSelectProps
   LoadingIcon?: ReactNode;
   ClearIcon?: ReactNode;
   DefaultIcon?: ReactNode;
+  shouldRenderSelectedOptions?: boolean;
   renderOption?: (option: Option) => ReactNode;
   renderSelectedOption?: (option?: Option) => ReactNode;
   renderSelectedOptions?: () => ReactNode;
@@ -47,6 +48,7 @@ export const BaseSelect = forwardRef(
       LoadingIcon,
       ClearIcon,
       DefaultIcon,
+      shouldRenderSelectedOptions = false,
       renderOption,
       renderSelectedOption,
       renderSelectedOptions,
@@ -88,7 +90,7 @@ export const BaseSelect = forwardRef(
                 <DefaultSelectedOption selectedOption={selectedOption} />
               )}
 
-              {renderSelectedOptions ? (
+              {shouldRenderSelectedOptions && renderSelectedOptions ? (
                 <div
                   className={classNames(
                     'w-full flex flex-wrap rounded-lg border min-h-[2.5rem] pr-10 text-gray items-center box-content',
