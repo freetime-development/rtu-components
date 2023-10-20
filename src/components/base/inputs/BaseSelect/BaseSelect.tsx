@@ -9,6 +9,7 @@ export interface BaseSelectProps
   extends Omit<HTMLProps<HTMLInputElement>, 'value' | 'onChange' | 'ref'> {
   isLoading?: boolean;
   disabled?: boolean;
+  disableClear?: boolean;
   options: Option[];
   value: string | null;
   name: string;
@@ -33,6 +34,7 @@ export const BaseSelect = forwardRef(
       isLoading,
       disabled,
       options,
+      disableClear,
       value,
       name,
       placeholder,
@@ -54,7 +56,7 @@ export const BaseSelect = forwardRef(
     const selectedOption = options.find(o => o.value === value);
 
     function onClick() {
-      if (!value) {
+      if (!value || isLoading || disableClear) {
         return;
       }
       setTimeout(() => {
@@ -63,7 +65,7 @@ export const BaseSelect = forwardRef(
     }
 
     function onKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
-      if (!value) {
+      if (!value || isLoading || disableClear) {
         return false;
       }
       if (e.key === 'Enter' || e.key === 'Space') {
@@ -89,7 +91,7 @@ export const BaseSelect = forwardRef(
               {renderSelectedOptions ? (
                 <div
                   className={classNames(
-                    'w-full flex flex-wrap rounded-lg border p-1 h-8 text-gray items-center box-content',
+                    'w-full flex flex-wrap rounded-lg border p-1 min-h-8 text-gray items-center box-content',
                     !disabled && 'hover:border-gray/20 focus:border-gray/20',
                     open ? 'rounded-b-none' : 'rounded-b-lg',
                     error
@@ -126,14 +128,14 @@ export const BaseSelect = forwardRef(
               <Combobox.Button
                 className={twMerge(
                   'absolute hidden right-0 h-full w-10 hover:cursor-pointer',
-                  !disabled && 'block',
+                  !disabled && 'flex items-center justify-center',
                 )}
                 // @ts-expect-error
                 tabindex={0} // it needs to overide the default -1 so that the Combobox.Button can open the dropdown, yes it's lower case i, no don't change it
                 onClick={onClick}
                 onKeyDown={onKeyDown}
               >
-                <div className="absolute right-3 top-3.5">
+                <div className="absolute">
                   {isLoading ? (
                     <>
                       {LoadingIcon ? (
@@ -145,7 +147,13 @@ export const BaseSelect = forwardRef(
                       )}
                     </>
                   ) : (
-                    <>{value ? <>{ClearIcon}</> : <>{DefaultIcon}</>}</>
+                    <>
+                      {value && !disableClear ? (
+                        <>{ClearIcon}</>
+                      ) : (
+                        <>{DefaultIcon}</>
+                      )}
+                    </>
                   )}
                 </div>
               </Combobox.Button>

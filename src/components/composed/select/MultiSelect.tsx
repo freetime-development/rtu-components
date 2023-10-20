@@ -39,7 +39,7 @@ type MultiSelectProps = Omit<
     renderSelectedOptions?: (props: RenderSelectedOptionsProps) => ReactNode;
   };
 
-interface RenderSelectedOptionsProps {
+export interface RenderSelectedOptionsProps {
   selectedOptions: Option[];
   handleRemove: (value: string | null) => void;
 }
@@ -47,7 +47,6 @@ interface RenderSelectedOptionsProps {
 export const MultiSelect = ({
   name,
   isLoading,
-  disabled,
   options,
   categories,
   placeholder = 'Select',
@@ -59,10 +58,8 @@ export const MultiSelect = ({
   label,
   async,
   onChange,
-  LoadingIcon,
-  ClearIcon,
-  DefaultIcon,
   renderSelectedOptions,
+  ...rest
 }: MultiSelectProps) => {
   const rules = validation?.rules;
   const errorMessage = validation?.errorMessage;
@@ -117,19 +114,15 @@ export const MultiSelect = ({
       <div className="flex flex-col flex-wrap">
         <BaseSelect
           ref={field.ref}
-          disabled={disabled}
           isLoading={isLoading}
+          placeholder={placeholder}
           options={filteredOptions}
           value={value}
           name={name}
-          placeholder={placeholder}
           error={error}
           onChange={handleOnChange}
           setQuery={setQuery}
           clear={clear}
-          LoadingIcon={LoadingIcon}
-          ClearIcon={ClearIcon}
-          DefaultIcon={DefaultIcon}
           renderSelectedOptions={
             renderSelectedOptions
               ? () => renderSelectedOptions({ selectedOptions, handleRemove })
@@ -140,6 +133,7 @@ export const MultiSelect = ({
                   />
                 )
           }
+          {...rest}
         />
       </div>
     </Field>

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { MultiSelect } from '../src/components';
+import { Icon, MultiSelect } from '../src/components';
 
 type Story = StoryObj<typeof MultiSelect>;
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
@@ -38,6 +38,8 @@ export const Primary: Story = {
       { label: 'option 2', value: 'option-2' },
       { label: 'option 3', value: 'option-3' },
     ],
+    DefaultIcon: <Icon name="arrow-down2" />,
+    disableClear: true,
   },
 };
 
