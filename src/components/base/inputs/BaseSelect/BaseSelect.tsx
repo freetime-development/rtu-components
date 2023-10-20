@@ -79,6 +79,14 @@ export const BaseSelect = forwardRef(
       return true;
     }
 
+    function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+      if (renderSelectedOptions) {
+        // prevent multi select from setting a query
+        return;
+      }
+      setQuery(e.target.value);
+    }
+
     return (
       <Combobox value={value} onChange={onChange} disabled={disabled}>
         {({ open }) => (
@@ -107,7 +115,7 @@ export const BaseSelect = forwardRef(
                 <Combobox.Input
                   name={name}
                   ref={ref}
-                  onChange={event => setQuery(event.target.value)}
+                  onChange={handleInputChange}
                   className={classNames(
                     'w-full rounded-lg border p-3 text-gray',
                     !disabled && 'hover:border-gray/20 focus:border-gray/20',
