@@ -75,9 +75,6 @@ module.exports = {
           900: '#101828',
         },
       },
-      minHeight: {
-        10: '2.5rem',
-      },
     },
   },
   plugins: [
