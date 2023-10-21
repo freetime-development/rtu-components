@@ -9,6 +9,7 @@ interface Props {
   open: boolean;
   transitionDuration: number;
   renderOption?: (option: Option) => ReactNode;
+  onTransitionEnd?: () => void;
 }
 
 export const BaseSelectOptions: FC<Props> = ({
@@ -17,6 +18,7 @@ export const BaseSelectOptions: FC<Props> = ({
   highlightedOptions,
   transitionDuration,
   renderOption,
+  onTransitionEnd,
 }) => {
   return (
     <div className="relative">
@@ -27,6 +29,7 @@ export const BaseSelectOptions: FC<Props> = ({
           open ? 'max-h-60 rounded-t-none' : 'max-h-0 border-transparent',
         )}
         style={{ transitionDuration: `${transitionDuration * 2}ms` }}
+        onTransitionEnd={onTransitionEnd}
       >
         {options.map((option, i) => (
           <Combobox.Option
@@ -61,9 +64,7 @@ export const BaseSelectOptions: FC<Props> = ({
 };
 
 function isHighlighted(option: Option, highlightedOptions?: Option[]) {
-  const match = highlightedOptions?.find(o => o.value === option.value);
-  console.log('match', match);
-  return match;
+  return highlightedOptions?.find(o => o.value === option.value);
 }
 
 function GroupLabel({ label }: { label: string }) {

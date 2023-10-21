@@ -120,7 +120,7 @@ export const BaseSelect = forwardRef(
                   ref={ref}
                   onChange={handleInputChange}
                   className={classNames(
-                    'w-full rounded-lg border p-3 text-gray',
+                    'w-full rounded-lg border min-h-[2.5rem] text-gray box-content pl-3',
                     !disabled && 'hover:border-gray/20 focus:border-gray/20',
                     open ? 'rounded-b-none' : 'rounded-b-lg',
                     error
@@ -178,6 +178,7 @@ export const BaseSelect = forwardRef(
               highlightedOptions={highlightedOptions}
               transitionDuration={transitionDuration}
               renderOption={renderOption}
+              onTransitionEnd={() => setQuery?.('')}
             />
           </>
         )}

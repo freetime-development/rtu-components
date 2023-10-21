@@ -86,7 +86,6 @@ export const MultiSelect = ({
 
   const handleOnChange = useCallback(
     (value: string) => {
-      setQuery('');
       const alreadyAdded = selectedOptions.find(o => o.value === value);
       if (alreadyAdded) {
         return;
