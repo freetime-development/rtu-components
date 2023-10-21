@@ -101,7 +101,7 @@ export const BaseSelect = forwardRef(
                 <DefaultSelectedOption selectedOption={selectedOption} />
               )}
 
-              {!open && renderSelectedOptions ? (
+              {!open && renderSelectedOptions && highlightedOptions?.length ? (
                 <div
                   className={classNames(
                     'w-full flex flex-wrap rounded-lg border min-h-[2.5rem] pr-10 text-gray items-center box-content',
