@@ -1,12 +1,8 @@
-import classNames from 'classnames';
-import { FC, PropsWithChildren, ReactNode, useCallback } from 'react';
+import { FC, ReactNode, useCallback } from 'react';
 import { useController } from 'react-hook-form';
-import { twMerge } from 'tailwind-merge';
 import { useFormError } from '@/utils';
 import {
-  Box,
   Category,
-  BaseSelect,
   Field,
   Option,
   Validation,
@@ -16,6 +12,7 @@ import {
   Icon,
 } from '@/components';
 import { Chip } from '@/components/base/buttons/Chip';
+import { BaseMultiSelect } from '@/components/base/inputs/BaseSelect/BaseMultiSelect';
 
 type MultiSelectProps = Omit<
   BaseSelectProps,
@@ -79,25 +76,6 @@ export const MultiSelect = ({
     onChange,
     async,
   );
-  const value =
-    !field.value || (Array.isArray(field.value) && !field.value[0])
-      ? ''
-      : field.value;
-
-  const handleOnChange = useCallback(
-    (value: string) => {
-      const alreadyAdded = selectedOptions.find(o => o.value === value);
-      if (alreadyAdded) {
-        return;
-      }
-      if (value) {
-        field.onChange([...field.value, value]);
-      } else {
-        field.onChange(field.value.filter((v: string) => v !== value));
-      }
-    },
-    [field, selectedOptions],
-  );
 
   const handleRemove = useCallback(
     (value: string | null) => {
@@ -118,16 +96,17 @@ export const MultiSelect = ({
       className={fieldClassName}
     >
       <div className="flex flex-col flex-wrap">
-        <BaseSelect
+        <BaseMultiSelect
+          multiple
           ref={field.ref}
           isLoading={isLoading}
           placeholder={placeholder}
           options={filteredOptions}
           highlightedOptions={selectedOptions}
-          value={value}
+          value={field.value}
           name={name}
           error={error}
-          onChange={handleOnChange}
+          onChange={field.onChange}
           setQuery={setQuery}
           clear={clear}
           renderSelectedOptions={
@@ -144,45 +123,6 @@ export const MultiSelect = ({
         />
       </div>
     </Field>
-  );
-};
-
-interface RenderInlineProps extends RenderSelectedOptionsProps {
-  name: string;
-}
-
-const RenderInlineOptions: FC<RenderInlineProps> = ({
-  name,
-  selectedOptions,
-  handleRemove,
-}) => {
-  return (
-    <>
-      {selectedOptions.map(option => {
-        return (
-          <label
-            key={option.value}
-            htmlFor={name}
-            className="my-2 block cursor-pointer"
-          >
-            <Box className="flex flex-row justify-between rounded-lg bg-gray-9/10 p-3 hover:bg-gray-9/20">
-              <button
-                onClick={() => handleRemove(option.value)}
-                className="flex w-full items-center justify-between"
-              >
-                {option.icon && (
-                  <i className={classNames('mx-2 flex h-6 w-6', option.icon)} />
-                )}
-                <span className="flex-grow text-left text-gray-9">
-                  {option.label}
-                </span>
-                <i className="icon-cross ml-3 text-gray-2" />
-              </button>
-            </Box>
-          </label>
-        );
-      })}
-    </>
   );
 };
 
