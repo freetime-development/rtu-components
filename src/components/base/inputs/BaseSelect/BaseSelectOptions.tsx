@@ -37,12 +37,12 @@ export const BaseSelectOptions: FC<Props> = ({
             key={`${name}-${option.label}-${i}`}
             value={option.value}
             className={classNames(
-              'flex px-3 ui-active:bg-primary-100 ui-not-active:bg-white',
+              'flex px-3 ui-active:bg-primary-100 bg-white',
               option.value ? 'border-b border-gray-9/10 p-3' : 'pb-0 pt-3',
               i === options.length - 1 ? 'border-none' : '',
               isHighlighted(option, highlightedOptions)
-                ? 'ui-active:bg-primary-100 ui-not-active:bg-primary-50'
-                : '',
+                ? 'ui-not-active:bg-primary-50'
+                : 'ui-not-active:bg-white',
             )}
           >
             {option.value === null ? (
