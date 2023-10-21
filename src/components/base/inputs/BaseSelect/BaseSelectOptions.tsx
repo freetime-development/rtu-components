@@ -38,7 +38,7 @@ export const BaseSelectOptions: FC<Props> = ({
             value={option.value}
             className={classNames(
               'flex px-3 ui-active:bg-primary-100 bg-white',
-              option.value ? 'border-b border-gray-9/10 p-3' : 'pb-0 pt-3',
+              option.value ? 'border-b p-3' : 'pb-0 pt-3',
               i === options.length - 1 ? 'border-none' : '',
               isHighlighted(option, highlightedOptions)
                 ? 'ui-not-active:bg-primary-50'

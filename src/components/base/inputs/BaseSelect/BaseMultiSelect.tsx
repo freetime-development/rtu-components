@@ -145,7 +145,7 @@ export const BaseMultiSelect = forwardRef(
                     </>
                   ) : (
                     <>
-                      {value && !disableClear ? (
+                      {value.length && !disableClear ? (
                         <>{ClearIcon}</>
                       ) : (
                         <>{DefaultIcon}</>

@@ -38,7 +38,7 @@ export const Primary: Story = {
       { label: 'option 3', value: 'option-3' },
     ],
     DefaultIcon: <Icon name="arrow-down2" />,
-    disableClear: true,
+    ClearIcon: <Icon name="cross" />,
   },
 };
 
