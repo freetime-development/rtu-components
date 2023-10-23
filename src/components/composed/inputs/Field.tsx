@@ -90,9 +90,9 @@ interface LabelProps {
 function Label({ label, tooltip }: LabelProps) {
   return (
     <div className="flex justify-between pb-2">
-      <h5 className="w-full flex-1 break-words text-black dark:text-white">
+      <span className="w-full flex-1 break-words text-black dark:text-white">
         {label}
-      </h5>
+      </span>
       {tooltip && <Tooltip text={tooltip} />}
     </div>
   );

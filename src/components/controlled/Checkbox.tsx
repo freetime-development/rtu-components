@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { Controller } from 'react-hook-form';
 import { BaseCheckbox, BaseCheckboxProps } from '../base';
 import { Validation } from '../types';
@@ -14,6 +14,7 @@ type CheckboxProps = FieldProps &
     fieldClassName?: string;
     inputClassName?: string;
     errorBorder?: boolean;
+    renderLabel?: () => ReactNode;
   };
 
 export const Checkbox: FC<CheckboxProps> = ({
@@ -29,6 +30,7 @@ export const Checkbox: FC<CheckboxProps> = ({
   hint,
   renderHint,
   renderError,
+  renderLabel,
   ...rest
 }) => {
   const rules = validation?.rules;
@@ -44,12 +46,12 @@ export const Checkbox: FC<CheckboxProps> = ({
         return (
           <Field
             name={name}
-            label={label}
+            // label={label}
             error={error}
             renderError={renderError}
             hint={hint}
             renderHint={renderHint}
-            className={fieldClassName}
+            className={`relative flex flex-row items-baseline justify-start gap-2 ${fieldClassName}`}
           >
             <BaseCheckbox
               ref={field.ref}
@@ -66,6 +68,13 @@ export const Checkbox: FC<CheckboxProps> = ({
               onFocus={onFocus}
               {...rest}
             />
+            {renderLabel ? (
+              renderLabel()
+            ) : (
+              <span className="relative top-[-3px] w-full flex-1 break-words text-black dark:text-white">
+                {label}
+              </span>
+            )}
           </Field>
         );
       }}
