@@ -22,8 +22,8 @@ export const Checkbox: FC<CheckboxProps> = ({
   label,
   validation,
   defaultValue,
-  fieldClassName,
-  inputClassName,
+  fieldClassName = '',
+  inputClassName = '',
   errorBorder,
   disabled,
   onFocus,
@@ -46,7 +46,6 @@ export const Checkbox: FC<CheckboxProps> = ({
         return (
           <Field
             name={name}
-            // label={label}
             error={error}
             renderError={renderError}
             hint={hint}
