@@ -63,7 +63,7 @@ export function Select<O extends Option>({
   const errorMessage = validation?.errorMessage;
   const error = useFormError(name, errorMessage);
   const { field } = useController({ name, rules, defaultValue });
-  const value = options.find(o => o.value === field.value);
+  const selectedOption = options.find(o => o.value === field.value);
   const { filteredOptions, setQuery, clear } = useSelect<O>(
     name,
     initialQuery,
@@ -101,7 +101,7 @@ export function Select<O extends Option>({
         error={error}
         placeholder={placeholder}
         options={filteredOptions}
-        value={!value ? '' : String(value)}
+        value={!selectedOption?.value ? '' : String(selectedOption.value)}
         onChange={handleOnChange}
         setQuery={setQuery}
         clear={clear}
