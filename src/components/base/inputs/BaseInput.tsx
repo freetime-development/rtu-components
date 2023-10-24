@@ -2,6 +2,7 @@ import type { VariantProps } from 'class-variance-authority';
 import { cva } from 'class-variance-authority';
 import { forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
+import { debounce as dbounce } from 'debounce';
 import { useClassNames } from '@/utils/useClassNames';
 
 type InputVariantProps = VariantProps<typeof inputVariants>;
@@ -15,7 +16,8 @@ export type BaseInputProps = Omit<
     containerClassName?: string;
     error?: boolean;
     onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    debounce?: number;
   };
 
 const inputVariants = cva(
@@ -48,6 +50,7 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
       orientation,
       className,
       containerClassName,
+      debounce,
       ...rest
     },
     ref,
@@ -79,7 +82,7 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
           name={name}
           value={value}
           placeholder={placeholder}
-          onChange={onChange}
+          onChange={debounce ? dbounce(onChange, debounce) : onChange}
           onBlur={onBlur}
           onFocus={onFocus}
           disabled={disabled}
