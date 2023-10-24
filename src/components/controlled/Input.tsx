@@ -16,7 +16,6 @@ export type InputProps = Omit<
     containerClassName?: string;
     inputClassName?: string;
     errorBorder?: boolean;
-    debounce?: number;
   };
 
 export const Input = ({
@@ -37,7 +36,6 @@ export const Input = ({
   renderError,
   hint,
   renderHint,
-  debounce,
   ...rest
 }: InputProps) => {
   const rules = validation?.rules;
@@ -76,7 +74,6 @@ export const Input = ({
               onChange={field.onChange}
               onBlur={field.onBlur}
               onFocus={onFocus}
-              debounce={debounce}
               {...rest}
             />
           </Field>
