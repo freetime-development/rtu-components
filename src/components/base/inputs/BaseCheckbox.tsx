@@ -30,7 +30,7 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>(
     return (
       <span
         className={twMerge(
-          'relative schrink-0 block box-content cursor-pointer user-select-none',
+          'relative shrink-0 block box-content cursor-pointer user-select-none',
           'h-4 w-4 rounded-[4px] border border-gray-300 bg-white text-primary',
           checked && 'checked border-primary bg-primary-50',
           error && 'border-error focus:ring-error focus:border-error',
