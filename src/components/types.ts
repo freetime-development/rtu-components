@@ -18,7 +18,7 @@ export interface Category {
 
 export interface Option {
   label: string;
-  value: string | null;
+  value: string | number | null;
   icon?: string;
   emoji?: string;
   subtext?: string;

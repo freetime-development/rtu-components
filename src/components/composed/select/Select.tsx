@@ -12,14 +12,14 @@ import {
 } from '@/components';
 import { useFormError } from '@/utils';
 
-type SelectProps = Omit<
+type SelectProps<O> = Omit<
   BaseSelectProps,
   'value' | 'onChange' | 'setQuery' | 'clear'
 > &
   FieldProps & {
     name: string;
     isLoading?: boolean;
-    options: Option[];
+    options: O[];
     categories?: Category[];
     fieldClassName?: string;
     containerClassName?: string;
@@ -36,7 +36,7 @@ type SelectProps = Omit<
     DefaultIcon?: ReactNode;
   };
 
-export const Select = ({
+export function Select<O extends Option>({
   name,
   isLoading,
   disabled,
@@ -58,12 +58,12 @@ export const Select = ({
   renderHint,
   renderError,
   ...rest
-}: SelectProps) => {
+}: SelectProps<O>) {
   const rules = validation?.rules;
   const errorMessage = validation?.errorMessage;
   const error = useFormError(name, errorMessage);
   const { field } = useController({ name, rules, defaultValue });
-  const { filteredOptions, setQuery, clear } = useSelect(
+  const { filteredOptions, setQuery, clear } = useSelect<O>(
     name,
     initialQuery,
     options,
@@ -108,4 +108,4 @@ export const Select = ({
       />
     </Field>
   );
-};
+}

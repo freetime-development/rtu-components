@@ -3,21 +3,25 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Category, Option } from '@/components/types';
 
-export const useSelect = (
+export function useSelect<O extends Option>(
   name: string,
   initialQuery = '',
-  options: Option[],
+  options: O[] = [],
   categories?: Category[],
   onChange?: (value: string) => void,
   async = false,
-) => {
+) {
   const { setValue } = useFormContext();
   const [query, setQuery] = useState(initialQuery);
 
   const groupedOptions = useMemo(() => {
     return (
       categories?.reduce((acc, category) => {
-        acc.push({ label: category.label, value: null });
+        const categoryOption = {
+          label: category.label,
+          value: null,
+        } as O;
+        acc.push(categoryOption);
 
         for (const item of category.items) {
           const option = options.find(option => option.value === item);
@@ -27,7 +31,7 @@ export const useSelect = (
         }
 
         return acc;
-      }, [] as Option[]) || []
+      }, [] as O[]) || []
     );
   }, [options, categories]);
 
@@ -68,4 +72,4 @@ export const useSelect = (
     }),
     [groupedOptions, filteredOptions, clear, query, setQuery, async],
   );
-};
+}

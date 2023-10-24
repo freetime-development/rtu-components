@@ -4,7 +4,7 @@ import { Radio } from '../../base/inputs/Radio';
 export interface RadioOptionProps {
   label: string;
   name: string;
-  value: string | null;
+  value: string | null | number;
   disabled?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   clear: () => void;

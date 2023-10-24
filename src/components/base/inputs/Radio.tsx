@@ -6,7 +6,7 @@ interface RadioProps {
   label?: string;
   className?: string;
   name: string;
-  value: string | null;
+  value: string | null | number;
   disabled?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   checked: boolean;

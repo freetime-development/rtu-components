@@ -1,4 +1,4 @@
-import { FC, ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { useController } from 'react-hook-form';
 import { useFormError } from '@/utils';
 import {
@@ -14,14 +14,14 @@ import {
 import { Chip } from '@/components/base/buttons/Chip';
 import { BaseMultiSelect } from '@/components/base/inputs/BaseSelect/BaseMultiSelect';
 
-type MultiSelectProps = Omit<
+type MultiSelectProps<O extends Option> = Omit<
   BaseSelectProps,
   'value' | 'onChange' | 'setQuery' | 'clear' | 'renderSelectedOptions'
 > &
   FieldProps & {
     name: string;
     isLoading?: boolean;
-    options: Option[];
+    options: O[];
     categories?: Category[];
     placeholder?: string;
     fieldClassName?: string;
@@ -33,15 +33,17 @@ type MultiSelectProps = Omit<
     LoadingIcon?: ReactNode;
     ClearIcon?: ReactNode;
     DefaultIcon?: ReactNode;
-    renderSelectedOptions?: (props: RenderSelectedOptionsProps) => ReactNode;
+    renderSelectedOptions?: <O extends Option>(
+      props: RenderSelectedOptionsProps<O>,
+    ) => ReactNode;
   };
 
-export interface RenderSelectedOptionsProps {
-  selectedOptions: Option[];
-  handleRemove: (value: string | null) => void;
+export interface RenderSelectedOptionsProps<O extends Option> {
+  selectedOptions: O[];
+  handleRemove: (value: O['value']) => void;
 }
 
-export const MultiSelect = ({
+export function MultiSelect<O extends Option>({
   name,
   isLoading,
   options,
@@ -60,15 +62,16 @@ export const MultiSelect = ({
   renderHint,
   renderError,
   ...rest
-}: MultiSelectProps) => {
+}: MultiSelectProps<O>) {
   const rules = validation?.rules;
   const errorMessage = validation?.errorMessage;
   const error = useFormError(name, errorMessage);
   const { field } = useController({ name, rules, defaultValue });
   const selectedOptions = options.filter(
     option => Array.isArray(field.value) && field.value.includes(option.value),
-  );
-  const { filteredOptions, setQuery, clear } = useSelect(
+  ) as O[];
+
+  const { filteredOptions, setQuery, clear } = useSelect<O>(
     name,
     initialQuery,
     options,
@@ -78,8 +81,8 @@ export const MultiSelect = ({
   );
 
   const handleRemove = useCallback(
-    (value: string | null) => {
-      field.onChange(field.value.filter((v: string) => v !== value));
+    (value: O['value']) => {
+      field.onChange(field.value.filter((v: O['value']) => v !== value));
     },
     [field],
   );
@@ -111,7 +114,8 @@ export const MultiSelect = ({
           clear={clear}
           renderSelectedOptions={
             renderSelectedOptions
-              ? () => renderSelectedOptions({ selectedOptions, handleRemove })
+              ? () =>
+                  renderSelectedOptions<O>({ selectedOptions, handleRemove })
               : () => (
                   <RenderChipOptions
                     selectedOptions={selectedOptions}
@@ -124,12 +128,12 @@ export const MultiSelect = ({
       </div>
     </Field>
   );
-};
+}
 
-const RenderChipOptions: FC<RenderSelectedOptionsProps> = ({
+function RenderChipOptions<O extends Option>({
   selectedOptions,
   handleRemove,
-}) => {
+}: RenderSelectedOptionsProps<O>) {
   return (
     <>
       {selectedOptions.map(option => {
@@ -142,4 +146,4 @@ const RenderChipOptions: FC<RenderSelectedOptionsProps> = ({
       })}
     </>
   );
-};
+}
