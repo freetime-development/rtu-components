@@ -28,7 +28,7 @@ type SelectProps<O> = Omit<
     initialQuery?: string;
     valueAs?: 'string' | 'number';
     validation?: Validation;
-    defaultValue?: string[] | string | number | null;
+    defaultValue?: string | number | null;
     onChange?: (value: string) => void;
     async?: boolean;
     LoadingIcon?: ReactNode;
@@ -50,7 +50,7 @@ export function Select<O extends Option>({
   tooltip,
   valueAs = 'string',
   validation,
-  defaultValue,
+  defaultValue = '',
   label,
   onChange,
   async,

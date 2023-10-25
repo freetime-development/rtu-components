@@ -10,6 +10,7 @@ export function useSelect<O extends Option>(
   categories?: Category[],
   onChange?: (value: string) => void,
   async = false,
+  multi = false,
 ) {
   const { setValue } = useFormContext();
   const [query, setQuery] = useState(initialQuery);
@@ -54,7 +55,7 @@ export function useSelect<O extends Option>(
   }, [query, options, categories, groupedOptions, async]);
 
   const clear = useCallback(() => {
-    setValue(name, []);
+    setValue(name, multi ? [] : '');
     setQuery(initialQuery);
   }, [initialQuery, setValue, name]);
 
