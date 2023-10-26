@@ -23,7 +23,7 @@ export interface BaseMultiSelectProps
   name: string;
   inputClassName?: string;
   placeholder?: string;
-  error?: string;
+  error?: boolean;
   onChange: (value: string[]) => void;
   setQuery?: (query: string) => void;
   clear: () => void;

@@ -26,6 +26,7 @@ type SelectProps<O> = Omit<
     inputClassName?: string;
     tooltip?: string | null;
     initialQuery?: string;
+    errorBorder?: boolean;
     valueAs?: 'string' | 'number';
     validation?: Validation;
     defaultValue?: string | number | null;
@@ -48,6 +49,7 @@ export function Select<O extends Option>({
   inputClassName,
   initialQuery,
   tooltip,
+  errorBorder,
   valueAs = 'string',
   validation,
   defaultValue = '',
@@ -98,7 +100,7 @@ export function Select<O extends Option>({
       <BaseSelect
         ref={field.ref}
         name={name}
-        error={error}
+        error={errorBorder ? Boolean(error) : false}
         placeholder={placeholder}
         options={filteredOptions}
         value={!selectedOption?.value ? '' : String(selectedOption.value)}

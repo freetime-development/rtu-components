@@ -24,6 +24,7 @@ type MultiSelectProps<O extends Option> = Omit<
     options: O[];
     categories?: Category[];
     placeholder?: string;
+    errorBorder?: boolean;
     fieldClassName?: string;
     initialQuery?: string;
     validation?: Validation;
@@ -52,6 +53,7 @@ export function MultiSelect<O extends Option>({
   initialQuery,
   fieldClassName,
   tooltip,
+  errorBorder,
   validation,
   defaultValue = [],
   label,
@@ -108,7 +110,7 @@ export function MultiSelect<O extends Option>({
           highlightedOptions={selectedOptions}
           value={field.value}
           name={name}
-          error={error}
+          error={errorBorder ? Boolean(error) : false}
           onChange={field.onChange}
           setQuery={setQuery}
           clear={clear}
