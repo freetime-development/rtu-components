@@ -100,9 +100,7 @@ export const BaseMultiSelect = forwardRef(
                     containerClassName,
                     !disabled && 'hover:border-gray/20 focus:border-gray/20',
                     open ? 'rounded-b-none' : 'rounded-b-lg',
-                    error
-                      ? 'border-error focus:border-error'
-                      : 'border-gray/10',
+                    error && 'border-error focus:border-error',
                   )}
                 >
                   {renderSelectedOptions()}
