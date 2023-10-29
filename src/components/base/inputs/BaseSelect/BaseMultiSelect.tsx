@@ -22,6 +22,7 @@ export interface BaseMultiSelectProps
   value: string[];
   name: string;
   inputClassName?: string;
+  containerClassName?: string;
   placeholder?: string;
   error?: boolean;
   onChange: (value: string[]) => void;
@@ -47,6 +48,7 @@ export const BaseMultiSelect = forwardRef(
       name,
       placeholder,
       inputClassName,
+      containerClassName,
       error,
       onChange,
       setQuery,
@@ -93,8 +95,9 @@ export const BaseMultiSelect = forwardRef(
             <Combobox.Button as="div" className="relative flex w-full">
               {!open && renderSelectedOptions && highlightedOptions?.length ? (
                 <div
-                  className={classNames(
+                  className={twMerge(
                     'w-full flex flex-wrap rounded-lg border min-h-[2.5rem] pr-10 text-gray items-center box-content',
+                    containerClassName,
                     !disabled && 'hover:border-gray/20 focus:border-gray/20',
                     open ? 'rounded-b-none' : 'rounded-b-lg',
                     error

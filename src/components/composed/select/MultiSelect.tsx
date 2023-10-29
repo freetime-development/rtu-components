@@ -26,6 +26,7 @@ type MultiSelectProps<O extends Option> = Omit<
     placeholder?: string;
     errorBorder?: boolean;
     fieldClassName?: string;
+    containerClassName?: string;
     initialQuery?: string;
     validation?: Validation;
     defaultValue?: string[] | string | number | null;
