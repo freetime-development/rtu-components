@@ -81,6 +81,7 @@ export function MultiSelect<O extends Option>({
     categories,
     onChange,
     async,
+    true,
   );
 
   const handleRemove = useCallback(

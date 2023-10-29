@@ -91,7 +91,7 @@ export const BaseMultiSelect = forwardRef(
               {!open && renderSelectedOptions && highlightedOptions?.length ? (
                 <div
                   className={twMerge(
-                    'w-full flex flex-wrap rounded-lg border min-h-[2.5rem] pr-10 text-gray items-center box-content',
+                    'w-full flex flex-wrap rounded-lg border min-h-[2.5rem] pl-3 pr-10 text-gray items-center box-content',
                     inputClassName,
                     !disabled && 'hover:border-gray/20 focus:border-gray/20',
                     open ? 'rounded-b-none' : 'rounded-b-lg',
