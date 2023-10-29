@@ -1,14 +1,6 @@
 import { Combobox } from '@headlessui/react';
-import classNames from 'classnames';
-import {
-  ForwardedRef,
-  HTMLProps,
-  ReactNode,
-  forwardRef,
-  useState,
-} from 'react';
+import { ForwardedRef, HTMLProps, ReactNode, forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { set } from 'date-fns';
 import { BaseSelectOptions } from './BaseSelectOptions';
 import { Option } from '@/components/types';
 
@@ -92,12 +84,15 @@ export const BaseMultiSelect = forwardRef(
       <Combobox value={value} onChange={onChange} disabled={disabled} multiple>
         {({ open }) => (
           <>
-            <Combobox.Button as="div" className="relative flex w-full">
+            <Combobox.Button
+              as="div"
+              className={twMerge('relative flex w-full', containerClassName)}
+            >
               {!open && renderSelectedOptions && highlightedOptions?.length ? (
                 <div
                   className={twMerge(
                     'w-full flex flex-wrap rounded-lg border min-h-[2.5rem] pr-10 text-gray items-center box-content',
-                    containerClassName,
+                    inputClassName,
                     !disabled && 'hover:border-gray/20 focus:border-gray/20',
                     open ? 'rounded-b-none' : 'rounded-b-lg',
                     error && 'border-error focus:border-error',
@@ -110,14 +105,12 @@ export const BaseMultiSelect = forwardRef(
                   name={name}
                   ref={ref}
                   onChange={handleInputChange}
-                  className={classNames(
-                    'w-full rounded-lg border min-h-[2.5rem] text-gray box-content pl-3',
+                  className={twMerge(
+                    'w-full flex flex-wrap rounded-lg border min-h-[2.5rem] pr-10 text-gray items-center box-content',
+                    inputClassName,
                     !disabled && 'hover:border-gray/20 focus:border-gray/20',
                     open ? 'rounded-b-none' : 'rounded-b-lg',
-                    error
-                      ? 'border-error focus:border-error'
-                      : 'border-gray/10',
-                    inputClassName,
+                    error && 'border-error focus:border-error',
                   )}
                   placeholder={placeholder}
                 />
