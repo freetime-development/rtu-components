@@ -34,7 +34,7 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>(
           'h-4 w-4 rounded-[4px] border border-gray-300 bg-white text-primary',
           checked && 'checked border-primary bg-primary-50',
           error && 'border-error focus:ring-error focus:border-error',
-          disabled ? 'cursor-default' : '',
+          disabled ? 'cursor-default' : 'cursor-pointer',
           className,
         )}
       >
@@ -52,7 +52,7 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>(
             'focus:ring-2 ring-primary focus:ring-primary',
             checked && 'checked border-primary bg-primary-50',
             error && 'border-error focus:ring-error focus:border-error',
-            disabled ? 'cursor-default' : '',
+            disabled ? 'cursor-default' : 'cursor-pointer',
             className,
           )}
           {...rest}
