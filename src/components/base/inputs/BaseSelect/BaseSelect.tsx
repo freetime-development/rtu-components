@@ -100,7 +100,7 @@ export const BaseSelect = forwardRef(
                   'w-full rounded-lg border min-h-[2.5rem] text-gray box-content pl-3',
                   !disabled && 'hover:border-gray/20 focus:border-gray/20',
                   open ? 'rounded-b-none' : 'rounded-b-lg',
-                  error ? 'border-error focus:border-error' : 'border-gray/10',
+                  error && 'border-error focus:border-error',
                   selectedOption?.icon || selectedOption?.emoji
                     ? 'px-9'
                     : 'pr-9',
