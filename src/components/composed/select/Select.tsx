@@ -45,8 +45,6 @@ export function Select<O extends Option>({
   categories,
   placeholder = 'Select',
   fieldClassName,
-  containerClassName,
-  inputClassName,
   initialQuery,
   tooltip,
   errorBorder,

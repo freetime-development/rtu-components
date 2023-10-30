@@ -15,6 +15,7 @@ export interface BaseSelectProps
   value: string | null;
   name: string;
   inputClassName?: string;
+  containerClassName?: string;
   placeholder?: string;
   error?: boolean;
   onChange: (value: string) => void;
@@ -40,6 +41,7 @@ export const BaseSelect = forwardRef(
       name,
       placeholder,
       inputClassName,
+      containerClassName,
       error,
       onChange,
       setQuery,
@@ -85,7 +87,10 @@ export const BaseSelect = forwardRef(
       <Combobox value={value} onChange={onChange} disabled={disabled}>
         {({ open }) => (
           <>
-            <Combobox.Button as="div" className="relative flex w-full">
+            <Combobox.Button
+              as="div"
+              className={twMerge('relative flex w-full', containerClassName)}
+            >
               {renderSelectedOption ? (
                 renderSelectedOption(selectedOption)
               ) : (
