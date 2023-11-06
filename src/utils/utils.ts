@@ -14,8 +14,8 @@ export function getErrorMessage(error: any, errorMessage?: string): string {
 }
 
 export function useFormError(name: string, errorMessage?: string) {
-  const { formState } = useFormContext();
-  const error = formState.errors[name];
+  const context = useFormContext();
+  const error = context?.formState.errors[name];
 
   return getErrorMessage(error, errorMessage);
 }
