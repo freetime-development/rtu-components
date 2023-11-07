@@ -59,7 +59,7 @@ export function UnderText({
 }: UnderTextProps) {
   return (
     <Transition
-      show={Boolean(error) || Boolean(hint)}
+      show={Boolean(error) || Boolean(hint || renderHint)}
       enter="transition-opacity duration-300"
       enterFrom="opacity-0"
       enterTo="opacity-100"
