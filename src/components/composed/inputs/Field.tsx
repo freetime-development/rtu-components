@@ -32,7 +32,10 @@ export const Field = ({
   return (
     <label
       htmlFor={name}
-      className={twMerge('flex flex-col w-full', className)}
+      className={twMerge(
+        'flex flex-col w-full text-black dark:text-white',
+        className,
+      )}
     >
       {label && <Label label={label} tooltip={tooltip} />}
 
