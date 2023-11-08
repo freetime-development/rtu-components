@@ -15,9 +15,9 @@ export const buttonVariants = cva(
     variants: {
       intent: {
         primary: ['bg-primary', 'text-white', 'hover:bg-primary/90'],
-        secondary: ['bg-secondary', 'hover:bg-secondary/80', 'text-white'],
+        secondary: ['bg-secondary', 'text-white', 'hover:bg-secondary/80'],
         icon: [],
-        outlined: ['border', 'border-gray-9', 'hover:bg-gray-9/20'],
+        outlined: ['border', 'border-gray', 'hover:bg-gray/20'],
         custom: [''],
       },
       size: {
@@ -62,7 +62,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         className={twMerge(
           'group',
-          buttonVariants({ size, intent, orientation }),
+          buttonVariants({ size, intent, orientation, loading }),
           className,
         )}
         type={type}
