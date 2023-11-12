@@ -1,32 +1,24 @@
 import { forwardRef } from 'react';
-import { Radio } from '../../base/inputs/Radio';
+import { Radio, RadioProps } from '../../base/inputs/Radio';
 
-export interface RadioOptionProps {
-  label: string;
-  name: string;
-  value: string | null | number;
-  disabled?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+export type RadioOptionProps = Omit<RadioProps, 'ref'> & {
   clear: () => void;
-  checked: boolean;
-}
+};
 
 export const RadioOption = forwardRef<HTMLInputElement, RadioOptionProps>(
-  ({ label, name, value, onChange, checked, clear, disabled }, ref) => {
+  ({ clear, name, value, checked, ...props }, ref) => {
     const id = `${name}:${value}`;
 
     return (
       <div className="flex">
         <Radio
           ref={ref}
-          id={id}
-          label={label}
           name={name}
+          id={id}
           value={value}
-          onChange={onChange}
           checked={checked}
-          disabled={disabled}
-          className="w-full bg-white p-3 text-gray-9 shadow-md hover:bg-gray-9/10"
+          {...props}
+          className="w-full bg-white p-3 text-gray-9 shadow-md hover:bg-gray-9/10 items-center"
         />
         {checked && (
           <button

@@ -15,10 +15,9 @@ interface RenderRadioOptionProps extends Omit<RadioOptionProps, 'onChange'> {
   onChange: (value: string | null) => void;
 }
 
-export type RadioGroupProps<O> = FieldProps & {
+export type RadioGroupProps<O extends Option> = FieldProps & {
   options: O[];
   tooltip?: string | null;
-  className?: string;
   fieldClassName?: string;
   disabled?: boolean;
   name: string;
@@ -35,7 +34,6 @@ export function RadioGroup<O extends Option>({
   options,
   tooltip,
   defaultValue = null,
-  className,
   fieldClassName,
   validation,
   name,
