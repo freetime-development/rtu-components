@@ -32,7 +32,7 @@ const labelVariants = cva(
 );
 
 const inputVariants = cva(
-  'before:h-1/2 before:w-1/2 before:bg-gray-900 checked:bg-primary checked:before:bg-gray-900',
+  'before:h-3/4 before:w-3/4 checked:before:bg-primary',
   {
     variants: {
       size: {
