@@ -43,7 +43,7 @@ function ModalGenerator() {
             </Button>
             <Button
               onClick={() => setOpen(false)}
-              intent="secondary"
+              variant="secondary"
               size="normal"
             >
               Close

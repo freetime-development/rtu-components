@@ -19,7 +19,7 @@ export const Buttons: Story = {
     children: [
       <Button
         key={1}
-        intent="custom"
+        variant="custom"
         size="large"
         className={classNames(
           pressAnimation,
@@ -40,7 +40,7 @@ export const Buttons: Story = {
       </Button>,
       <Button
         key={2}
-        intent="custom"
+        variant="custom"
         size="large"
         className={twMerge(
           pressAnimation,
@@ -57,13 +57,13 @@ export const Buttons: Story = {
             className="slideLeft absolute right-4 rounded-full text-2xl text-gray-6 group-focus:-translate-x-32 group-focus:text-info group-active:scale-105 group-active:text-info"
           />
           <div className="group-focus:fadeIn flex w-0 items-center justify-between opacity-0 group-focus:w-20">
-            <Button intent="custom" size="small" className="p-0 md:h-auto">
+            <Button variant="custom" size="small" className="p-0 md:h-auto">
               <Icon name="play3" className="rounded-full text-info" />
             </Button>
-            <Button intent="custom" size="small" className="p-0 md:h-auto">
+            <Button variant="custom" size="small" className="p-0 md:h-auto">
               <Icon name="pause2" className="rounded-full text-info" />
             </Button>
-            <Button intent="custom" size="small" className="p-0 md:h-auto">
+            <Button variant="custom" size="small" className="p-0 md:h-auto">
               <Icon name="stop2" className="rounded-full text-info" />
             </Button>
           </div>

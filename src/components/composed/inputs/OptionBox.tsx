@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { ChangeEvent, FormEvent, forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Box, BaseCheckbox } from '@/components';
 
@@ -8,7 +8,7 @@ interface OptionBoxProps {
   className?: string;
   disabled?: boolean;
   checked: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>, option: string) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>, option: string) => void;
   error?: boolean;
 }
 

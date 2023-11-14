@@ -77,7 +77,7 @@ const DatePickerHeader: FC<ReactDatePickerCustomHeaderProps> = ({
     <div className="flex items-center justify-between justify-items-center">
       <Button
         size="small"
-        intent="icon"
+        variant="custom"
         onClick={decreaseMonth}
         disabled={prevMonthButtonDisabled}
       >
@@ -88,7 +88,7 @@ const DatePickerHeader: FC<ReactDatePickerCustomHeaderProps> = ({
 
       <Button
         size="small"
-        intent="icon"
+        variant="custom"
         onClick={increaseMonth}
         disabled={nextMonthButtonDisabled}
       >

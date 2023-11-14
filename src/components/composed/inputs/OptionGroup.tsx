@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { ChangeEvent, FormEvent, useCallback } from 'react';
 import { useController } from 'react-hook-form';
 import {
   FadeIn,
@@ -52,7 +52,7 @@ export const OptionGroup = ({
   const { ref, onChange, value } = field;
 
   const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>, option: string) => {
+    (e: ChangeEvent<HTMLInputElement>, option: string) => {
       let newValue = [];
       if (e.target.checked) {
         newValue = [...value, option];

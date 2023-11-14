@@ -33,11 +33,11 @@ export const BaseTimePicker = ({ value, onChange, open }: TimePickerProps) => {
     <div className="flex items-center">
       <div className="flex flex-1 items-center">
         <div className="flex flex-col items-center p-5">
-          <Button onClick={incrementHours} intent="outlined">
+          <Button onClick={incrementHours} variant="outlined">
             <Icon name="arrow-up2" />
           </Button>
           <div className="my-2 text-gray-9">{meridiemHours}</div>
-          <Button onClick={decrementHours} intent="outlined">
+          <Button onClick={decrementHours} variant="outlined">
             <Icon name="arrow-down2" />
           </Button>
         </div>
@@ -45,11 +45,11 @@ export const BaseTimePicker = ({ value, onChange, open }: TimePickerProps) => {
         <div>:</div>
 
         <div className="flex flex-col items-center p-5">
-          <Button onClick={incrementMinutes} intent="outlined">
+          <Button onClick={incrementMinutes} variant="outlined">
             <Icon name="arrow-up2" />
           </Button>
           <div className="my-2 text-gray-9">{meridiemMinutes}</div>
-          <Button onClick={decrementMinutes} intent="outlined">
+          <Button onClick={decrementMinutes} variant="outlined">
             <Icon name="arrow-down2" />
           </Button>
         </div>

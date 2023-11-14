@@ -4,11 +4,10 @@ export type Validation = {
   rules:
     | Omit<
         RegisterOptions<FieldValues, string>,
-        'setValueAs' | 'disabled' | 'valueAsNumber' | 'valueAsDate'
+        'setValueAs' | 'valueAsNumber' | 'valueAsDate'
       >
     | undefined;
   errorMessage?: string;
-  tooltip?: string;
 };
 
 export interface Category {

@@ -288,7 +288,7 @@ export function useValidationRule(node: Tree): Validation {
       : undefined,
   };
 
-  return { rules, tooltip: validation.label };
+  return { rules };
 }
 
 export function getNumberFromString(value: string) {

@@ -11,25 +11,25 @@ type AnchorProps = DetailedHTMLProps<
   };
 
 const variantDefaults: ButtonVariantProps = {
-  intent: 'secondary',
-  size: 'large',
+  variant: 'secondary',
+  size: 'normal',
 };
 
 export const Link = forwardRef<HTMLAnchorElement, AnchorProps>(
   (
-    { size, intent, orientation, children, className, icon, ...restProps },
+    { size, variant, orientation, children, className, icon, ...props },
     ref,
   ) => {
     return (
       <a
         ref={ref}
         className={twMerge(
-          buttonVariants({ ...variantDefaults, orientation, intent, size }),
+          buttonVariants({ ...variantDefaults, orientation, variant, size }),
           className,
         )}
-        {...restProps}
+        {...props}
       >
-        {children && <div className="buttonContent">{children}</div>}
+        {children}
         {icon && (
           <div className={twMerge(`icon-${icon}`, 'h-3 w-auto md:h-4')}></div>
         )}

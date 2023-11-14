@@ -1,16 +1,48 @@
 import { ChangeEvent, HTMLProps, ReactNode, forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
+import { VariantProps, cva } from 'class-variance-authority';
 import { CheckboxSvg } from './CheckboxSvg';
 
-export interface BaseCheckboxProps extends HTMLProps<HTMLInputElement> {
-  name: string;
-  checked: boolean;
-  disabled?: boolean;
-  className?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  error?: boolean;
-  CheckedIcon?: ReactNode;
-}
+export type BaseCheckboxProps = Omit<
+  HTMLProps<HTMLInputElement>,
+  'size' | 'onChange'
+> &
+  CheckboxVariantProps &
+  CheckboxIconVariantProps & {
+    name: string;
+    checked?: boolean;
+    error?: boolean;
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+    CheckedIcon?: ReactNode;
+  };
+type CheckboxVariantProps = VariantProps<typeof checkboxVariants>;
+type CheckboxIconVariantProps = VariantProps<typeof checkboxIconVariants>;
+
+const checkboxVariants = cva('', {
+  variants: {
+    size: {
+      normal: ['w-5', 'h-5'],
+      small: ['w-4', 'h-4'],
+      custom: [''],
+    },
+  },
+  defaultVariants: {
+    size: 'normal',
+  },
+});
+
+const checkboxIconVariants = cva('', {
+  variants: {
+    size: {
+      normal: ['1rem'],
+      small: ['0.75rem'],
+      custom: '',
+    },
+  },
+  defaultVariants: {
+    size: 'normal',
+  },
+});
 
 export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>(
   (
@@ -20,21 +52,25 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>(
       disabled,
       className,
       checked,
-      onChange,
       error,
-      CheckedIcon = <CheckboxSvg width={16} height={16} />,
-      ...rest
+      size,
+      CheckedIcon = (
+        <CheckboxSvg
+          width={checkboxIconVariants({ size })}
+          height={checkboxIconVariants({ size })}
+        />
+      ),
+      ...props
     },
     ref,
   ) => {
     return (
       <span
         className={twMerge(
-          'relative shrink-0 block box-content cursor-pointer user-select-none',
-          'h-4 w-4 rounded-[4px] border border-gray-300 bg-white text-primary',
-          checked && 'checked border-primary bg-primary-50',
-          error && 'border-error focus:ring-error focus:border-error',
-          disabled ? 'cursor-default' : 'cursor-pointer',
+          checkboxVariants({ size }),
+          'flex transition relative shrink-0 cursor-pointer user-select-none justify-center items-center text-primary',
+          '[&>svg]:pointer-events-none [&>svg]:absolute',
+          error && 'text-error',
           className,
         )}
       >
@@ -45,19 +81,22 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>(
           name={name}
           disabled={disabled}
           checked={checked}
-          onChange={onChange}
           className={twMerge(
-            'absolute top-0 z-1 left-0 outline-none appearance-none cursor-inherit',
-            'h-4 w-4 rounded-[4px]',
-            'focus:ring-2 ring-primary focus:ring-primary',
+            checkboxVariants({ size }),
+            'rounded peer transition border border-gray-300 bg-white text-primary',
+            'absolute z-1 outline-none appearance-none cursor-inherit',
+            'focus:ring-1 ring-primary focus:ring-primary',
             checked && 'checked border-primary bg-primary-50',
-            error && 'border-error focus:ring-error focus:border-error',
+            error &&
+              'border-error focus:ring-error focus:border-error bg-transparent',
             disabled ? 'cursor-default' : 'cursor-pointer',
             className,
           )}
-          {...rest}
+          {...props}
         />
-        {checked && <>{CheckedIcon}</>}
+        <span className="relative opacity-0 peer-checked:opacity-100">
+          {CheckedIcon}
+        </span>
       </span>
     );
   },

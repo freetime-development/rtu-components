@@ -14,7 +14,7 @@ const variantDefaults: AlertVariantProps = { type: 'warning' };
 const alert = cva('flex gap-5 w-full px-5 py-3 rounded-lg items-center', {
   variants: {
     type: {
-      info: ['bg-info', 'text-white'],
+      info: ['bg-secondary', 'text-white'],
       warning: ['bg-warning', 'text-white'],
       error: ['bg-error', 'text-white'],
       success: ['bg-success', 'text-white'],

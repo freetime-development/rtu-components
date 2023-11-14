@@ -30,7 +30,7 @@ export const Preview: FC<PreviewProps> = ({ files, removeFile }) => {
           <img src={url} className="w-full h-full" />
           <Button
             onClick={e => handleRemove(e, id)}
-            intent="custom"
+            variant="custom"
             size="small"
             className="absolute top-0 right-0 p-3 border border-gray-300 text-gray-300 rounded-lg bg-white"
           >

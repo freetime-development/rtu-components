@@ -13,18 +13,33 @@ export const buttonVariants = cva(
   'flex relative gap-2 rounded-lg font-semibold disabled:opacity-40 disabled:pointer-events-none focus:outline-0 justify-center items-center',
   {
     variants: {
-      intent: {
-        primary: ['bg-primary', 'text-white', 'hover:bg-primary/90'],
-        secondary: ['bg-secondary', 'text-white', 'hover:bg-secondary/80'],
-        icon: [],
-        outlined: ['border', 'border-gray', 'hover:bg-gray/20'],
+      variant: {
+        primary: [
+          'bg-primary',
+          'text-white',
+          'hover:bg-primary/90',
+          'active:bg-primary-700',
+        ],
+        secondary: [
+          'bg-secondary',
+          'text-white',
+          'hover:bg-secondary/90',
+          'active:bg-secondary-700',
+        ],
+        outlined: [
+          'border',
+          'border-gray-200',
+          'hover:border-gray',
+          'active:border-gray-300',
+          'text-gray',
+        ],
         custom: [''],
       },
       size: {
         full: ['w-full', 'py-3', 'px-5'],
-        large: ['md:w-48', 'py-3', 'px-5'],
-        normal: ['md:w-32', 'py-3', 'px-5'],
-        small: ['h-8', 'w-8', 'py-3', 'px-5'],
+        large: ['py-3', 'px-5', 'text-lg'],
+        normal: ['py-2', 'px-4', 'text-base'],
+        small: ['py-2', 'px-3', 'text-sm'],
         custom: [''],
       },
       loading: {
@@ -36,9 +51,9 @@ export const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      intent: 'primary',
+      variant: 'primary',
       orientation: 'normal',
-      size: 'large',
+      size: 'normal',
     },
   },
 );
@@ -48,12 +63,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     {
       className,
       size,
-      intent,
+      variant,
       orientation,
       children,
       loading,
       type = 'button',
-      ...rest
+      ...props
     },
     ref,
   ) => {
@@ -62,11 +77,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         className={twMerge(
           'group',
-          buttonVariants({ size, intent, orientation, loading }),
+          buttonVariants({ size, variant, orientation, loading }),
           className,
         )}
         type={type}
-        {...rest}
+        {...props}
       >
         {children}
       </button>

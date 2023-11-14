@@ -10,52 +10,144 @@ const meta: Meta<typeof Button> = {
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-export const Primary: Story = {
+export const PrimaryLarge: Story = {
   args: {
     size: 'large',
-    children: 'Primary Button',
+    children: 'Click me!',
+  },
+};
+
+export const PrimaryNormal: Story = {
+  args: {
+    children: 'Click me!',
+  },
+};
+
+export const PrimarySmall: Story = {
+  args: {
+    size: 'small',
+    children: 'Click me!',
   },
 };
 
 export const PrimaryWithIcon: Story = {
   args: {
-    size: 'large',
-    intent: 'primary',
+    variant: 'primary',
     children: (
       <>
-        Secondary Button <Icon name="plus" />
+        Click me! <Icon name="plus" size="sm" />
       </>
     ),
   },
 };
 
-export const Secondary: Story = {
+export const PrimaryWithIconReversed: Story = {
   args: {
-    size: 'large',
-    intent: 'secondary',
-    children: 'Secondary Button',
+    variant: 'primary',
+    orientation: 'reverse',
+    children: (
+      <>
+        Click me! <Icon name="plus" size="sm" />
+      </>
+    ),
   },
 };
 
-export const SmallWithIcon: Story = {
+export const SecondaryLarge: Story = {
   args: {
+    variant: 'secondary',
+    size: 'large',
+    children: 'Click me!',
+  },
+};
+
+export const SecondaryNormal: Story = {
+  args: {
+    variant: 'secondary',
+    children: 'Click me!',
+  },
+};
+
+export const SecondarySmall: Story = {
+  args: {
+    variant: 'secondary',
     size: 'small',
-    intent: 'secondary',
-    children: <Icon name="plus" />,
+    children: 'Click me!',
   },
 };
 
-export const Outlined: Story = {
+export const SecondaryWithIcon: Story = {
   args: {
+    variant: 'secondary',
+    children: (
+      <>
+        Click me! <Icon name="plus" size="sm" />
+      </>
+    ),
+  },
+};
+
+export const SecondaryWithIconReversed: Story = {
+  args: {
+    variant: 'secondary',
+    orientation: 'reverse',
+    children: (
+      <>
+        Click me! <Icon name="plus" size="sm" />
+      </>
+    ),
+  },
+};
+
+export const OutlinedLarge: Story = {
+  args: {
+    variant: 'outlined',
     size: 'large',
-    intent: 'outlined',
-    children: 'Outlined Button',
+    children: 'Click me!',
+  },
+};
+
+export const OutlinedNormal: Story = {
+  args: {
+    variant: 'outlined',
+    children: 'Click me!',
+  },
+};
+
+export const OutlinedSmall: Story = {
+  args: {
+    variant: 'outlined',
+    size: 'small',
+    children: 'Click me!',
+  },
+};
+
+export const OutlinedWithIcon: Story = {
+  args: {
+    variant: 'outlined',
+    children: (
+      <>
+        Click me! <Icon name="plus" size="sm" />
+      </>
+    ),
+  },
+};
+
+export const OutlinedWithIconReversed: Story = {
+  args: {
+    variant: 'outlined',
+    orientation: 'reverse',
+    children: (
+      <>
+        Click me! <Icon name="plus" size="sm" />
+      </>
+    ),
   },
 };
 
 export const Neumorphism: Story = {
   args: {
-    intent: 'custom',
+    variant: 'custom',
     size: 'custom',
     className:
       'nm-convex-white w-10 h-10 text-gray-2 items-center justify-center active:shadow-md transition ease-in-out duration-200 group-active:scale-105',
@@ -70,7 +162,7 @@ export const Neumorphism: Story = {
 
 export const NeumorphismRound: Story = {
   args: {
-    intent: 'custom',
+    variant: 'custom',
     size: 'custom',
     className:
       'nm-convex-white rounded-full w-10 h-10 text-gray-2 items-center justify-center active:shadow-md transition ease-in-out duration-200 group-active:scale-105',

@@ -11,6 +11,7 @@ export const Chip: FC<ChipProps> = ({ children, onRemove, className = '' }) => {
     e.stopPropagation();
     onRemove();
   };
+
   return (
     <button
       className={twMerge(
