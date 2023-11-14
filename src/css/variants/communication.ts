@@ -11,7 +11,12 @@ export const communicationVariants = cva([], {
       ],
     },
     info: {
-      true: ['border', 'border-info', 'hover:border-info', 'focus:border-info'],
+      true: [
+        'border',
+        'border-secondary',
+        'hover:border-secondary',
+        'focus:border-secondary',
+      ],
     },
     warning: {
       true: [

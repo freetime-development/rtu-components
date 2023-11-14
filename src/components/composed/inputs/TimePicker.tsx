@@ -1,6 +1,6 @@
-import classNames from 'classnames';
 import { useRef, useState } from 'react';
 import { useController } from 'react-hook-form';
+import { twMerge } from 'tailwind-merge';
 import { BaseInput, BaseTimePicker, Icon, Validation } from '@/components';
 import { getMeridiemnTime } from '@/hooks/useMeridiemTime';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
@@ -49,15 +49,13 @@ export const TimePicker = (props: TimePickerProps) => {
         onChange={field.onChange}
         onFocus={onFocus}
         disabled={props.disabled}
-        Icon={() => <Icon name="alarm" />}
-        className={classNames(open ? 'rounded-b-none' : 'rounded-b-lg')}
+        renderLeft={className => <Icon name="alarm" className={className} />}
+        className={twMerge(open ? 'rounded-b-none' : 'rounded-b-lg')}
       />
       <div
-        className={classNames(
+        className={twMerge(
           'absolute z-10 w-full  border-gray-9/20 bg-white',
-          {
-            'rounded-lg rounded-t-none border ': open,
-          },
+          open && 'rounded-lg rounded-t-none border',
         )}
       >
         <BaseTimePicker {...timepickerProps} />

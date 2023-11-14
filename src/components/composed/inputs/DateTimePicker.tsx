@@ -94,7 +94,9 @@ export const DateTimePicker = ({
             name={`${name}-date`}
             value={date}
             placeholder={placeholder}
-            Icon={() => <Icon name="calendar" />}
+            renderLeft={className => (
+              <Icon name="calendar" className={className} />
+            )}
             onChange={e => {
               setDate(e.target.value);
             }}
@@ -111,7 +113,9 @@ export const DateTimePicker = ({
             id={`${name}-time`}
             name={`${name}-time`}
             value={time}
-            Icon={() => <Icon name="alarm" />}
+            renderLeft={className => (
+              <Icon name="alarm" className={className} />
+            )}
             placeholder={placeholder}
             onChange={e => {
               setTime(e.target.value);

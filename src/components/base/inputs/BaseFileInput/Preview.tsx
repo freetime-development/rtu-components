@@ -32,9 +32,13 @@ export const Preview: FC<PreviewProps> = ({ files, removeFile }) => {
             onClick={e => handleRemove(e, id)}
             variant="custom"
             size="small"
-            className="absolute top-0 right-0 p-3 border border-gray-300 text-gray-300 rounded-lg bg-white"
+            className="absolute top-1 right-1 p-1 border border-gray-300 text-gray-300 rounded-lg"
           >
-            <Icon name="cross" className="text-gray-300" />
+            <Icon
+              name="cross"
+              size="xs"
+              className="text-gray-300 leading-none"
+            />
           </Button>
         </div>
       ))}

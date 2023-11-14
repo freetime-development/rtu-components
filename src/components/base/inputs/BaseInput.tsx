@@ -2,31 +2,57 @@ import type { VariantProps } from 'class-variance-authority';
 import { cva } from 'class-variance-authority';
 import { forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { useClassNames } from '@/utils/useClassNames';
 
 type InputVariantProps = VariantProps<typeof inputVariants>;
 export type BaseInputProps = Omit<
   React.HTMLProps<HTMLInputElement>,
-  'onChange' | 'onFocus'
+  'onChange' | 'onFocus' | 'size'
 > &
   InputVariantProps & {
-    Icon?: () => JSX.Element;
+    renderLeft?: (className: string, error?: boolean) => JSX.Element;
+    renderRight?: (className: string, error?: boolean) => JSX.Element;
     name: string;
     containerClassName?: string;
     error?: boolean;
     onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   };
 
 const inputVariants = cva(
   [
-    'flex w-full items-center rounded-lg border border-gray-9/10 hover:border-gray-9/20 focus:border-gray-9/20 dark:border-white-9/10 dark:hover:border-white-9/20 dark:focus:border-white-9/20',
+    'peer flex-grow appearance-none rounded-lg bg-transparent text-gray focus:outline-none',
+  ],
+  {
+    variants: {
+      size: {
+        large: ['py-3', 'px-5', 'text-lg'],
+        normal: ['py-2.5', 'px-4', 'text-base'],
+        small: ['py-2', 'px-3', 'text-sm'],
+        custom: [''],
+      },
+    },
+    defaultVariants: {
+      size: 'normal',
+    },
+  },
+);
+
+const sideVariants = cva(
+  [
+    'flex w-10 items-center self-stretch border-0 bg-transparent justify-center',
+    'peer-focus:border-gray-300 group-hover:border-gray',
   ],
   {
     variants: {
       orientation: {
-        normal: ['flex-row'],
-        reverse: ['flex-row-reverse'],
+        right: ['border-l'],
+        left: ['border-r'],
+      },
+      size: {
+        large: ['text-lg', '1.25rem'],
+        normal: ['text-base', '1rem'],
+        small: ['text-sm', '0.75rem'],
+        custom: [''],
       },
     },
   },
@@ -35,42 +61,35 @@ const inputVariants = cva(
 export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
   (
     {
-      Icon,
+      renderLeft,
+      renderRight,
       name,
       value,
       type,
       placeholder,
       onChange,
       onBlur,
+      size,
       onFocus,
       disabled,
       error,
-      orientation,
       className,
       containerClassName,
       ...rest
     },
     ref,
   ) => {
-    const classNames = useClassNames(
-      error ? 'error' : 'custom',
-      containerClassName,
-      inputVariants({ orientation }),
-    );
-
     return (
-      <div className={classNames}>
-        {Icon && (
-          <div
-            className={twMerge(
-              'relative flex w-8 cursor-pointer items-center self-stretch border-0 bg-transparent',
-              orientation === 'reverse'
-                ? 'justify-start rounded-r-lg'
-                : 'justify-end rounded-l-lg',
-            )}
-          >
-            {Icon()}
-          </div>
+      <div
+        className={twMerge(
+          'flex w-full group items-center rounded-lg border border-gray-200 hover:border-gray/90 focus-within:border-gray-300 text-gray',
+          disabled && 'pointer-events-none',
+          error && 'focus-within:border-error border-error hover:border-error',
+          containerClassName,
+        )}
+      >
+        {renderLeft && (
+          <>{renderLeft(sideVariants({ orientation: 'left', size }), error)}</>
         )}
         <input
           ref={ref}
@@ -84,17 +103,20 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
           onFocus={onFocus}
           disabled={disabled}
           className={twMerge(
-            'flex-grow appearance-none rounded-lg bg-transparent p-3 text-gray-9',
+            inputVariants({ size }),
             error && 'text-error',
-            Icon
-              ? orientation === 'reverse'
-                ? 'rounded-r-none border-r-0'
-                : 'rounded-l-none border-l-0'
-              : '',
+            disabled && 'opacity-40 pointer-events-none',
+            renderLeft && 'rounded-l-none border-l-0',
+            renderRight && 'rounded-r-none border-r-0',
             className,
           )}
           {...rest}
         />
+        {renderRight && (
+          <>
+            {renderRight(sideVariants({ orientation: 'right', size }), error)}
+          </>
+        )}
       </div>
     );
   },

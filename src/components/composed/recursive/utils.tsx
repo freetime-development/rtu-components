@@ -2,7 +2,6 @@ import { useFormContext } from 'react-hook-form';
 import { Validation } from '../../types';
 import { INode, Tree } from './types';
 import {
-  Boolean,
   DatePicker,
   DateTimePicker,
   Icon,
@@ -53,19 +52,6 @@ export function useElementByType(node: Tree) {
   let element;
 
   switch (field.type) {
-    case 'boolean':
-      element = (
-        <Boolean
-          key={field.name}
-          name={field.name}
-          label={field.label}
-          disabled={field.disabled}
-          defaultValue={field.defaultValue ?? null}
-          validation={validation}
-          tooltip={field.tooltip}
-        />
-      );
-      break;
     case 'number':
       element = (
         <Input
@@ -77,7 +63,9 @@ export function useElementByType(node: Tree) {
           validation={validation}
           tooltip={field.tooltip}
           placeholder={field.placeholder ?? undefined}
-          Icon={() => <Icon name="sort-numeric-asc" />}
+          renderLeft={className => (
+            <Icon name="sort-numeric-asc" className={className} />
+          )}
           type="number"
         />
       );
@@ -92,7 +80,9 @@ export function useElementByType(node: Tree) {
           defaultValue={field.defaultValue ?? ''}
           validation={validation}
           tooltip={field.tooltip}
-          Icon={() => <Icon name="sort-alpha-asc" />}
+          renderLeft={className => (
+            <Icon name="sort-alpha-asc" className={className} />
+          )}
         />
       );
       break;
