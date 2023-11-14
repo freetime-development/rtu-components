@@ -9,13 +9,14 @@ const Component = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
     ref={ref}
+    className="relative opacity-0 peer-checked:opacity-100"
     {...props}
   >
     <path
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={2}
+      strokeWidth={3}
       d="M20 6 9 17l-5-5"
     />
   </svg>

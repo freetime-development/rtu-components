@@ -13,7 +13,7 @@ export type BaseCheckboxProps = Omit<
     checked?: boolean;
     error?: boolean;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-    CheckedIcon?: ReactNode;
+    renderCheckedIcon?: (defaultClassName: string) => ReactNode;
   };
 type CheckboxVariantProps = VariantProps<typeof checkboxVariants>;
 type CheckboxIconVariantProps = VariantProps<typeof checkboxIconVariants>;
@@ -54,12 +54,7 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>(
       checked,
       error,
       size,
-      CheckedIcon = (
-        <CheckboxSvg
-          width={checkboxIconVariants({ size })}
-          height={checkboxIconVariants({ size })}
-        />
-      ),
+      renderCheckedIcon,
       ...props
     },
     ref,
@@ -94,9 +89,16 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>(
           )}
           {...props}
         />
-        <span className="relative opacity-0 peer-checked:opacity-100">
-          {CheckedIcon}
-        </span>
+        {renderCheckedIcon ? (
+          <>
+            {renderCheckedIcon('relative opacity-0 peer-checked:opacity-100')}
+          </>
+        ) : (
+          <CheckboxSvg
+            width={checkboxIconVariants({ size })}
+            height={checkboxIconVariants({ size })}
+          />
+        )}
       </span>
     );
   },
