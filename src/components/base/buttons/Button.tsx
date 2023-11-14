@@ -38,7 +38,7 @@ export const buttonVariants = cva(
       size: {
         full: ['w-full', 'py-3', 'px-5'],
         large: ['py-3', 'px-5', 'text-lg'],
-        normal: ['py-2', 'px-4', 'text-base'],
+        normal: ['py-2.5', 'px-4', 'text-base'],
         small: ['py-2', 'px-3', 'text-sm'],
         custom: [''],
       },
