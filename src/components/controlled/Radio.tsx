@@ -4,7 +4,7 @@ import { Validation } from '../types';
 import { BaseRadioProps, BaseRadio } from '../base';
 import { useFormError } from '@/utils';
 
-type RadioProps = Omit<
+export type RadioProps = Omit<
   BaseRadioProps,
   'defaultValue' | 'ref' | 'onChange' | 'checked' | 'value'
 > & {

@@ -11,7 +11,7 @@ import {
   BaseMultiSelect,
 } from '@/components';
 
-type MultiSelectProps<O extends Option> = Omit<
+export type MultiSelectProps<O extends Option> = Omit<
   BaseSelectProps,
   'value' | 'onChange' | 'setQuery' | 'clear' | 'renderSelectedOptions'
 > &

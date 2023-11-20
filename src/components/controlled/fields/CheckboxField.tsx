@@ -7,7 +7,7 @@ import {
 } from '@/components/base/fields';
 import { Validation } from '@/components/types';
 
-type CheckboxFieldProps = Omit<
+export type CheckboxFieldProps = Omit<
   BaseCheckboxFieldProps,
   'defaultValue' | 'ref' | 'onChange' | 'checked'
 > & {

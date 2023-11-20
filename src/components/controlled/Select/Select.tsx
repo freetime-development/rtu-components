@@ -11,7 +11,7 @@ import {
 } from '@/components';
 import { useFormError } from '@/utils';
 
-type SelectProps<O> = Omit<
+export type SelectProps<O> = Omit<
   BaseSelectProps,
   'value' | 'onChange' | 'onBlur' | 'clear' | 'ref'
 > &

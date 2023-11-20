@@ -6,7 +6,7 @@ import {
 } from '@/components/base/fields';
 import { Validation } from '@/components/types';
 
-type FileInputFieldProps = Omit<
+export type FileInputFieldProps = Omit<
   BaseFileInputFieldProps,
   'ref' | 'onChange' | 'defaultValue' | 'value'
 > & {

@@ -6,7 +6,7 @@ import {
 } from '@/components/base/fields';
 import { Validation } from '@/components/types';
 
-type TextAreaFieldProps = Omit<
+export type TextAreaFieldProps = Omit<
   BaseTextAreaFieldProps,
   'defaultValue' | 'ref'
 > & {

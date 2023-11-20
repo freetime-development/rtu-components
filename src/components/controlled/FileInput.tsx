@@ -2,7 +2,7 @@ import { useController } from 'react-hook-form';
 import { Validation, FieldProps, BaseFileInputProps, BaseFileInput } from '..';
 import { useFormError } from '@/utils';
 
-type FileInputProps = Omit<
+export type FileInputProps = Omit<
   BaseFileInputProps,
   'ref' | 'onChange' | 'defaultValue' | 'value'
 > &

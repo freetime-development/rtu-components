@@ -1,7 +1,6 @@
 import { ChangeEvent, HTMLProps, ReactNode, forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { VariantProps, cva } from 'class-variance-authority';
-import { labelAlignmentVariants } from '../classNameVariants';
 import { CheckboxSvg } from './CheckboxSvg';
 import {
   ComponentVariantState,

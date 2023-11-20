@@ -2,7 +2,7 @@ import { Controller } from 'react-hook-form';
 import { Validation, BaseTextAreaProps, BaseTextArea } from '..';
 import { useFormError } from '@/utils';
 
-type TextAreaProps = Omit<
+export type TextAreaProps = Omit<
   BaseTextAreaProps,
   'defaultValue' | 'ref' | 'onChange' | 'onBlur'
 > & {

@@ -4,7 +4,7 @@ import { BaseCheckbox, BaseCheckboxProps } from '../base';
 import { Validation } from '../types';
 import { useFormError } from '@/utils';
 
-type Checkboxrops = Omit<
+export type Checkboxrops = Omit<
   BaseCheckboxProps,
   'defaultValue' | 'ref' | 'onChange' | 'checked'
 > & {

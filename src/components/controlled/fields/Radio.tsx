@@ -4,7 +4,7 @@ import { useFormError } from '@/utils';
 import { BaseRadioFieldProps, BaseRadioField } from '@/components/base/fields';
 import { Validation } from '@/components/types';
 
-type RadioFieldProps = Omit<
+export type RadioFieldProps = Omit<
   BaseRadioFieldProps,
   'defaultValue' | 'ref' | 'onChange' | 'checked' | 'value'
 > & {
