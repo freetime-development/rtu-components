@@ -2,7 +2,7 @@ import { AnchorHTMLAttributes, DetailedHTMLProps, forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { ButtonVariantProps, buttonVariants } from './Button';
 
-type AnchorProps = DetailedHTMLProps<
+export type LinkButtonProps = DetailedHTMLProps<
   AnchorHTMLAttributes<HTMLAnchorElement>,
   HTMLAnchorElement
 > &
@@ -15,7 +15,7 @@ const variantDefaults: ButtonVariantProps = {
   size: 'normal',
 };
 
-export const LinkButton = forwardRef<HTMLAnchorElement, AnchorProps>(
+export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
   (
     {
       size,
