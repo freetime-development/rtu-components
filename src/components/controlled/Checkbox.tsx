@@ -4,7 +4,7 @@ import { BaseCheckbox, BaseCheckboxProps } from '../base';
 import { Validation } from '../types';
 import { useFormError } from '@/utils';
 
-export type Checkboxrops = Omit<
+export type CheckboxProps = Omit<
   BaseCheckboxProps,
   'defaultValue' | 'ref' | 'onChange' | 'checked'
 > & {
@@ -15,7 +15,7 @@ export type Checkboxrops = Omit<
   errorBorder?: boolean;
 };
 
-export const Checkbox: FC<Checkboxrops> = ({
+export const Checkbox: FC<CheckboxProps> = ({
   name,
   validation,
   defaultValue,
