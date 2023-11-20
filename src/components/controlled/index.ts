@@ -4,3 +4,4 @@ export * from './Checkbox';
 export * from './FileInput';
 export * from './Select';
 export * from './Radio';
+export * from './fields';
