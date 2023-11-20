@@ -4,7 +4,7 @@ import { Alert, FetchingError } from '../src/components';
 type Story = StoryObj<typeof Alert>;
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof Alert> = {
-  title: 'General/FetchingErrorAlert',
+  title: 'NeedLove/FetchingErrorAlert',
   component: Alert,
   tags: ['autodocs'],
 };

@@ -1,4 +1,4 @@
-import { Button, Icon, Switch } from '@/components';
+import { Button, Icon, Tabs } from '@/components';
 import useMeridiemTime from '@/hooks/useMeridiemTime';
 
 interface TimePickerProps
@@ -55,7 +55,7 @@ export const BaseTimePicker = ({ value, onChange, open }: TimePickerProps) => {
         </div>
       </div>
       <div className="flex flex-1 justify-center">
-        <Switch
+        <Tabs
           value={meridiem}
           options={meridiemOptions}
           onClick={handleMeridiemChange}

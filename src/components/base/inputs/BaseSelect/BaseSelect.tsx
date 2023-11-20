@@ -1,33 +1,50 @@
 import { Combobox } from '@headlessui/react';
-import classNames from 'classnames';
 import { ForwardedRef, HTMLProps, ReactNode, forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { BaseSelectOptions } from './BaseSelectOptions';
+import {
+  BaseSelectVariants,
+  selectSideItemVariants,
+  selectSizeVariants,
+} from './variantClassNames';
+import { StateButton } from './StateButton';
 import { Option } from '@/components/types';
+import {
+  ComponentVariantState,
+  ComponentVariantType,
+  getComponentStateVariants,
+} from '@/css/variants/stateVariants';
 
-export interface BaseSelectProps
-  extends Omit<HTMLProps<HTMLInputElement>, 'value' | 'onChange' | 'ref'> {
-  isLoading?: boolean;
-  disabled?: boolean;
-  disableClear?: boolean;
-  options: Option[];
-  highlightedOptions?: Option[];
-  value: string | null;
-  name: string;
-  inputClassName?: string;
-  containerClassName?: string;
-  placeholder?: string;
-  error?: boolean;
-  onChange: (value: string) => void;
-  setQuery?: (query: string) => void;
-  clear: () => void;
-  transitionDuration?: number;
-  LoadingIcon?: ReactNode;
-  ClearIcon?: ReactNode;
-  DefaultIcon?: ReactNode;
-  renderOption?: (option: Option) => ReactNode;
-  renderSelectedOption?: (option?: Option) => ReactNode;
-}
+export type BaseSelectProps = Omit<
+  HTMLProps<HTMLInputElement>,
+  'value' | 'onChange' | 'ref' | 'size'
+> &
+  BaseSelectVariants & {
+    isLoading?: boolean;
+    disabled?: boolean;
+    disableClear?: boolean;
+    options?: Option[];
+    selectedOptions?: Option[];
+    value: string | null;
+    name: string;
+    inputClassName?: string;
+    containerClassName?: string;
+    placeholder?: string;
+    error?: boolean;
+    onChange: (value: string) => void;
+    setQuery?: (query: string) => void;
+    clear: () => void;
+    transitionDuration?: number;
+    LoadingIcon?: ReactNode;
+    ClearIcon?: ReactNode;
+    DefaultIcon?: ReactNode;
+    renderOption?: (option: Option) => ReactNode;
+    renderLeft?: (
+      option?: Option,
+      className?: string,
+      error?: boolean,
+    ) => ReactNode;
+  };
 
 export const BaseSelect = forwardRef(
   (
@@ -35,7 +52,7 @@ export const BaseSelect = forwardRef(
       isLoading,
       disabled,
       options,
-      highlightedOptions,
+      selectedOptions,
       disableClear,
       value,
       name,
@@ -46,16 +63,32 @@ export const BaseSelect = forwardRef(
       onChange,
       setQuery,
       clear,
+      size,
       transitionDuration = 150,
       LoadingIcon,
       ClearIcon,
       DefaultIcon,
       renderOption,
-      renderSelectedOption,
+      renderLeft,
     }: BaseSelectProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
-    const selectedOption = options.find(o => o.value === value);
+    const { wrapperStateVariants, inputStateVariants } =
+      getComponentStateVariants(
+        ComponentVariantType.SELECT,
+        error ? ComponentVariantState.ERROR : ComponentVariantState.DEFAULT,
+      );
+    const sizeVariants = selectSizeVariants({ size });
+    const sideItemVariantsLeft = selectSideItemVariants({
+      size,
+      orientation: 'left',
+    });
+    const sideItemVariantsRight = selectSideItemVariants({
+      size,
+      orientation: 'right',
+    });
+
+    const selectedOption = options?.find(o => o.value === value);
 
     function onClick() {
       if (!value || isLoading || disableClear) {
@@ -84,82 +117,73 @@ export const BaseSelect = forwardRef(
     }
 
     return (
-      <Combobox value={value} onChange={onChange} disabled={disabled}>
+      <Combobox value={value} onChange={onChange}>
         {({ open }) => (
-          <>
+          <div className="group">
             <Combobox.Button
               as="div"
-              className={twMerge('relative flex w-full', containerClassName)}
+              className={twMerge(
+                'flex w-full items-center',
+                sizeVariants,
+                wrapperStateVariants,
+                open ? 'rounded-b-none' : 'rounded-b-lg',
+                disabled && 'pointer-events-none opacity-40',
+                containerClassName,
+              )}
             >
-              {renderSelectedOption ? (
-                renderSelectedOption(selectedOption)
+              {renderLeft ? (
+                <>{renderLeft(selectedOption, sideItemVariantsLeft, error)}</>
               ) : (
-                <DefaultSelectedOption selectedOption={selectedOption} />
+                <DefaultSelectedOption
+                  selectedOption={selectedOption}
+                  className={sideItemVariantsLeft}
+                />
               )}
 
               <Combobox.Input
                 name={name}
                 ref={ref}
                 onChange={handleInputChange}
-                className={classNames(
-                  'w-full rounded-lg border min-h-[2.5rem] text-gray box-content pl-3',
-                  !disabled && 'hover:border-gray/20 focus:border-gray/20',
-                  open ? 'rounded-b-none' : 'rounded-b-lg',
-                  error && 'border-error focus:border-error',
-                  selectedOption?.icon || selectedOption?.emoji
-                    ? 'px-9'
-                    : 'pr-9',
+                className={twMerge(
+                  'peer flex-grow appearance-none outline-none',
+                  inputStateVariants,
                   inputClassName,
                 )}
                 placeholder={placeholder}
                 displayValue={(value: string) => {
-                  return options.find(o => o.value === value)?.label || '';
+                  return options?.find(o => o.value === value)?.label || '';
                 }}
               />
 
-              <Combobox.Button
+              <StateButton
                 className={twMerge(
-                  'absolute hidden right-0 h-full w-10 hover:cursor-pointer',
+                  'hidden cursor-pointer',
+                  sideItemVariantsRight,
                   !disabled && 'flex items-center justify-center',
                 )}
-                // @ts-expect-error
-                tabindex={0} // it needs to overide the default -1 so that the Combobox.Button can open the dropdown, yes it's lower case i, no don't change it
+                value={value}
+                disabled={disabled}
+                disableClear={disableClear}
+                isLoading={isLoading}
                 onClick={onClick}
                 onKeyDown={onKeyDown}
-              >
-                <div className="absolute">
-                  {isLoading ? (
-                    <>
-                      {LoadingIcon ? (
-                        <>{LoadingIcon}</>
-                      ) : (
-                        <div className="flex h-full w-10 items-center justify-center">
-                          <div className="h-5 w-5 animate-spin rounded-full border-2 border-solid border-t-transparent" />
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <>
-                      {value && !disableClear ? (
-                        <>{ClearIcon}</>
-                      ) : (
-                        <>{DefaultIcon}</>
-                      )}
-                    </>
-                  )}
-                </div>
-              </Combobox.Button>
+                ClearIcon={ClearIcon}
+                DefaultIcon={DefaultIcon}
+                LoadingIcon={LoadingIcon}
+              />
             </Combobox.Button>
 
             <BaseSelectOptions
               open={open}
               options={options}
-              highlightedOptions={highlightedOptions}
+              className={sizeVariants}
+              leftClassName={sideItemVariantsLeft}
+              selectedOptions={selectedOptions}
               transitionDuration={transitionDuration}
               renderOption={renderOption}
               onTransitionEnd={() => setQuery?.('')}
             />
-          </>
+          </div>
         )}
       </Combobox>
     );
@@ -170,8 +194,10 @@ BaseSelect.displayName = 'BaseSelect';
 
 function DefaultSelectedOption({
   selectedOption,
+  className,
 }: {
   selectedOption?: Option;
+  className?: string;
 }) {
   if (!selectedOption) {
     return null;
@@ -179,16 +205,16 @@ function DefaultSelectedOption({
 
   if (selectedOption.icon) {
     return (
-      <div className="absolute flex h-full w-10 items-center justify-center">
-        <i className={classNames('h-6 w-6', selectedOption.icon)} />
+      <div className={className}>
+        <i className={twMerge(selectedOption.icon)} />
       </div>
     );
   }
 
   if (selectedOption.emoji) {
     return (
-      <div className="absolute flex h-full w-10 items-center justify-center">
-        <span className="h-6 w-6">{selectedOption.emoji}</span>
+      <div className={className}>
+        <span>{selectedOption.emoji}</span>
       </div>
     );
   }

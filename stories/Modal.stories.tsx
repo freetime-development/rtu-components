@@ -8,6 +8,14 @@ const meta: Meta<typeof Modal> = {
   title: 'General/Modal',
   component: ModalGenerator,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      story: {
+        inline: false,
+        iframeHeight: 500,
+      },
+    },
+  },
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args

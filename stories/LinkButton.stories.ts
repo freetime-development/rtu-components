@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Link } from '../src/components';
+import { LinkButton } from '../src/components';
 
-type Story = StoryObj<typeof Link>;
+type Story = StoryObj<typeof LinkButton>;
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
-const meta: Meta<typeof Link> = {
-  title: 'General/LinkButton',
-  component: Link,
+const meta: Meta<typeof LinkButton> = {
+  title: 'NeedLove/LinkButton',
+  component: LinkButton,
   tags: ['autodocs'],
 };
 

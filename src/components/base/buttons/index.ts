@@ -1,4 +1,4 @@
 export * from './Button';
-export * from './Link';
+export * from './LinkButton';
 export * from './Chip';
-export * from './Switch';
+export * from './Tabs';

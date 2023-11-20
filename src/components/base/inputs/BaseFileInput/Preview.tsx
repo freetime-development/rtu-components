@@ -26,8 +26,8 @@ export const Preview: FC<PreviewProps> = ({ files, removeFile }) => {
   return (
     <div className="flex w-full h-full">
       {previews.map(({ id, url }) => (
-        <div key={id} className="relative w-full h-full">
-          <img src={url} className="w-full h-full" />
+        <div key={id} className="relative rounded-lg w-full h-full">
+          <img src={url} className="w-full rounded-lg h-full" />
           <Button
             onClick={e => handleRemove(e, id)}
             variant="custom"

@@ -15,7 +15,7 @@ const types: FlashMessageType[] = ['info', 'error', 'success', 'warning'];
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof FlashMessages> = {
-  title: 'General/FlashMessages',
+  title: 'NeedLove/FlashMessages',
   component: FlashMessageGenerator,
   decorators: [
     Story => (

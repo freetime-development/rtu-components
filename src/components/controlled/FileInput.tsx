@@ -1,11 +1,5 @@
 import { useController } from 'react-hook-form';
-import {
-  Field,
-  Validation,
-  FieldProps,
-  BaseFileInput,
-  BaseFileInputProps,
-} from '..';
+import { Validation, FieldProps, BaseFileInputProps, BaseFileInput } from '..';
 import { useFormError } from '@/utils';
 
 type FileInputProps = Omit<
@@ -15,34 +9,22 @@ type FileInputProps = Omit<
   FieldProps & {
     name: string;
     validation?: Validation;
-    tooltip?: string | null;
-    fieldClassName?: string;
     inputClassName?: string;
     errorBorder?: boolean;
     aggregate?: boolean;
   };
 
 export const FileInput = ({
-  placeholder,
-  tooltip,
-  fieldClassName,
   inputClassName,
-  disabled,
   type = 'text',
   name,
   validation,
-  label,
   errorBorder,
-  onFocus,
   aggregate,
-  hint,
-  renderHint,
-  renderError,
   ...rest
 }: FileInputProps) => {
   const rules = validation?.rules;
-  const errorMessage = validation?.errorMessage;
-  const error = useFormError(name, errorMessage);
+  const error = useFormError(name);
   const { field } = useController({ name, rules, defaultValue: [] });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,34 +41,20 @@ export const FileInput = ({
   };
 
   return (
-    <Field
+    <BaseFileInput
       name={name}
-      label={label}
-      tooltip={tooltip}
-      error={error}
-      renderError={renderError}
-      hint={hint}
-      renderHint={renderHint}
-      className={fieldClassName}
-    >
-      <BaseFileInput
-        //   ref={field.ref}
-        error={errorBorder ? Boolean(error) : false}
-        id={name}
-        type={type}
-        name={name}
-        className={inputClassName}
-        value={field.value}
-        disabled={disabled}
-        placeholder={placeholder}
-        onChange={handleChange}
-        removeFile={handleRemoveFile}
-        onBlur={field.onBlur}
-        onFocus={onFocus}
-        {...rest}
-      />
-    </Field>
+      id={name}
+      type={type}
+      ref={field.ref}
+      error={Boolean(error)}
+      value={field.value}
+      className={inputClassName}
+      onChange={handleChange}
+      removeFile={handleRemoveFile}
+      onBlur={field.onBlur}
+      {...rest}
+    />
   );
 };
 
-FileInput.displayName = 'Input';
+FileInput.displayName = 'FileInput';

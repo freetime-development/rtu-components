@@ -61,7 +61,7 @@ export function useElementByType(node: Tree) {
           label={field.label}
           defaultValue={field.defaultValue ?? null}
           validation={validation}
-          tooltip={field.tooltip}
+          tooltip={field.tooltip ?? undefined}
           placeholder={field.placeholder ?? undefined}
           renderLeft={className => (
             <Icon name="sort-numeric-asc" className={className} />
@@ -79,7 +79,7 @@ export function useElementByType(node: Tree) {
           disabled={field.disabled}
           defaultValue={field.defaultValue ?? ''}
           validation={validation}
-          tooltip={field.tooltip}
+          tooltip={field.tooltip ?? undefined}
           renderLeft={className => (
             <Icon name="sort-alpha-asc" className={className} />
           )}
@@ -110,7 +110,7 @@ export function useElementByType(node: Tree) {
             placeholder: field.placeholder ?? undefined,
             defaultValue: field.defaultValue ?? '',
             validation,
-            tooltip: field.tooltip,
+            tooltip: field.tooltip ?? undefined,
           }}
           datepickerProps={{
             skipFilterDays: true,
@@ -130,7 +130,7 @@ export function useElementByType(node: Tree) {
           label={field.label}
           defaultValue={field.defaultValue ?? null}
           validation={validation}
-          tooltip={field.tooltip}
+          tooltip={field.tooltip ?? undefined}
         />
       );
       break;
@@ -143,7 +143,7 @@ export function useElementByType(node: Tree) {
           validation={validation}
           disabled={field.disabled}
           defaultValue={field.defaultValue ?? []}
-          tooltip={field.tooltip}
+          tooltip={field.tooltip ?? undefined}
           options={field.options ?? []}
         />
       );
@@ -156,7 +156,7 @@ export function useElementByType(node: Tree) {
           disabled={field.disabled}
           name={field.name}
           label={field.label}
-          tooltip={field.tooltip}
+          tooltip={field.tooltip ?? undefined}
           options={field.options ?? []}
           validation={validation}
           className="py-2"
@@ -237,7 +237,6 @@ export function useValidationRule(node: Tree): Validation {
           boolean: (value: boolean) => value !== null,
         },
       },
-      errorMessage: 'Something went wrong',
     };
   }
 

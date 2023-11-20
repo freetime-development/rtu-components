@@ -1,50 +1,29 @@
 import { Controller } from 'react-hook-form';
-import {
-  Field,
-  Validation,
-  FieldProps,
-  BaseTextAreaProps,
-  BaseTextArea,
-} from '..';
+import { Validation, BaseTextAreaProps, BaseTextArea } from '..';
 import { useFormError } from '@/utils';
 
-type BaseAreaProps = Omit<
+type TextAreaProps = Omit<
   BaseTextAreaProps,
-  'defaultValue' | 'ref' | 'className'
-> &
-  FieldProps & {
-    name: string;
-    validation?: Validation;
-    defaultValue?: string | null;
-    tooltip?: string | null;
-    fieldClassName?: string;
-    containerClassName?: string;
-    inputClassName?: string;
-    errorBorder?: boolean;
-  };
+  'defaultValue' | 'ref' | 'onChange' | 'onBlur'
+> & {
+  name: string;
+  validation?: Validation;
+  defaultValue?: string | null;
+  inputClassName?: string;
+  errorBorder?: boolean;
+};
 
 export const TextArea = ({
-  placeholder,
-  tooltip,
-  fieldClassName,
-  containerClassName,
   inputClassName,
-  disabled,
   type = 'text',
   name,
   validation,
   defaultValue,
-  label,
   errorBorder,
-  onFocus,
-  renderError,
-  hint,
-  renderHint,
   ...rest
-}: BaseAreaProps) => {
+}: TextAreaProps) => {
   const rules = validation?.rules;
-  const errorMessage = validation?.errorMessage;
-  const error = useFormError(name, errorMessage);
+  const error = useFormError(name);
 
   return (
     <Controller
@@ -53,33 +32,17 @@ export const TextArea = ({
       rules={rules}
       render={({ field }) => {
         return (
-          <Field
+          <BaseTextArea
             name={name}
-            label={label}
-            tooltip={tooltip}
-            error={error}
-            renderError={renderError}
-            hint={hint}
-            renderHint={renderHint}
-            className={fieldClassName}
-          >
-            <BaseTextArea
-              ref={field.ref}
-              error={errorBorder ? Boolean(error) : false}
-              id={name}
-              type={type}
-              name={name}
-              containerClassName={containerClassName}
-              className={inputClassName}
-              value={field.value}
-              disabled={disabled}
-              placeholder={placeholder}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-              onFocus={onFocus}
-              {...rest}
-            />
-          </Field>
+            type={type}
+            value={field.value}
+            ref={field.ref}
+            error={Boolean(error)}
+            className={inputClassName}
+            onChange={field.onChange}
+            onBlur={field.onBlur}
+            {...rest}
+          />
         );
       }}
     />

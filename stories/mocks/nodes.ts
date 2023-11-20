@@ -2,24 +2,6 @@ import { INode } from '../../src/components';
 
 export const nodesMock: INode[] = [
   {
-    id: 1,
-    key: 'key-1',
-    parent: null,
-    maxNumberOfReplicas: null,
-    parentVisibilityRule: '',
-    parentRuleType: '',
-    order: 1,
-    field: {
-      name: 'bool',
-      label: 'Bool',
-      type: 'boolean',
-      disabled: false,
-      validation: {
-        required: true,
-      },
-    },
-  },
-  {
     id: 2,
     key: 'key-2',
     parent: null,

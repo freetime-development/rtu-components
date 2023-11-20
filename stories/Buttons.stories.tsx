@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 import { Button, Icon } from '../src/components';
 import { Row } from './utils/Row';
@@ -21,9 +20,9 @@ export const Buttons: Story = {
         key={1}
         variant="custom"
         size="large"
-        className={classNames(
+        className={twMerge(
           pressAnimation,
-          'h-10 w-10 items-center justify-center rounded-full text-gray-2 ease-in-out nm-convex-white group-active:scale-105',
+          'h-10 w-48 items-center justify-center rounded-full text-gray-2 ease-in-out nm-convex-white group-active:scale-105',
         )}
       >
         <>
@@ -45,7 +44,7 @@ export const Buttons: Story = {
         className={twMerge(
           pressAnimation,
           'focus:justify-end',
-          'h-10 w-10 items-center justify-between rounded-full text-gray-4 nm-convex-white',
+          'h-10 w-48 items-center justify-between rounded-full text-gray-4 nm-convex-white',
         )}
       >
         <span className="opacity-1 transition delay-150 group-focus:opacity-0 group-focus:transition-none">

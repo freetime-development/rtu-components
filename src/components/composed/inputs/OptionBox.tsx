@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, forwardRef } from 'react';
+import { ChangeEvent, forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Box, BaseCheckbox } from '@/components';
 
@@ -19,16 +19,16 @@ export const OptionBox = forwardRef<HTMLInputElement, OptionBoxProps>(
         htmlFor={name}
         className={twMerge(className, 'block cursor-pointer py-2')}
       >
-        <Box className="flex-row rounded-lg bg-white p-3 hover:bg-gray-9/10">
+        <Box className="flex flex-row gap-2 items-center rounded-lg bg-white p-3">
           <BaseCheckbox
             ref={ref}
             name={name}
             disabled={disabled}
-            label={label}
             checked={checked}
             error={error}
             onChange={e => onChange(e, name)}
           />
+          {label}
         </Box>
       </label>
     );

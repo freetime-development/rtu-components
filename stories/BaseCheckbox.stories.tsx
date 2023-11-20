@@ -4,22 +4,38 @@ import { BaseCheckbox } from '../src/components';
 type Story = StoryObj<typeof BaseCheckbox>;
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof BaseCheckbox> = {
-  title: 'Form/Base/BaseCheckbox',
+  title: 'Form/Base/Checkbox',
   component: BaseCheckbox,
   tags: ['autodocs'],
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-export const CheckedNormal: Story = {
+export const XL: Story = {
   args: {
+    size: 'xl',
     name: 'checkbox-1',
     checked: true,
   },
 };
 
-export const CheckedSmall: Story = {
+export const Large: Story = {
   args: {
-    name: 'checkbox-1',
+    size: 'large',
+    name: 'checkbox-2',
+    checked: true,
+  },
+};
+
+export const Normal: Story = {
+  args: {
+    name: 'checkbox-3',
+    checked: true,
+  },
+};
+
+export const Small: Story = {
+  args: {
+    name: 'checkbox-4',
     size: 'small',
     checked: true,
   },
@@ -27,30 +43,14 @@ export const CheckedSmall: Story = {
 
 export const UnChecked: Story = {
   args: {
-    name: 'checkbox-3',
+    name: 'checkbox-5',
     checked: false,
   },
 };
 
-export const UnCheckedSmall: Story = {
+export const Error: Story = {
   args: {
-    name: 'checkbox-3',
-    size: 'small',
-    checked: false,
-  },
-};
-
-export const WithError: Story = {
-  args: {
-    name: 'checkbox-4',
-    error: true,
-  },
-};
-
-export const WithErrorSmall: Story = {
-  args: {
-    name: 'checkbox-4',
-    size: 'small',
+    name: 'checkbox-6',
     error: true,
   },
 };
@@ -58,17 +58,30 @@ export const WithErrorSmall: Story = {
 export const CheckedWithError: Story = {
   args: {
     checked: true,
-    name: 'checkbox-4',
+    name: 'checkbox-7',
     error: true,
   },
 };
 
-export const CheckedWithErrorSmall: Story = {
+export const Hover: Story = {
   args: {
-    checked: true,
-    name: 'checkbox-4',
-    size: 'small',
-    error: true,
+    name: 'checkbox-8',
+  },
+  parameters: {
+    pseudo: {
+      hover: true,
+    },
+  },
+};
+
+export const Focus: Story = {
+  args: {
+    name: 'checkbox-9',
+  },
+  parameters: {
+    pseudo: {
+      focus: true,
+    },
   },
 };
 

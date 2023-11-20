@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#7F56D9',
+          DEFAULT: '#9E77ED',
           25: '#FCFAFF',
           50: '#F9F5FF',
           100: '#F4EBFF',
@@ -20,7 +20,7 @@ module.exports = {
           900: '#42307D',
         },
         secondary: {
-          DEFAULT: '#00B3B5',
+          DEFAULT: '#2DC3C6',
           25: '#EEFFFF',
           50: '#E3FAFB',
           100: '#C7F1F1',
@@ -34,7 +34,7 @@ module.exports = {
           900: '#0E8587',
         },
         error: {
-          DEFAULT: '#D92D20',
+          DEFAULT: '#F04438',
           25: '#FFFBFA',
           50: '#FEF3F2',
           100: '#FEE4E2',
@@ -48,7 +48,7 @@ module.exports = {
           900: '#7A271A',
         },
         warning: {
-          DEFAULT: '#DC6803',
+          DEFAULT: '#F79009',
           25: '#FFFCF5',
           50: '#FFFAEB',
           100: '#FEF0C7',
@@ -62,7 +62,7 @@ module.exports = {
           900: '#7A2E0E',
         },
         success: {
-          DEFAULT: '#039855',
+          DEFAULT: '#12B76A',
           25: '#F6FEF9',
           50: '#ECFDF3',
           100: '#D1FADF',
@@ -76,7 +76,7 @@ module.exports = {
           900: '#054F31',
         },
         gray: {
-          DEFAULT: '#475467',
+          DEFAULT: '#667085',
           25: '#FCFCFD',
           50: '#F9FAFB',
           100: '#F2F4F7',

@@ -1,6 +1,6 @@
-import classNames from 'classnames';
 import { FC, useRef, useState } from 'react';
 import { useController } from 'react-hook-form';
+import { twMerge } from 'tailwind-merge';
 import { useOnClickOutside } from '@/hooks';
 import {
   BaseDatePicker,
@@ -67,9 +67,10 @@ export const DatePicker: FC<DatePickerProps> = ({
     <>
       {isStatic ? (
         <div
-          className={classNames('flex flex-col gap-4', {
-            'pointer-events-none opacity-50': inputProps.disabled,
-          })}
+          className={twMerge(
+            'flex flex-col gap-4',
+            inputProps.disabled && 'pointer-events-none opacity-50',
+          )}
         >
           <Input {...props} />
           <BaseDatePicker {...dtProps} />
@@ -84,7 +85,7 @@ export const DatePicker: FC<DatePickerProps> = ({
           />
           {open && (
             <div
-              className={classNames(
+              className={twMerge(
                 'absolute z-10  w-full rounded-lg rounded-t-none border border-gray-9/20 bg-white',
               )}
             >

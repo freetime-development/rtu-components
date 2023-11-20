@@ -22,7 +22,7 @@ export const Tooltip = memo(({ text, placement = 'top' }: TooltipProps) => {
         </FadeIn>
       }
     >
-      <i className="icon-info text-black" />
+      <i className="icon-info" />
     </RCTooltip>
   );
 });

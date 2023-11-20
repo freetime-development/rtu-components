@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { RefCallback, useCallback } from 'react';
 import { useController } from 'react-hook-form';
 import { useFormError } from '@/utils';
@@ -45,8 +44,7 @@ export function RadioGroup<O extends Option>({
   renderError,
 }: RadioGroupProps<O>) {
   const rules = validation?.rules;
-  const errorMessage = validation?.errorMessage;
-  const error = useFormError(name, errorMessage);
+  const error = useFormError(name);
   const { field } = useController({
     name,
     rules,
@@ -87,7 +85,7 @@ export function RadioGroup<O extends Option>({
       renderHint={renderHint}
       className={fieldClassName}
     >
-      <div className={classNames('flex flex-col')}>
+      <div className={'flex flex-col gap-2'}>
         {options.map((option, i) => {
           if (renderOption) {
             return renderOption(

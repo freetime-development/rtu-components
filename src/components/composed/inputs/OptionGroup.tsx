@@ -42,8 +42,8 @@ export const OptionGroup = ({
 }: OptionGroupProps) => {
   const replicaIndex = useReplicaIndexContext();
   const rules = validation?.rules;
-  const errorMessage = validation?.errorMessage;
-  const error = useFormError(name, errorMessage);
+  const errorMessage = validation;
+  const error = useFormError(name);
   const { field } = useController({
     name,
     rules,

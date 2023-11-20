@@ -5,7 +5,7 @@ import { Icon, Select } from '../src/components';
 type Story = StoryObj<typeof Select>;
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof Select> = {
-  title: 'General/Select',
+  title: 'Controlled/Select',
   component: Select,
   tags: ['autodocs'],
   parameters: {

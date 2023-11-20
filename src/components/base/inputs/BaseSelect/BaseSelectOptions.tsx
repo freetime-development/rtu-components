@@ -1,47 +1,52 @@
 import { Combobox } from '@headlessui/react';
-import classNames from 'classnames';
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 import { Option } from '@/components/types';
 
-interface Props {
-  options: Option[];
-  highlightedOptions?: Option[];
+interface BaseSelectOptionsProps<O extends Option> {
+  className?: string;
+  leftClassName?: string;
+  options?: O[];
+  selectedOptions?: O[];
   open: boolean;
   transitionDuration: number;
-  renderOption?: (option: Option) => ReactNode;
+  renderOption?: (option: O, className?: string) => ReactNode;
   onTransitionEnd?: () => void;
 }
 
-export const BaseSelectOptions: FC<Props> = ({
+export function BaseSelectOptions<O extends Option>({
+  className,
+  leftClassName,
   open,
   options,
-  highlightedOptions,
+  selectedOptions,
   transitionDuration,
   renderOption,
   onTransitionEnd,
-}) => {
+}: BaseSelectOptionsProps<O>) {
   return (
     <div className="relative">
       <Combobox.Options
         static
-        className={classNames(
-          'transition-height absolute z-10 w-full overflow-auto border rounded-b-lg border-gray-9/20',
+        className={twMerge(
+          'transition-height absolute z-10 w-full overflow-auto border rounded-b-lg border-gray-200',
           open ? 'max-h-60 rounded-t-none' : 'max-h-0 border-transparent',
         )}
         style={{ transitionDuration: `${transitionDuration * 2}ms` }}
         onTransitionEnd={onTransitionEnd}
       >
-        {options.map((option, i) => (
+        {options?.map((option, i) => (
           <Combobox.Option
             disabled={option.value === null}
             key={`${name}-${option.label}-${i}`}
             value={option.value}
-            className={classNames(
-              'flex px-3 ui-active:bg-primary-100 bg-white focus:scale-[99%] focus:rounded-lg transition-transform duration-75 ease-in-out',
+            className={twMerge(
+              'flex items-center px-3 ui-active:bg-primary-100 bg-white focus:scale-[99%]  focus:rounded-lg transition-transform duration-75 ease-in-out',
               option.value ? 'border-b p-3' : 'pb-0 pt-3',
               i === options.length - 1 ? 'border-none' : '',
-              isHighlighted(option, highlightedOptions) &&
+              isHighlighted(option, selectedOptions) &&
                 'ui-not-active:bg-primary-50',
+              className,
             )}
           >
             {option.value === null ? (
@@ -49,9 +54,9 @@ export const BaseSelectOptions: FC<Props> = ({
             ) : (
               <>
                 {renderOption ? (
-                  renderOption(option)
+                  renderOption(option, leftClassName)
                 ) : (
-                  <DefaultOption option={option} />
+                  <DefaultOption option={option} className={leftClassName} />
                 )}
               </>
             )}
@@ -60,10 +65,10 @@ export const BaseSelectOptions: FC<Props> = ({
       </Combobox.Options>
     </div>
   );
-};
+}
 
-function isHighlighted(option: Option, highlightedOptions?: Option[]) {
-  return highlightedOptions?.find(o => o.value === option.value);
+function isHighlighted(option: Option, selectedOptions?: Option[]) {
+  return selectedOptions?.find(o => o.value === option.value);
 }
 
 function GroupLabel({ label }: { label: string }) {
@@ -75,12 +80,24 @@ function GroupLabel({ label }: { label: string }) {
   );
 }
 
-function DefaultOption({ option }: { option: Option }) {
+interface DefaultOptionBaseSelectOptionsProps {
+  option: Option;
+  className?: string;
+}
+
+function DefaultOption({
+  option,
+  className,
+}: DefaultOptionBaseSelectOptionsProps) {
+  const label = <span className="text-gray">{option.label}</span>;
+
   if (option.icon) {
     return (
       <>
-        <i className={classNames('mx-2 h-6 w-6', option.icon)} />
-        <span>{option.label}</span>
+        <div className={className}>
+          <i className={option.icon} />
+        </div>
+        {label}
       </>
     );
   }
@@ -88,20 +105,22 @@ function DefaultOption({ option }: { option: Option }) {
   if (option.emoji) {
     return (
       <>
-        <span className="mr-2">{option.emoji}</span>
-        <span>{option.label}</span>
+        <div className={className}>
+          <span>{option.emoji}</span>
+        </div>
+        {label}
       </>
     );
   }
 
   if (option.subtext) {
     return (
-      <div className="flex flex-col">
+      <div className="flex flex-col text-gray">
         <span className="text-sm">{option.label}</span>
         <span className="text-xs">{option.subtext}</span>
       </div>
     );
   }
 
-  return <span>{option.label}</span>;
+  return label;
 }

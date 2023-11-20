@@ -10,21 +10,30 @@ const meta: Meta<typeof BaseTextArea> = {
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-export const First: Story = {
+export const Default: Story = {
   args: {
     name: 'textarea',
     label: 'TextArea',
-    placeholder: 'Give me your life story',
+    placeholder: "Tell us something nice about yourself, don't be shy",
   },
 };
 
-export const Second: Story = {
+export const With5Rows: Story = {
   args: {
     name: 'textarea',
     label: 'TextArea',
-    placeholder: 'Give me your life story',
+    placeholder: "Tell us something nice about yourself, don't be shy",
     rows: 5,
     cols: 10,
+  },
+};
+
+export const WithError: Story = {
+  args: {
+    name: 'textarea',
+    label: 'TextArea',
+    error: true,
+    placeholder: "Tell us something nice about yourself, don't be shy",
   },
 };
 

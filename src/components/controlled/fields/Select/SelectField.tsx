@@ -2,19 +2,18 @@ import { ReactNode, useCallback } from 'react';
 import { useController } from 'react-hook-form';
 import {
   Category,
-  BaseSelect,
-  Field,
   Option,
   Validation,
   useSelect,
-  BaseSelectProps,
   FieldProps,
+  BaseSelectField,
+  BaseSelectFieldProps,
 } from '@/components';
 import { useFormError } from '@/utils';
 
-type SelectProps<O> = Omit<
-  BaseSelectProps,
-  'value' | 'onChange' | 'setQuery' | 'clear'
+type SelectFieldProps<O> = Omit<
+  BaseSelectFieldProps,
+  'value' | 'onChange' | 'onBlur' | 'clear' | 'ref'
 > &
   FieldProps & {
     name: string;
@@ -37,33 +36,25 @@ type SelectProps<O> = Omit<
     DefaultIcon?: ReactNode;
   };
 
-export function Select<O extends Option>({
+export function SelectField<O extends Option>({
   name,
   isLoading,
-  disabled,
   options,
   categories,
-  placeholder = 'Select',
-  fieldClassName,
+  inputClassName,
   initialQuery,
-  tooltip,
   errorBorder,
   valueAs = 'string',
   validation,
   defaultValue = '',
-  label,
   onChange,
   async,
-  hint,
-  renderHint,
-  renderError,
   ...rest
-}: SelectProps<O>) {
+}: SelectFieldProps<O>) {
   const rules = validation?.rules;
-  const errorMessage = validation?.errorMessage;
-  const error = useFormError(name, errorMessage);
+  const error = useFormError(name);
   const { field } = useController({ name, rules, defaultValue });
-  const selectedOption = options.find(o => o.value === field.value);
+  const selectedOption = options?.find(o => o.value === field.value);
   const { filteredOptions, setQuery, clear } = useSelect<O>(
     name,
     initialQuery,
@@ -85,28 +76,19 @@ export function Select<O extends Option>({
   );
 
   return (
-    <Field
+    <BaseSelectField
       name={name}
-      label={label}
-      tooltip={tooltip}
+      ref={field.ref}
       error={error}
-      renderError={renderError}
-      hint={hint}
-      renderHint={renderHint}
-      className={fieldClassName}
-    >
-      <BaseSelect
-        ref={field.ref}
-        name={name}
-        error={errorBorder ? Boolean(error) : false}
-        placeholder={placeholder}
-        options={filteredOptions}
-        value={!selectedOption?.value ? '' : String(selectedOption.value)}
-        onChange={handleOnChange}
-        setQuery={setQuery}
-        clear={clear}
-        {...rest}
-      />
-    </Field>
+      className={inputClassName}
+      options={filteredOptions}
+      value={!selectedOption?.value ? '' : String(selectedOption.value)}
+      onChange={handleOnChange}
+      setQuery={setQuery}
+      clear={clear}
+      {...rest}
+    />
   );
 }
+
+SelectField.displayName = 'SelectField';

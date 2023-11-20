@@ -1,6 +1,6 @@
-import classNames from 'classnames';
 import { useRef, useState } from 'react';
 import { useController } from 'react-hook-form';
+import { twMerge } from 'tailwind-merge';
 import {
   BaseDatePicker,
   BaseInput,
@@ -48,9 +48,9 @@ export const DateTimePicker = ({
     defaultValue ? defaultValue?.split(',')[0] : '',
   );
 
-  const errorMessage = validation?.errorMessage;
+  const errorMessage = validation;
   const rules = validation?.rules;
-  const error = useFormError(name, errorMessage);
+  const error = useFormError(name);
   const { field } = useController({ name, defaultValue, rules });
 
   const ref = useRef(null);
@@ -103,7 +103,7 @@ export const DateTimePicker = ({
             onBlur={field.onBlur}
             onFocus={onFocusDate}
             disabled={disabled}
-            className={classNames(
+            className={twMerge(
               'rounded-lg rounded-r-none border',
               open ? 'rounded-b-none' : 'rounded-b-lg',
             )}
@@ -123,7 +123,7 @@ export const DateTimePicker = ({
             onBlur={field.onBlur}
             onFocus={onFocusTime}
             disabled={disabled}
-            className={classNames(
+            className={twMerge(
               'rounded-lg rounded-l-none border-l-0',
               open ? 'rounded-b-none' : 'rounded-b-lg',
             )}
@@ -131,7 +131,7 @@ export const DateTimePicker = ({
         </div>
       </Field>
       <div
-        className={classNames(
+        className={twMerge(
           'absolute z-10 w-full  bg-white hover:border-gray-9/20 focus:border-gray-9/20',
           open
             ? 'rounded-lg rounded-t-none border border-gray-9/20'

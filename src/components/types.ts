@@ -7,7 +7,6 @@ export type Validation = {
         'setValueAs' | 'valueAsNumber' | 'valueAsDate'
       >
     | undefined;
-  errorMessage?: string;
 };
 
 export interface Category {

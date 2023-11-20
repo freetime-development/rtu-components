@@ -4,7 +4,7 @@ import { BaseFileInput } from '../src/components';
 type Story = StoryObj<typeof BaseFileInput>;
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof BaseFileInput> = {
-  title: 'Form/Base/BaseFileInput',
+  title: 'Form/Base/FileInput',
   component: BaseFileInput,
   tags: ['autodocs'],
 };
@@ -15,7 +15,17 @@ export const Primary: Story = {
     name: 'file',
     children: 'Upload',
     multiple: true,
-    className: 'w-32 h-32 border border-gray-300 rounded-lg',
+    className: 'w-24 h-24',
+  },
+};
+
+export const PrimaryWithError: Story = {
+  args: {
+    name: 'file',
+    children: 'Upload',
+    error: true,
+    multiple: true,
+    className: 'w-24 h-24',
   },
 };
 

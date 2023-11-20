@@ -5,7 +5,7 @@ import { BaseInput as Input, Icon } from '../src/components';
 type Story = StoryObj<typeof Input>;
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof Input> = {
-  title: 'Form/Base/BaseInput',
+  title: 'Form/Base/Input',
   component: Input,
   tags: ['autodocs'],
 };

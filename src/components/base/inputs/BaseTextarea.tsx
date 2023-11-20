@@ -1,65 +1,35 @@
 import { forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { useClassNames } from '@/utils/useClassNames';
+import {
+  ComponentVariantState,
+  ComponentVariantType,
+  getComponentStateVariants,
+} from '@/css/variants/stateVariants';
 
-export type BaseTextAreaProps = Omit<
-  React.HTMLProps<HTMLTextAreaElement>,
-  'onChange' | 'onFocus'
-> & {
+export type BaseTextAreaProps = React.HTMLProps<HTMLTextAreaElement> & {
   name: string;
-  containerClassName?: string;
-  rows?: number;
-  cols?: number;
   error?: boolean;
-  onFocus?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 export const BaseTextArea = forwardRef<HTMLTextAreaElement, BaseTextAreaProps>(
-  (
-    {
-      name,
-      value,
-      placeholder,
-      onChange,
-      onBlur,
-      onFocus,
-      disabled,
-      rows,
-      cols,
-      error,
-      className,
-      containerClassName,
-    },
-    ref,
-  ) => {
-    const classNames = useClassNames(
-      error ? 'error' : 'custom',
-      containerClassName,
-      'flex w-full items-center rounded-lg border border-gray-9/10 hover:border-gray-9/20 focus:border-gray-9/20 dark:border-white-9/10 dark:hover:border-white-9/20 dark:focus:border-white-9/20',
+  ({ name, error, className, ...props }, ref) => {
+    const { inputStateVariants } = getComponentStateVariants(
+      ComponentVariantType.TEXTAREA,
+      error ? ComponentVariantState.ERROR : ComponentVariantState.DEFAULT,
     );
 
     return (
-      <div className={classNames}>
-        <textarea
-          ref={ref}
-          id={name}
-          name={name}
-          value={value}
-          rows={rows}
-          cols={cols}
-          placeholder={placeholder}
-          onChange={onChange}
-          onBlur={onBlur}
-          onFocus={onFocus}
-          disabled={disabled}
-          className={twMerge(
-            'flex-grow outline-none appearance-none rounded-lg bg-transparent p-3 text-gray-9',
-            error && 'text-error',
-            className,
-          )}
-        />
-      </div>
+      <textarea
+        ref={ref}
+        id={name}
+        name={name}
+        className={twMerge(
+          'flex w-full p-3 outline-none appearance-none bg-transparent rounded-lg',
+          inputStateVariants,
+          className,
+        )}
+        {...props}
+      />
     );
   },
 );

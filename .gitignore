@@ -20,6 +20,7 @@ release/
 output/
 output_resource/
 log/
+storybook-static/
 
 .vscode/**/*
 !.vscode/settings.json

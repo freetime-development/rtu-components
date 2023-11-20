@@ -15,9 +15,9 @@ interface TimePickerProps
 
 export const TimePicker = (props: TimePickerProps) => {
   const { name, validation, defaultValue, label } = props;
-  const errorMessage = validation?.errorMessage;
+  const errorMessage = validation;
   const rules = validation?.rules;
-  const error = useFormError(name, errorMessage);
+  const error = useFormError(name);
   const { field } = useController({ name, defaultValue, rules });
   const [open, setOpen] = useState(false);
   const meridiemTime = getMeridiemnTime(field.value);

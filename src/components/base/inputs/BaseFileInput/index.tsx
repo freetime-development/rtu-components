@@ -5,8 +5,13 @@ import {
   useRef,
   useState,
 } from 'react';
+import { twMerge } from 'tailwind-merge';
 import { Content } from './Content';
-import { useClassNames } from '@/utils/useClassNames';
+import {
+  ComponentVariantState,
+  ComponentVariantType,
+  getComponentStateVariants,
+} from '@/css/variants/stateVariants';
 
 export type BaseFileInputProps = PropsWithChildren &
   Omit<React.HTMLProps<HTMLInputElement>, 'onClick' | 'value'> & {
@@ -17,6 +22,7 @@ export type BaseFileInputProps = PropsWithChildren &
       removeFile: (id: string) => void,
     ) => JSX.Element;
     disablePreview?: boolean;
+    /** Merges existing selection with new files */
     aggregate?: boolean;
     onSuccess?: (files: File[]) => void;
     removeFile?: (id: string) => void;
@@ -47,9 +53,9 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
     },
     ref,
   ) => {
-    const classNames = useClassNames(
-      error ? 'error' : 'custom',
-      className ?? '',
+    const { wrapperStateVariants } = getComponentStateVariants(
+      ComponentVariantType.FILE,
+      error ? ComponentVariantState.ERROR : ComponentVariantState.DEFAULT,
     );
     const inputRef = useRef<HTMLInputElement>(null);
     const [files, setFiles] = useState<File[]>(value ?? []);
@@ -83,7 +89,11 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
       <button
         ref={ref}
         type="button"
-        className={classNames}
+        className={twMerge(
+          'border rounded-lg w-20 h-20',
+          wrapperStateVariants,
+          className,
+        )}
         onClick={handleClick}
         disabled={disabled}
       >
@@ -102,7 +112,7 @@ export const BaseFileInput = forwardRef<HTMLButtonElement, BaseFileInputProps>(
             type="file"
             name={name}
             onChange={onChange ?? handleChange}
-            className={'hidden'}
+            className="hidden"
             {...rest}
           />
         </>
