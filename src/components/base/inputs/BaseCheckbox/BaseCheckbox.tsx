@@ -108,7 +108,12 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>(
         />
         {renderCheckedIcon ? (
           <>
-            {renderCheckedIcon('relative opacity-0 peer-checked:opacity-100')}
+            {renderCheckedIcon(
+              twMerge(
+                'relative opacity-0 peer-checked:opacity-100',
+                checkboxIconSizeVariants({ size }),
+              ),
+            )}
           </>
         ) : (
           <CheckboxSvg
