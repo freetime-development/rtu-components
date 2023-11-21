@@ -18,7 +18,6 @@ export type BaseCheckboxProps = Omit<
     checked?: boolean;
     error?: boolean;
     containerClassName?: string;
-    fieldClassName?: string;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     renderLabel?: (className?: string) => JSX.Element;
     renderCheckedIcon?: (defaultClassName: string) => ReactNode;
@@ -63,7 +62,6 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>(
       renderLabel,
       name,
       containerClassName,
-      fieldClassName,
       disabled,
       className,
       checked,

@@ -19,7 +19,6 @@ export const Checkbox: FC<CheckboxProps> = ({
   name,
   validation,
   defaultValue,
-  fieldClassName = '',
   inputClassName = '',
   errorBorder,
   ...rest
