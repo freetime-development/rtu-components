@@ -41,7 +41,7 @@ export function BaseSelectOptions<O extends Option>({
             key={`${name}-${option.label}-${i}`}
             value={option.value}
             className={twMerge(
-              'flex items-center px-3 ui-active:bg-primary-100 bg-white focus:scale-[99%]  focus:rounded-lg transition-transform duration-75 ease-in-out',
+              'flex items-center px-3 ui-active:bg-primary-100 focus:scale-[99%] focus:rounded-lg transition-transform duration-75 ease-in-out',
               option.value ? 'border-b p-3' : 'pb-0 pt-3',
               i === options.length - 1 ? 'border-none' : '',
               isHighlighted(option, selectedOptions) &&

@@ -13,7 +13,7 @@ export function formatNum(
 export function formatCurrency(
   currency: string,
   amount: number,
-  locales: string | string[],
+  locales?: string | string[],
   options?: Intl.NumberFormatOptions,
 ) {
   return formatNum(

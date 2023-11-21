@@ -15,7 +15,6 @@ interface TimePickerProps
 
 export const TimePicker = (props: TimePickerProps) => {
   const { name, validation, defaultValue, label } = props;
-  const errorMessage = validation;
   const rules = validation?.rules;
   const error = useFormError(name);
   const { field } = useController({ name, defaultValue, rules });
@@ -54,7 +53,7 @@ export const TimePicker = (props: TimePickerProps) => {
       />
       <div
         className={twMerge(
-          'absolute z-10 w-full  border-gray-9/20 bg-white',
+          'absolute z-10 w-full  border-gray/20',
           open && 'rounded-lg rounded-t-none border',
         )}
       >

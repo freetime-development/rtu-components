@@ -19,7 +19,7 @@ export const OptionBox = forwardRef<HTMLInputElement, OptionBoxProps>(
         htmlFor={name}
         className={twMerge(className, 'block cursor-pointer py-2')}
       >
-        <Box className="flex flex-row gap-2 items-center rounded-lg bg-white p-3">
+        <Box className="flex flex-row gap-2 items-center rounded-lg p-3">
           <BaseCheckbox
             ref={ref}
             name={name}

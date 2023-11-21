@@ -34,6 +34,8 @@ export const FlashMessagesContext = React.createContext({
   allMessages: {},
   timeoutInMs: defaultTimeoutInMs,
   setTimeoutInMs: (timeoutInMs: number) => {},
+  clearDefaultGroup: () => {},
+  removeAll: () => {},
 });
 
 const reducer = (

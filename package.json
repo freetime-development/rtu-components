@@ -1,14 +1,16 @@
 {
   "name": "rtu-components",
-  "version": "0.4.32",
+  "version": "0.4.33",
   "types": "./dist/types/index.d.ts",
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",
-  "author": "Consilius",
+  "author": {
+    "name": "Consilius"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/freetime-development/rtu-components"
+    "url": "git+https://github.com/freetime-development/rtu-components.git"
   },
   "bin": {
     "rtu-generate-types": "./generateIcomoonTypes.js"
@@ -31,7 +33,8 @@
     "storybook": "storybook dev -p 6006",
     "build-css": "tailwindcss -i ./src/css/main.css -o ./dist/main.css",
     "build-css:watch": "tailwindcss -i ./src/css/main.css -o ./dist/main.css --watch",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_4387019a352defc"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,mjs,cjs}": [
@@ -92,6 +95,7 @@
     "@types/react": "^18.2.23",
     "@types/react-datepicker": "^4.15.1",
     "@types/uuid": "^9.0.4",
+    "chromatic": "^9.1.0",
     "husky": "~8.0.3",
     "lint-staged": "~13.1.4",
     "prettier": "^3.1.0",
@@ -105,5 +109,11 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/freetime-development/rtu-components/issues"
+  },
+  "readme": "ERROR: No README data found!",
+  "homepage": "https://github.com/freetime-development/rtu-components#readme",
+  "_id": "rtu-components@0.4.32"
 }

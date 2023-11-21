@@ -13,7 +13,7 @@ export const RadioOption = forwardRef<HTMLInputElement, RadioOptionProps>(
       <div className="flex">
         <label
           htmlFor={id}
-          className="w-full gap-2 flex rounded-lg cursor-pointer bg-white p-3 text-gray shadow-md hover:bg-gray-9/10 items-center"
+          className="w-full gap-2 flex rounded-lg cursor-pointer p-3 text-gray shadow-md hover:bg-gray-9/10 items-center"
         >
           <BaseRadio
             ref={ref}
@@ -27,7 +27,7 @@ export const RadioOption = forwardRef<HTMLInputElement, RadioOptionProps>(
         </label>
         {checked && (
           <button
-            className="ml-2 cursor-pointer select-text rounded-lg bg-white p-3 text-gray shadow-md"
+            className="ml-2 cursor-pointer select-text rounded-lg p-3 text-gray shadow-md"
             type="button"
             onClick={clear}
           >

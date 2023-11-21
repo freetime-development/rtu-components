@@ -86,7 +86,7 @@ export const DatePicker: FC<DatePickerProps> = ({
           {open && (
             <div
               className={twMerge(
-                'absolute z-10  w-full rounded-lg rounded-t-none border border-gray-9/20 bg-white',
+                'absolute z-10  w-full rounded-lg rounded-t-none border border-gray/20',
               )}
             >
               <div className="m-4">

@@ -132,7 +132,7 @@ export const DateTimePicker = ({
       </Field>
       <div
         className={twMerge(
-          'absolute z-10 w-full  bg-white hover:border-gray-9/20 focus:border-gray-9/20',
+          'absolute z-10 w-full hover:border-gray-9/20 focus:border-gray-9/20',
           open
             ? 'rounded-lg rounded-t-none border border-gray-9/20'
             : 'rounded-t-lg border-gray-9/10',

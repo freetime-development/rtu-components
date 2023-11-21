@@ -66,7 +66,7 @@ const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
       <div
         ref={ref}
         className={twMerge(
-          `flex flex-col items-center rounded-lg bg-white p-5 pt-7 shadow-md md:p-10 ${className}`,
+          `flex flex-col items-center rounded-lg p-5 pt-7 shadow-md md:p-10 ${className}`,
         )}
       >
         {children}
