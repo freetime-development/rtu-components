@@ -10,7 +10,7 @@ import {
 
 export type BaseCheckboxProps = Omit<
   HTMLProps<HTMLInputElement>,
-  'size' | 'error' | 'onChange'
+  'size' | 'error' | 'onChange' | 'ref'
 > &
   CheckboxVariantProps &
   CheckboxIconVariantProps & {
