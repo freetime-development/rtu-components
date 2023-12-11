@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority';
 import { FC } from 'react';
 import { Option } from '@/components';
 
-type TabProps = {
+export type TabProps = {
   value: string;
   options: Option[];
   renderOption?: (

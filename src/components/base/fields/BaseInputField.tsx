@@ -9,20 +9,23 @@ export type BaseInputFieldProps = FieldProps &
   };
 
 export const BaseInputField = forwardRef<HTMLInputElement, BaseInputFieldProps>(
-  ({
-    id,
-    name,
-    className = '',
-    fieldClassName = '',
-    label,
-    renderLabel,
-    hint,
-    renderHint,
-    error,
-    renderError,
-    tooltip,
-    ...rest
-  }) => {
+  (
+    {
+      id,
+      name,
+      className = '',
+      fieldClassName = '',
+      label,
+      renderLabel,
+      hint,
+      renderHint,
+      error,
+      renderError,
+      tooltip,
+      ...rest
+    },
+    ref,
+  ) => {
     return (
       <Field
         id={id ?? name}
@@ -38,6 +41,7 @@ export const BaseInputField = forwardRef<HTMLInputElement, BaseInputFieldProps>(
       >
         <BaseInput
           id={id ?? name}
+          ref={ref}
           name={name}
           className={className}
           error={Boolean(error)}
