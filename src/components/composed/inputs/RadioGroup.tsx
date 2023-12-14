@@ -95,7 +95,7 @@ export function RadioGroup<O extends Option>({
                 onChange: handleChange,
                 clear,
                 disabled,
-                checked: value === null ? false : value?.includes(option.value),
+                checked: value === option.value,
               },
               i === 0 ? ref : null,
             );
@@ -110,7 +110,7 @@ export function RadioGroup<O extends Option>({
               name={name}
               value={option.value}
               onChange={handleOnChange}
-              checked={value === null ? false : value?.includes(option.value)}
+              checked={value === option.value}
               clear={clear}
             />
           );
