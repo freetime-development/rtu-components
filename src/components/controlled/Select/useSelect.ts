@@ -7,12 +7,12 @@ export function useSelect<O extends Option>(
   name: string,
   initialQuery = '',
   options: O[] = [],
+  onChange: (value: string | string[]) => void,
   categories?: Category[],
-  onChange?: (value: string) => void,
+  onQueryChange?: (value: string) => void,
   async = false,
   multi = false,
 ) {
-  const { setValue } = useFormContext();
   const [query, setQuery] = useState(initialQuery);
 
   const groupedOptions = useMemo(() => {
@@ -55,13 +55,13 @@ export function useSelect<O extends Option>(
   }, [query, options, categories, groupedOptions, async]);
 
   const clear = useCallback(() => {
-    setValue(name, multi ? [] : '');
+    onChange(multi ? [] : '');
     setQuery(initialQuery);
-  }, [initialQuery, setValue, name]);
+  }, [initialQuery, onChange, name]);
 
   useEffect(() => {
-    onChange?.(query);
-  }, [onChange, query]);
+    onQueryChange?.(query);
+  }, [onQueryChange, query]);
 
   return useMemo(
     () => ({

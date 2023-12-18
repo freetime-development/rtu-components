@@ -59,6 +59,7 @@ export function SelectField<O extends Option>({
     name,
     initialQuery,
     options,
+    field.onChange,
     categories,
     onChange,
     async,

@@ -58,6 +58,7 @@ export function MultiSelectField<O extends Option>({
     name,
     initialQuery,
     options,
+    field.onChange,
     categories,
     onChange,
     async,
