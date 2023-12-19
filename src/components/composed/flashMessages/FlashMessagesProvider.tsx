@@ -36,6 +36,7 @@ export const FlashMessagesContext = React.createContext({
   setTimeoutInMs: (timeoutInMs: number) => {},
   clearDefaultGroup: () => {},
   removeAll: () => {},
+  removeMessage: (id: string, group: string) => {},
 });
 
 const reducer = (
@@ -149,6 +150,7 @@ export const FlashMessagesProvider: FC<FlashMessagesProviderProps> = ({
       addMessage,
       getMessagesFromGroup,
       removeAll,
+      removeMessage,
       clearDefaultGroup,
       allMessages: messages,
       timeoutInMs,
@@ -158,6 +160,7 @@ export const FlashMessagesProvider: FC<FlashMessagesProviderProps> = ({
       addMessage,
       getMessagesFromGroup,
       messages,
+      removeMessage,
       removeAll,
       clearDefaultGroup,
       timeoutInMs,
