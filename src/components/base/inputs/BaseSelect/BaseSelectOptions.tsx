@@ -6,6 +6,7 @@ import { Option } from '@/components/types';
 interface BaseSelectOptionsProps<O extends Option> {
   className?: string;
   leftClassName?: string;
+  optionsClassName?: string;
   options?: O[];
   selectedOptions?: O[];
   open: boolean;
@@ -20,6 +21,7 @@ export function BaseSelectOptions<O extends Option>({
   open,
   options,
   selectedOptions,
+  optionsClassName,
   transitionDuration,
   renderOption,
   onTransitionEnd,
@@ -29,8 +31,9 @@ export function BaseSelectOptions<O extends Option>({
       <Combobox.Options
         static
         className={twMerge(
-          'transition-height absolute z-10 w-full overflow-auto border rounded-b-lg border-gray-200',
-          open ? 'max-h-60 rounded-t-none' : 'max-h-0 border-transparent',
+          'transition-height absolute z-10 w-full overflow-auto border rounded-b-lg bg-white border-gray-200',
+          open ? 'max-h-60 rounded-t-none' : 'max-h-0 border-0',
+          optionsClassName,
         )}
         style={{ transitionDuration: `${transitionDuration * 2}ms` }}
         onTransitionEnd={onTransitionEnd}

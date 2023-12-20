@@ -29,6 +29,7 @@ export type BaseSelectProps = Omit<
     name: string;
     inputClassName?: string;
     containerClassName?: string;
+    optionsClassName?: string;
     placeholder?: string;
     error?: boolean;
     onChange: (value: string) => void;
@@ -59,6 +60,7 @@ export const BaseSelect = forwardRef(
       placeholder,
       inputClassName,
       containerClassName,
+      optionsClassName,
       error,
       onChange,
       setQuery,
@@ -182,6 +184,7 @@ export const BaseSelect = forwardRef(
               transitionDuration={transitionDuration}
               renderOption={renderOption}
               onTransitionEnd={() => setQuery?.('')}
+              optionsClassName={optionsClassName}
             />
           </div>
         )}
