@@ -12,6 +12,7 @@ type FlashMessage = {
   message: React.ReactNode;
   timeout?: number;
   permanent?: boolean;
+  onRemove?: () => void;
 };
 
 type FlashMessagesStore = Record<string, FlashMessage[]>;
@@ -140,10 +141,10 @@ export const FlashMessagesProvider: FC<FlashMessagesProviderProps> = ({
       });
 
       if (!message.permanent) {
-        setTimeout(
-          () => removeMessage(newMessage.id as string, group),
-          messageTimeout,
-        );
+        setTimeout(() => {
+          removeMessage(newMessage.id as string, group);
+          message.onRemove?.();
+        }, messageTimeout);
       }
     },
     [removeMessage, timeoutInMs],
