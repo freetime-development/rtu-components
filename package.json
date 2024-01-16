@@ -1,6 +1,6 @@
 {
   "name": "rtu-components",
-  "version": "0.4.42",
+  "version": "0.4.43",
   "types": "./dist/types/index.d.ts",
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",
@@ -57,7 +57,6 @@
     "postcss-import": "^15.1.0",
     "rc-tooltip": "^6.1.0",
     "react-datepicker": "^4.18.0",
-    "react-hook-form": "^7.46.2",
     "storybook": "^7.5.3",
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "^3.3.3",
@@ -66,14 +65,18 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.46.2"
   },
   "peerDependenciesMeta": {
     "react": {
-      "optional": true
+      "optional": false
     },
     "react-dom": {
-      "optional": true
+      "optional": false
+    },
+    "react-hook-form": {
+      "optional": false
     }
   },
   "devDependencies": {
