@@ -1,4 +1,4 @@
-import { Button, Icon, Tabs } from '@/components';
+import { Button, Icon, Option, Tabs } from '@/components';
 import useMeridiemTime from '@/hooks/useMeridiemTime';
 
 interface TimePickerProps
@@ -8,7 +8,9 @@ interface TimePickerProps
   open: boolean;
 }
 
-const meridiemOptions = [
+type MeridiemOption = Omit<Option, 'value'> & { value: 'AM' | 'PM' };
+
+const meridiemOptions: MeridiemOption[] = [
   { label: 'AM', value: 'AM' },
   { label: 'PM', value: 'PM' },
 ];
@@ -55,7 +57,7 @@ export const BaseTimePicker = ({ value, onChange, open }: TimePickerProps) => {
         </div>
       </div>
       <div className="flex flex-1 justify-center">
-        <Tabs
+        <Tabs<MeridiemOption>
           value={meridiem}
           options={meridiemOptions}
           onClick={handleMeridiemChange}

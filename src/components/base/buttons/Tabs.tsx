@@ -1,9 +1,10 @@
 import { twMerge } from 'tailwind-merge';
 import { cva } from 'class-variance-authority';
-import { FC } from 'react';
 import { Option } from '@/components';
 
-export type TabProps<O extends Option> = {
+type TabOption = Omit<Option, 'value'> & { value: string | number };
+
+export type TabProps<O extends TabOption> = {
   value: O['value'];
   options: O[];
   renderOption?: (
@@ -31,7 +32,7 @@ const switchVariants = cva('', {
   },
 });
 
-export function Tabs<O extends Option>({
+export function Tabs<O extends TabOption>({
   options,
   value,
   className,
@@ -56,7 +57,7 @@ export function Tabs<O extends Option>({
                 {renderOption(option, value === option.value, isFirst, isLast)}
               </>
             ) : (
-              <DefaultButton
+              <DefaultButton<O>
                 orientation={orientation}
                 variant={variant}
                 isFirst={isFirst}
@@ -74,18 +75,18 @@ export function Tabs<O extends Option>({
   );
 }
 
-interface DefaultButtonProps {
+type DefaultButtonProps<O extends TabOption> = {
   isFirst: boolean;
   isLast: boolean;
   isSelected: boolean;
   className?: string;
-  orientation: TabProps<Option>['orientation'];
-  option: TabProps<Option>['options'][0];
-  onClick: TabProps<Option>['onClick'];
-  variant: TabProps<Option>['variant'];
-}
+  orientation: TabProps<O>['orientation'];
+  option: TabProps<O>['options'][0];
+  onClick: TabProps<O>['onClick'];
+  variant: TabProps<O>['variant'];
+};
 
-const DefaultButton: FC<DefaultButtonProps> = ({
+function DefaultButton<O extends TabOption>({
   isFirst,
   isLast,
   isSelected,
@@ -94,7 +95,7 @@ const DefaultButton: FC<DefaultButtonProps> = ({
   orientation,
   variant,
   onClick,
-}) => {
+}: DefaultButtonProps<O>) {
   const switchVariants = cva('p-3', {
     variants: {
       variant: {
@@ -130,4 +131,4 @@ const DefaultButton: FC<DefaultButtonProps> = ({
       {option.label}
     </button>
   );
-};
+}

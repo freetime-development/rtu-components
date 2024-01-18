@@ -48,7 +48,6 @@ export const DateTimePicker = ({
     defaultValue ? defaultValue?.split(',')[0] : '',
   );
 
-  const errorMessage = validation;
   const rules = validation?.rules;
   const error = useFormError(name);
   const { field } = useController({ name, defaultValue, rules });
