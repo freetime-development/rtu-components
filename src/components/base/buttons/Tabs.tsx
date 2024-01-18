@@ -3,11 +3,11 @@ import { cva } from 'class-variance-authority';
 import { FC } from 'react';
 import { Option } from '@/components';
 
-export type TabProps = {
+export type TabProps<O extends Option> = {
   value: string;
-  options: Option[];
+  options: O[];
   renderOption?: (
-    option: Option,
+    option: O,
     isSelected: boolean,
     isFirst: boolean,
     isLast: boolean,
@@ -31,7 +31,7 @@ const switchVariants = cva('', {
   },
 });
 
-export function Tabs({
+export function Tabs<O extends Option>({
   options,
   value,
   className,
@@ -40,7 +40,7 @@ export function Tabs({
   orientation = 'horizontal',
   variant = 'primary',
   renderOption,
-}: TabProps) {
+}: TabProps<O>) {
   return (
     <div
       className={twMerge(switchVariants({ orientation }), containerClassName)}
@@ -79,10 +79,10 @@ interface DefaultButtonProps {
   isLast: boolean;
   isSelected: boolean;
   className?: string;
-  orientation: TabProps['orientation'];
-  option: TabProps['options'][0];
-  onClick: TabProps['onClick'];
-  variant: TabProps['variant'];
+  orientation: TabProps<Option>['orientation'];
+  option: TabProps<Option>['options'][0];
+  onClick: TabProps<Option>['onClick'];
+  variant: TabProps<Option>['variant'];
 }
 
 const DefaultButton: FC<DefaultButtonProps> = ({
