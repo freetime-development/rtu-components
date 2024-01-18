@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { Option } from '@/components';
 
 export type TabProps<O extends Option> = {
-  value: string;
+  value: O['value'];
   options: O[];
   renderOption?: (
     option: O,
@@ -12,7 +12,7 @@ export type TabProps<O extends Option> = {
     isFirst: boolean,
     isLast: boolean,
   ) => JSX.Element;
-  onClick: (value: any) => void;
+  onClick: (value: O['value']) => void;
   containerClassName?: string;
   className?: string;
   orientation?: 'horizontal' | 'vertical';
