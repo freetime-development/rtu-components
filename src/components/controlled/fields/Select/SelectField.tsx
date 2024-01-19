@@ -20,10 +20,6 @@ export type SelectFieldProps<O> = Omit<
     isLoading?: boolean;
     options: O[];
     categories?: Category[];
-    fieldClassName?: string;
-    containerClassName?: string;
-    inputClassName?: string;
-    tooltip?: string | null;
     initialQuery?: string;
     errorBorder?: boolean;
     valueAs?: 'string' | 'number';
@@ -41,7 +37,6 @@ export function SelectField<O extends Option>({
   isLoading,
   options,
   categories,
-  inputClassName,
   initialQuery,
   errorBorder,
   valueAs = 'string',
@@ -81,7 +76,6 @@ export function SelectField<O extends Option>({
       name={name}
       ref={field.ref}
       error={error}
-      className={inputClassName}
       options={filteredOptions}
       value={!selectedOption?.value ? '' : String(selectedOption.value)}
       onChange={handleOnChange}

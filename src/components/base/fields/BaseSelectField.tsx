@@ -15,7 +15,6 @@ export const BaseSelectField = forwardRef<
   ({
     id,
     name,
-    className = '',
     fieldClassName = '',
     label,
     renderLabel,
@@ -42,7 +41,6 @@ export const BaseSelectField = forwardRef<
         <BaseSelect
           id={id ?? name}
           name={name}
-          className={className}
           error={Boolean(error)}
           {...rest}
         />
