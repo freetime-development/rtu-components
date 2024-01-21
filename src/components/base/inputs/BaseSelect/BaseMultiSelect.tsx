@@ -41,6 +41,7 @@ export type BaseMultiSelectProps<O extends Option> = Omit<
     name: string;
     inputClassName?: string;
     containerClassName?: string;
+    optionsClassName?: string;
     placeholder?: string;
     error?: boolean;
     onChange: (value: string[]) => void;
@@ -84,6 +85,7 @@ function MultiSelect<O extends Option>(
     placeholder,
     inputClassName,
     containerClassName,
+    optionsClassName,
     error,
     onChange,
     setQuery,
@@ -219,6 +221,7 @@ function MultiSelect<O extends Option>(
               options={options}
               className={sizeVariants}
               leftClassName={sideItemVariantsLeft}
+              optionsClassName={optionsClassName}
               selectedOptions={selectedOptions}
               transitionDuration={transitionDuration}
               renderOption={renderOption}

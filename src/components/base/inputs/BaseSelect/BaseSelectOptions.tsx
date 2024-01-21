@@ -51,6 +51,13 @@ export function BaseSelectOptions<O extends Option>({
                 'ui-not-active:bg-primary-50',
               className,
             )}
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                e.stopPropagation();
+                e.currentTarget.click();
+                e.currentTarget.focus();
+              }
+            }}
           >
             {option.value === null ? (
               <GroupLabel label={option.label} />
