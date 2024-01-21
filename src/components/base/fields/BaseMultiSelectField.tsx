@@ -12,7 +12,6 @@ export type BaseMultiSelectFieldProps<O extends Option> = FieldProps &
 function BaseMultiSelectFieldComponent<O extends Option>({
   id,
   name,
-  className = '',
   fieldClassName = '',
   label,
   renderLabel,
@@ -39,7 +38,6 @@ function BaseMultiSelectFieldComponent<O extends Option>({
       <BaseMultiSelect
         id={id ?? name}
         name={name}
-        className={className}
         error={Boolean(error)}
         {...rest}
       />

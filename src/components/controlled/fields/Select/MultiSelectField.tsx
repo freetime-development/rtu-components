@@ -20,10 +20,7 @@ type MultiSelectFieldProps<O extends Option> = Omit<
     isLoading?: boolean;
     options: O[];
     categories?: Category[];
-    placeholder?: string;
     errorBorder?: boolean;
-    fieldClassName?: string;
-    containerClassName?: string;
     initialQuery?: string;
     validation?: Validation;
     defaultValue?: string[] | string | number | null;
@@ -39,7 +36,6 @@ export function MultiSelectField<O extends Option>({
   options,
   categories,
   initialQuery,
-  inputClassName,
   errorBorder,
   validation,
   defaultValue = [],
@@ -77,7 +73,6 @@ export function MultiSelectField<O extends Option>({
       multiple
       name={name}
       error={error}
-      className={inputClassName}
       ref={field.ref}
       options={filteredOptions}
       selectedOptions={selectedOptions}

@@ -6,6 +6,7 @@ import {
   ReactNode,
   Ref,
   forwardRef,
+  useRef,
 } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { cva } from 'class-variance-authority';
@@ -24,6 +25,7 @@ import {
   ComponentVariantType,
   getComponentStateVariants,
 } from '@/css/variants/stateVariants';
+import { useOnClickOutside } from '@/hooks';
 
 export type BaseMultiSelectProps<O extends Option> = Omit<
   HTMLProps<HTMLInputElement>,
@@ -97,6 +99,8 @@ function MultiSelect<O extends Option>(
   }: BaseMultiSelectProps<O>,
   ref: ForwardedRef<HTMLInputElement>,
 ) {
+  const containerRef = useRef(null);
+
   const { wrapperStateVariants, inputStateVariants } =
     getComponentStateVariants(
       ComponentVariantType.SELECT,
@@ -139,8 +143,16 @@ function MultiSelect<O extends Option>(
     setQuery?.(e.target.value);
   }
 
+  // useOnClickOutside(containerRef);
+
   return (
-    <Combobox value={value} onChange={onChange} disabled={disabled} multiple>
+    <Combobox
+      value={value}
+      onChange={onChange}
+      disabled={disabled}
+      ref={containerRef}
+      multiple
+    >
       {({ open }) => {
         const showSelectedOptions = !open && selectedOptions?.length;
         return (

@@ -29,7 +29,7 @@ export function BaseSelectOptions<O extends Option>({
   return (
     <div className="relative">
       <Combobox.Options
-        static
+        // static
         className={twMerge(
           'transition-height absolute z-10 w-full overflow-auto border rounded-b-lg bg-white border-gray-200',
           open ? 'max-h-60 rounded-t-none' : 'max-h-0 border-0',
