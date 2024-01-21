@@ -7,6 +7,7 @@ interface BaseSelectOptionsProps<O extends Option> {
   className?: string;
   leftClassName?: string;
   optionsClassName?: string;
+  optionClassName?: string;
   options?: O[];
   selectedOptions?: O[];
   open: boolean;
@@ -22,6 +23,7 @@ export function BaseSelectOptions<O extends Option>({
   options,
   selectedOptions,
   optionsClassName,
+  optionClassName,
   transitionDuration,
   renderOption,
   onTransitionEnd,
@@ -50,6 +52,7 @@ export function BaseSelectOptions<O extends Option>({
               isHighlighted(option, selectedOptions) &&
                 'ui-not-active:bg-primary-50',
               className,
+              optionClassName,
             )}
             onKeyDown={e => {
               if (e.key === 'Enter') {
