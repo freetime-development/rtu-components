@@ -117,7 +117,12 @@ export const BaseSelect = forwardRef(
     }
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-      setQuery?.(e.target.value);
+      const { value } = e.target;
+      setQuery?.(value);
+
+      if (!value) {
+        onChange(value);
+      }
     }
 
     return (
@@ -188,6 +193,7 @@ export const BaseSelect = forwardRef(
               onTransitionEnd={() => setQuery?.('')}
               optionsClassName={optionsClassName}
               optionClassName={optionClassName}
+              clear={clear}
             />
           </div>
         )}

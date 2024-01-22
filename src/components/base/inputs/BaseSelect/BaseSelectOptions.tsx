@@ -33,7 +33,7 @@ export function BaseSelectOptions<O extends Option>({
   return (
     <div className="relative">
       <Combobox.Options
-        // static
+        static
         className={twMerge(
           'transition-height absolute z-10 w-full overflow-auto border rounded-b-lg bg-white border-gray-200 overscroll-contain',
           open ? 'max-h-60 rounded-t-none' : 'max-h-0 border-0',
@@ -46,9 +46,6 @@ export function BaseSelectOptions<O extends Option>({
           <Combobox.Option
             disabled={option.value === null}
             key={`${name}-${option.label}-${i}`}
-            onSelect={() => {
-              clear?.();
-            }}
             value={option.value}
             className={twMerge(
               'flex items-center px-3 ui-active:bg-primary-100 focus:scale-[99%] focus:rounded-lg transition-transform duration-75 ease-in-out',
@@ -59,14 +56,6 @@ export function BaseSelectOptions<O extends Option>({
               className,
               optionClassName,
             )}
-            onKeyDown={e => {
-              if (e.key === 'Enter') {
-                e.stopPropagation();
-                e.currentTarget.click();
-                e.currentTarget.focus();
-                clear?.();
-              }
-            }}
           >
             {option.value === null ? (
               <GroupLabel label={option.label} />
