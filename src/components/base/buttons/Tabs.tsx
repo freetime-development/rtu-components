@@ -4,7 +4,11 @@ import { Option } from '@/components';
 
 type TabOption = Omit<Option, 'value'> & { value: string | number };
 
-export type TabProps<O extends TabOption> = {
+export type TabProps<O = void> = O extends void
+  ? DefaultTabProps
+  : GenericTabProps<O extends TabOption ? O : never>;
+
+type GenericTabProps<O extends TabOption> = {
   value: O['value'];
   options: O[];
   renderOption?: (
@@ -14,6 +18,18 @@ export type TabProps<O extends TabOption> = {
     isLast: boolean,
   ) => JSX.Element;
   onClick: (value: O['value']) => void;
+} & Omit<DefaultTabProps, 'options' | 'value' | 'onClick' | 'renderOption'>;
+
+type DefaultTabProps = {
+  value: TabOption['value'];
+  options: TabOption[];
+  renderOption?: (
+    option: TabOption,
+    isSelected: boolean,
+    isFirst: boolean,
+    isLast: boolean,
+  ) => JSX.Element;
+  onClick: (value: TabOption['value']) => void;
   containerClassName?: string;
   className?: string;
   orientation?: 'horizontal' | 'vertical';
