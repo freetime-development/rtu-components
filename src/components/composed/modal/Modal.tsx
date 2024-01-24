@@ -2,7 +2,7 @@ import { FC, PropsWithChildren, forwardRef, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useOnClickOutside } from '@/hooks';
 
-type ModalProps = PropsWithChildren & {
+export type ModalProps = PropsWithChildren & {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
