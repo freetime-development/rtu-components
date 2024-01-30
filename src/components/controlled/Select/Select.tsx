@@ -76,6 +76,8 @@ export function Select<O extends Option>({
     [field, valueAs],
   );
 
+  console.log('Select', selectedOption, field.value);
+
   return (
     <BaseSelect
       name={name}

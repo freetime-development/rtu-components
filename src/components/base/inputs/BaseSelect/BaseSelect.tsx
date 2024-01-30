@@ -125,6 +125,8 @@ export const BaseSelect = forwardRef(
       }
     }
 
+    console.log('BaseSelect', selectedOption, value);
+
     return (
       <Combobox value={value} onChange={onChange}>
         {({ open }) => (

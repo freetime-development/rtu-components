@@ -1,6 +1,5 @@
 import { debounce } from 'debounce';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
 import { Category, Option } from '@/components/types';
 
 export function useSelect<O extends Option>(
@@ -56,8 +55,8 @@ export function useSelect<O extends Option>(
 
   const clear = useCallback(() => {
     onChange(multi ? [] : '');
-    setQuery(initialQuery);
-  }, [initialQuery, onChange, name]);
+    setQuery('');
+  }, [onChange, name]);
 
   useEffect(() => {
     onQueryChange?.(query);
