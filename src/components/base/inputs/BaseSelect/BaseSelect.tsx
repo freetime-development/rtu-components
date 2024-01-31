@@ -125,10 +125,8 @@ export const BaseSelect = forwardRef(
       }
     }
 
-    console.log('BaseSelect', selectedOption, value);
-
     return (
-      <Combobox value={value} onChange={onChange}>
+      <Combobox value={value || null} onChange={onChange} nullable>
         {({ open }) => (
           <div className="group">
             <Combobox.Button

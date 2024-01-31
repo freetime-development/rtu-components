@@ -145,8 +145,6 @@ function MultiSelect<O extends Option>(
     setQuery?.(e.target.value);
   }
 
-  // useOnClickOutside(containerRef);
-
   return (
     <Combobox
       value={value}
