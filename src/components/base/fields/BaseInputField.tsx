@@ -1,7 +1,6 @@
 import { forwardRef } from 'react';
 import { BaseInput, BaseInputProps } from '..';
-import { FieldProps } from '../../composed';
-import { Field } from '../inputs/Field';
+import { Field, FieldProps } from '../inputs/Field';
 
 export type BaseInputFieldProps = FieldProps &
   Omit<BaseInputProps, 'ref' | 'error'> & {

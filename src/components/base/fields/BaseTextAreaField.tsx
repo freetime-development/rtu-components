@@ -1,7 +1,6 @@
 import { FC, forwardRef } from 'react';
 import { BaseTextArea, BaseTextAreaProps } from '..';
-import { FieldProps } from '../../composed';
-import { Field } from '../inputs/Field';
+import { FieldProps, Field } from '../inputs/Field';
 
 export type BaseTextAreaFieldProps = FieldProps &
   Omit<BaseTextAreaProps, 'ref' | 'error' | 'className'> & {

@@ -1,7 +1,6 @@
 import { ReactElement, Ref, forwardRef } from 'react';
 import { BaseMultiSelect, BaseMultiSelectProps } from '..';
-import { FieldProps } from '../../composed';
-import { Field } from '../inputs/Field';
+import { FieldProps, Field } from '../inputs/Field';
 import { Option } from '@/components/types';
 
 export type BaseMultiSelectFieldProps<O extends Option> = FieldProps &

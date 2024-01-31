@@ -1,7 +1,6 @@
 import { FC, forwardRef } from 'react';
 import { BaseFileInput, BaseFileInputProps } from '..';
-import { FieldProps } from '../../composed';
-import { Field } from '../inputs/Field';
+import { FieldProps, Field } from '../inputs/Field';
 
 export type BaseFileInputFieldProps = FieldProps &
   Omit<BaseFileInputProps, 'ref' | 'error'> & {

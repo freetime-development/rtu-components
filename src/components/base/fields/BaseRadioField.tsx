@@ -1,9 +1,8 @@
 import { FC, forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { BaseRadio, BaseRadioProps } from '..';
-import { FieldProps } from '../../composed';
+import { FieldProps, FieldRow } from '../inputs/Field';
 import { LabelTextVariantProps } from '../inputs/classNameVariants';
-import { FieldRow } from '../inputs/Field';
 import {
   ComponentVariantState,
   ComponentVariantType,

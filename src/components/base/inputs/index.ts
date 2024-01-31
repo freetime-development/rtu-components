@@ -6,3 +6,4 @@ export * from './BaseRadio';
 export * from './BaseTextarea';
 export * from './BaseFileInput';
 export * from './BaseSelect';
+export * from './Field';

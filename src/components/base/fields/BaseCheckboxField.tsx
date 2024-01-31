@@ -1,7 +1,6 @@
 import { FC, forwardRef } from 'react';
 import { BaseCheckbox, BaseCheckboxProps } from '..';
-import { FieldProps } from '../../composed';
-import { FieldRow } from '../inputs/Field';
+import { FieldProps, FieldRow } from '../inputs/Field';
 
 export type BaseCheckboxFieldProps = FieldProps &
   Omit<BaseCheckboxProps, 'ref' | 'error'> & {
