@@ -25,7 +25,7 @@ type MultiSelectFieldProps<O extends Option> = Omit<
     validation?: Validation;
     defaultValue?: string[] | string | number | null;
     async?: boolean;
-    onChange?: (value: string) => void;
+    onQueryChange?: (value: string) => void;
     LoadingIcon?: ReactNode;
     ClearIcon?: ReactNode;
     DefaultIcon?: ReactNode;
@@ -40,7 +40,7 @@ export function MultiSelectField<O extends Option>({
   validation,
   defaultValue = [],
   async,
-  onChange,
+  onQueryChange,
   ...rest
 }: MultiSelectFieldProps<O>) {
   const rules = validation?.rules;
@@ -56,7 +56,7 @@ export function MultiSelectField<O extends Option>({
     options,
     field.onChange,
     categories,
-    onChange,
+    onQueryChange,
     async,
     true,
   );

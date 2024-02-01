@@ -25,7 +25,8 @@ export type SelectFieldProps<O> = Omit<
     valueAs?: 'string' | 'number';
     validation?: Validation;
     defaultValue?: string | number | null;
-    onChange?: (value: string) => void;
+    onQueryChange?: (value: string) => void;
+    onSelect?: (value: string | number | null) => void;
     async?: boolean;
     LoadingIcon?: ReactNode;
     ClearIcon?: ReactNode;
@@ -42,7 +43,8 @@ export function SelectField<O extends Option>({
   valueAs = 'string',
   validation,
   defaultValue = '',
-  onChange,
+  onQueryChange,
+  onSelect,
   async,
   ...rest
 }: SelectFieldProps<O>) {
@@ -56,16 +58,19 @@ export function SelectField<O extends Option>({
     options,
     field.onChange,
     categories,
-    onChange,
+    onQueryChange,
     async,
   );
 
   const handleOnChange = useCallback(
     (value: string) => {
       if (valueAs === 'number') {
-        field.onChange(parseInt(value, 10));
+        const numberValue = parseInt(value, 10);
+        field.onChange(numberValue);
+        onSelect?.(numberValue);
       } else {
         field.onChange(value);
+        onSelect?.(value);
       }
     },
     [field, valueAs],

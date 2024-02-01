@@ -27,7 +27,7 @@ export type MultiSelectProps<O extends Option> = Omit<
     validation?: Validation;
     defaultValue?: string[] | string | number | null;
     async?: boolean;
-    onChange?: (value: string) => void;
+    onQueryChange?: (value: string) => void;
     LoadingIcon?: ReactNode;
     ClearIcon?: ReactNode;
     DefaultIcon?: ReactNode;
@@ -43,7 +43,7 @@ export function MultiSelect<O extends Option>({
   validation,
   defaultValue = [],
   async,
-  onChange,
+  onQueryChange,
   ...rest
 }: MultiSelectProps<O>) {
   const rules = validation?.rules;
@@ -59,7 +59,7 @@ export function MultiSelect<O extends Option>({
     options,
     field.onChange,
     categories,
-    onChange,
+    onQueryChange,
     async,
     true,
   );
