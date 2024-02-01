@@ -13,7 +13,7 @@ import { useFormError } from '@/utils';
 
 export type SelectProps<O> = Omit<
   BaseSelectProps,
-  'value' | 'onChange' | 'onBlur' | 'clear' | 'ref'
+  'value' | 'onChange' | 'onBlur' | 'clear' | 'ref' | 'onSelect'
 > &
   FieldProps & {
     name: string;
