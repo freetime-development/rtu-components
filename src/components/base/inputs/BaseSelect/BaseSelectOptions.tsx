@@ -4,6 +4,7 @@ import { twMerge } from 'tailwind-merge';
 import { Option } from '@/components/types';
 
 interface BaseSelectOptionsProps<O extends Option> {
+  name?: string;
   className?: string;
   leftClassName?: string;
   optionsClassName?: string;
@@ -14,10 +15,10 @@ interface BaseSelectOptionsProps<O extends Option> {
   transitionDuration: number;
   renderOption?: (option: O, className?: string) => ReactNode;
   onTransitionEnd?: () => void;
-  clear?: () => void;
 }
 
 export function BaseSelectOptions<O extends Option>({
+  name,
   className,
   leftClassName,
   open,
@@ -28,7 +29,6 @@ export function BaseSelectOptions<O extends Option>({
   transitionDuration,
   renderOption,
   onTransitionEnd,
-  clear,
 }: BaseSelectOptionsProps<O>) {
   return (
     <div className="relative">

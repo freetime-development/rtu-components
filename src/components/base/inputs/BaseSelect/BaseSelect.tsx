@@ -1,18 +1,25 @@
 import { Combobox } from '@headlessui/react';
-import { ForwardedRef, HTMLProps, ReactNode, forwardRef } from 'react';
+import {
+  ForwardedRef,
+  HTMLProps,
+  ReactNode,
+  forwardRef,
+  useCallback,
+  useMemo,
+} from 'react';
 import { twMerge } from 'tailwind-merge';
 import { BaseSelectOptions } from './BaseSelectOptions';
+import { StateButton } from './StateButton';
 import {
   BaseSelectVariants,
   selectSideItemVariants,
   selectSizeVariants,
 } from './variantClassNames';
-import { StateButton } from './StateButton';
 import { Option } from '@/components/types';
 import {
-  ComponentVariantState,
-  ComponentVariantType,
   getComponentStateVariants,
+  ComponentVariantType,
+  ComponentVariantState,
 } from '@/css/variants/stateVariants';
 
 export type BaseSelectProps = Omit<
@@ -92,41 +99,57 @@ export const BaseSelect = forwardRef(
       orientation: 'right',
     });
 
-    const selectedOption = options?.find(o => o.value === value);
+    const selectedOption = useMemo(
+      () => options?.find(o => o.value === value),
+      [options, value],
+    );
 
-    function onClick() {
+    const onClick = useCallback(() => {
       if (!value || isLoading || disableClear) {
         return;
       }
       setTimeout(() => {
         clear();
       }, transitionDuration);
-    }
+    }, [value, isLoading, disableClear, transitionDuration, clear]);
 
-    function onKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
-      if (!value || isLoading || disableClear) {
-        return false;
-      }
-      if (e.key === 'Enter' || e.key === 'Space') {
-        setTimeout(() => {
-          clear();
-        }, transitionDuration);
-      }
+    const onKeyDown = useCallback(
+      (e: React.KeyboardEvent<HTMLButtonElement>) => {
+        if (!value || isLoading || disableClear) {
+          return false;
+        }
+        if (e.key === 'Enter' || e.key === 'Space') {
+          setTimeout(() => {
+            clear();
+          }, transitionDuration);
+        }
 
-      return true;
-    }
+        return true;
+      },
+      [value, isLoading, disableClear, transitionDuration, clear],
+    );
 
-    function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-      const { value } = e.target;
-      setQuery?.(value);
+    const handleInputChange = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        setQuery?.(value);
 
-      if (!value) {
-        onChange(value);
-      }
-    }
+        if (!value) {
+          onChange(value);
+        }
+      },
+      [onChange, setQuery],
+    );
+
+    const onTransitionEnd = useCallback(() => {
+      // user didn't select any option, clearing the query
+      setTimeout(() => {
+        setQuery?.('');
+      }, transitionDuration);
+    }, [setQuery, transitionDuration, value]);
 
     return (
-      <Combobox value={value || null} onChange={onChange} nullable>
+      <Combobox nullable value={value || null} onChange={onChange}>
         {({ open }) => (
           <div className="group">
             <Combobox.Button
@@ -183,6 +206,7 @@ export const BaseSelect = forwardRef(
             </Combobox.Button>
 
             <BaseSelectOptions
+              name={name}
               open={open}
               options={options}
               className={sizeVariants}
@@ -190,10 +214,9 @@ export const BaseSelect = forwardRef(
               selectedOptions={selectedOptions}
               transitionDuration={transitionDuration}
               renderOption={renderOption}
-              onTransitionEnd={() => setQuery?.('')}
+              onTransitionEnd={onTransitionEnd}
               optionsClassName={optionsClassName}
               optionClassName={optionClassName}
-              clear={clear}
             />
           </div>
         )}
