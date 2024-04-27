@@ -25,7 +25,6 @@ import {
   ComponentVariantType,
   getComponentStateVariants,
 } from '@/css/variants/stateVariants';
-import { useOnClickOutside } from '@/hooks';
 
 export type BaseMultiSelectProps<O extends Option> = Omit<
   HTMLProps<HTMLInputElement>,
