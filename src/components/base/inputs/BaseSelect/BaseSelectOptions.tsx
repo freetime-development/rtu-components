@@ -36,7 +36,7 @@ export function BaseSelectOptions<O extends Option>({
         static
         className={twMerge(
           'transition-height absolute z-10 w-full overflow-auto border rounded-b-lg bg-white border-gray-200 overscroll-contain',
-          open ? 'max-h-60 rounded-t-none border-t-0' : 'max-h-0p',
+          open ? 'max-h-60 rounded-t-none border-t-0' : 'max-h-0',
           optionsClassName,
         )}
         style={{ transitionDuration: `${transitionDuration * 2}ms` }}
