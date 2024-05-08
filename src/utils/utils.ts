@@ -1,23 +1,12 @@
 import { useEffect } from 'react';
-import { FieldErrors, useFormContext } from 'react-hook-form';
+import { FieldErrors, get, useFormContext } from 'react-hook-form';
 
-export function getErrorMessage(error: any, errorMessage?: string): string {
-  if (error) {
-    if (errorMessage) {
-      return errorMessage;
-    }
+export function useFormError(name: string): string {
+  const { formState } = useFormContext();
 
-    return error.message;
-  }
+  const error = get(formState, name);
 
-  return '';
-}
-
-export function useFormError(name: string, errorMessage?: string) {
-  const context = useFormContext();
-  const error = context?.formState.errors[name];
-
-  return getErrorMessage(error, errorMessage);
+  return error ? error.message : '';
 }
 
 export function useScrollToError(errors: FieldErrors) {
