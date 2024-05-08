@@ -4,7 +4,7 @@ import { FieldErrors, get, useFormContext } from 'react-hook-form';
 export function useFormError(name: string): string {
   const { formState } = useFormContext();
 
-  const error = get(formState, name);
+  const error = get(formState.errors, name);
 
   return error ? error.message : '';
 }
