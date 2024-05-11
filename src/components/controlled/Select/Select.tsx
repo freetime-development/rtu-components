@@ -11,8 +11,8 @@ import {
 } from '@/components';
 import { useFormError } from '@/utils';
 
-export type SelectProps<O> = Omit<
-  BaseSelectProps,
+export type SelectProps<O extends Option> = Omit<
+  BaseSelectProps<O>,
   'value' | 'onChange' | 'onBlur' | 'clear' | 'ref' | 'onSelect'
 > &
   FieldProps & {
@@ -68,8 +68,14 @@ export function Select<O extends Option>({
   );
 
   const handleOnChange = useCallback(
-    (value: string) => {
-      if (valueAs === 'number') {
+    (value: Option['value']) => {
+      if (valueAs === 'number' && value) {
+        if (typeof value === 'number') {
+          field.onChange(value);
+          onSelect?.(value);
+          return;
+        }
+
         const numberValue = parseInt(value, 10);
         field.onChange(numberValue);
         onSelect?.(numberValue);
@@ -82,7 +88,7 @@ export function Select<O extends Option>({
   );
 
   return (
-    <BaseSelect
+    <BaseSelect<O>
       name={name}
       ref={field.ref}
       error={Boolean(error)}

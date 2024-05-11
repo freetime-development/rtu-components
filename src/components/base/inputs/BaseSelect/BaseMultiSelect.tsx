@@ -231,7 +231,7 @@ function MultiSelect<O extends Option>(
   );
 }
 
-interface RenderChipOptionsProps<O extends Option> {
+export interface RenderChipOptionsProps<O extends Option> {
   selectedOptions: O[];
   handleRemove: (value: O['value']) => void;
 }
@@ -255,5 +255,5 @@ function RenderChipOptions<O extends Option>({
 }
 
 export const BaseMultiSelect = forwardRef(MultiSelect) as <O extends Option>(
-  p: BaseMultiSelectProps<O> & { ref?: Ref<HTMLSelectElement> },
+  p: BaseMultiSelectProps<O> & { ref?: ForwardedRef<HTMLInputElement> },
 ) => ReactElement;

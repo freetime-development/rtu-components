@@ -5,33 +5,30 @@ import {
   Option,
   Validation,
   useSelect,
-  FieldProps,
   BaseSelectField,
   BaseSelectFieldProps,
 } from '@/components';
 import { useFormError } from '@/utils';
 
-export type SelectFieldProps<O> = Omit<
-  BaseSelectFieldProps,
+export type SelectFieldProps<O extends Option> = Omit<
+  BaseSelectFieldProps<O>,
   'value' | 'onChange' | 'onBlur' | 'clear' | 'ref' | 'onSelect'
-> &
-  FieldProps & {
-    name: string;
-    isLoading?: boolean;
-    options: O[];
-    categories?: Category[];
-    initialQuery?: string;
-    errorBorder?: boolean;
-    valueAs?: 'string' | 'number';
-    validation?: Validation;
-    defaultValue?: string | number | null;
-    onQueryChange?: (value: string) => void;
-    onSelect?: (value: string | number | null) => void;
-    async?: boolean;
-    LoadingIcon?: ReactNode;
-    ClearIcon?: ReactNode;
-    DefaultIcon?: ReactNode;
-  };
+> & {
+  name: string;
+  isLoading?: boolean;
+  options: O[];
+  categories?: Category[];
+  initialQuery?: string;
+  valueAs?: 'string' | 'number';
+  validation?: Validation;
+  defaultValue?: string | number | null;
+  onQueryChange?: (value: string) => void;
+  onSelect?: (value: Option['value']) => void;
+  async?: boolean;
+  LoadingIcon?: ReactNode;
+  ClearIcon?: ReactNode;
+  DefaultIcon?: ReactNode;
+};
 
 export function SelectField<O extends Option>({
   name,
@@ -39,7 +36,6 @@ export function SelectField<O extends Option>({
   options,
   categories,
   initialQuery,
-  errorBorder,
   valueAs = 'string',
   validation,
   defaultValue = '',
@@ -63,8 +59,14 @@ export function SelectField<O extends Option>({
   );
 
   const handleOnChange = useCallback(
-    (value: string) => {
-      if (valueAs === 'number') {
+    (value: Option['value']) => {
+      if (valueAs === 'number' && value) {
+        if (typeof value === 'number') {
+          field.onChange(value);
+          onSelect?.(value);
+          return;
+        }
+
         const numberValue = parseInt(value, 10);
         field.onChange(numberValue);
         onSelect?.(numberValue);
@@ -77,7 +79,7 @@ export function SelectField<O extends Option>({
   );
 
   return (
-    <BaseSelectField
+    <BaseSelectField<O>
       name={name}
       ref={field.ref}
       error={error}

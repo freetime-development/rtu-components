@@ -47,5 +47,5 @@ function BaseMultiSelectFieldComponent<O extends Option>({
 export const BaseMultiSelectField = forwardRef(
   BaseMultiSelectFieldComponent,
 ) as <O extends Option>(
-  p: BaseMultiSelectFieldProps<O> & { ref?: Ref<HTMLSelectElement> },
+  p: BaseMultiSelectFieldProps<O> & { ref?: Ref<HTMLInputElement> },
 ) => ReactElement;

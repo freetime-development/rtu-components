@@ -12,8 +12,8 @@ import {
 } from '@/components';
 
 export type MultiSelectProps<O extends Option> = Omit<
-  BaseSelectProps,
-  'value' | 'onChange' | 'setQuery' | 'clear' | 'renderSelectedOptions'
+  BaseSelectProps<O>,
+  'value' | 'onChange' | 'setQuery' | 'clear'
 > &
   FieldProps & {
     name: string;
@@ -51,7 +51,7 @@ export function MultiSelect<O extends Option>({
   const { field } = useController({ name, rules, defaultValue });
   const selectedOptions = options?.filter(
     option => Array.isArray(field.value) && field.value.includes(option.value),
-  ) as O[];
+  );
 
   const { filteredOptions, setQuery, clear } = useSelect<O>(
     name,
@@ -72,7 +72,7 @@ export function MultiSelect<O extends Option>({
   );
 
   return (
-    <BaseMultiSelect
+    <BaseMultiSelect<O>
       multiple
       name={name}
       error={Boolean(error)}

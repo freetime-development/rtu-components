@@ -2,6 +2,7 @@ import { Combobox } from '@headlessui/react';
 import {
   ForwardedRef,
   HTMLProps,
+  ReactElement,
   ReactNode,
   forwardRef,
   useCallback,
@@ -22,7 +23,7 @@ import {
   ComponentVariantState,
 } from '@/css/variants/stateVariants';
 
-export type BaseSelectProps = Omit<
+export type BaseSelectProps<O extends Option> = Omit<
   HTMLProps<HTMLInputElement>,
   'value' | 'onChange' | 'ref' | 'size'
 > &
@@ -30,9 +31,9 @@ export type BaseSelectProps = Omit<
     isLoading?: boolean;
     disabled?: boolean;
     disableClear?: boolean;
-    options?: Option[];
-    selectedOptions?: Option[];
-    value: string | null;
+    options?: O[];
+    selectedOptions?: O[];
+    value: O['value'] | null;
     name: string;
     inputClassName?: string;
     containerClassName?: string;
@@ -40,23 +41,19 @@ export type BaseSelectProps = Omit<
     optionClassName?: string;
     placeholder?: string;
     error?: boolean;
-    onChange: (value: string) => void;
+    onChange: (value: O['value']) => void;
     setQuery?: (query: string) => void;
     clear: () => void;
     transitionDuration?: number;
     LoadingIcon?: ReactNode;
     ClearIcon?: ReactNode;
     DefaultIcon?: ReactNode;
-    renderOption?: (option: Option) => ReactNode;
-    renderLeft?: (
-      option?: Option,
-      className?: string,
-      error?: boolean,
-    ) => ReactNode;
+    renderOption?: (option: O) => ReactNode;
+    renderLeft?: (option?: O, className?: string, error?: boolean) => ReactNode;
   };
 
 export const BaseSelect = forwardRef(
-  (
+  <O extends Option>(
     {
       isLoading,
       disabled,
@@ -81,7 +78,7 @@ export const BaseSelect = forwardRef(
       DefaultIcon,
       renderOption,
       renderLeft,
-    }: BaseSelectProps,
+    }: BaseSelectProps<O>,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const { wrapperStateVariants, inputStateVariants } =
@@ -166,7 +163,7 @@ export const BaseSelect = forwardRef(
               {renderLeft ? (
                 <>{renderLeft(selectedOption, sideItemVariantsLeft, error)}</>
               ) : (
-                <DefaultSelectedOption
+                <DefaultSelectedOption<O>
                   selectedOption={selectedOption}
                   className={sideItemVariantsLeft}
                 />
@@ -193,7 +190,7 @@ export const BaseSelect = forwardRef(
                   sideItemVariantsRight,
                   !disabled && 'flex items-center justify-center',
                 )}
-                value={value}
+                value={value as any}
                 disabled={disabled}
                 disableClear={disableClear}
                 isLoading={isLoading}
@@ -223,15 +220,15 @@ export const BaseSelect = forwardRef(
       </Combobox>
     );
   },
-);
+) as <O extends Option>(
+  p: BaseSelectProps<O> & { ref?: ForwardedRef<HTMLInputElement> },
+) => ReactElement;
 
-BaseSelect.displayName = 'BaseSelect';
-
-function DefaultSelectedOption({
+function DefaultSelectedOption<O extends Option>({
   selectedOption,
   className,
 }: {
-  selectedOption?: Option;
+  selectedOption?: O;
   className?: string;
 }) {
   if (!selectedOption) {
