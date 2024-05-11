@@ -10,7 +10,7 @@ import {
   InputProps,
 } from '@/components';
 
-type DatePickerProps = {
+export type DatePickerProps = {
   inputProps: InputProps & {
     defautValue?: string;
   };
