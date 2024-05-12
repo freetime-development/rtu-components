@@ -18,10 +18,7 @@ export type ModalProps = PropsWithChildren & {
   disableOverlay?: boolean;
 };
 
-export const Modal: FC<ModalProps> = forwardRef<
-  HTMLDivElement | null,
-  ModalProps
->(
+export const Modal = forwardRef<HTMLDivElement | null, ModalProps>(
   (
     {
       isOpen,
