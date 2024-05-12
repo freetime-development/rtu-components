@@ -1,4 +1,10 @@
-import { FC, PropsWithChildren, forwardRef, useRef } from 'react';
+import {
+  FC,
+  PropsWithChildren,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useOnClickOutside } from '@/hooks';
 
@@ -12,48 +18,58 @@ export type ModalProps = PropsWithChildren & {
   disableOverlay?: boolean;
 };
 
-export const Modal: FC<ModalProps> = ({
-  isOpen,
-  onClose,
-  children,
-  className,
-  disableClickOutside = false,
-  Overlay,
-  disableOverlay,
-}) => {
-  const ref = useRef(null);
-  useOnClickOutside(ref, onClose, disableClickOutside);
+export const Modal: FC<ModalProps> = forwardRef<
+  HTMLDivElement | null,
+  ModalProps
+>(
+  (
+    {
+      isOpen,
+      onClose,
+      children,
+      className,
+      disableClickOutside = false,
+      Overlay,
+      disableOverlay,
+    },
+    ref,
+  ) => {
+    const modalRef = useRef<HTMLDivElement | null>(null);
 
-  if (!isOpen) {
-    return null;
-  }
+    useImperativeHandle(ref, () => modalRef.current as HTMLDivElement);
+    useOnClickOutside(modalRef, onClose, disableClickOutside);
 
-  if (!disableOverlay) {
+    if (!isOpen) {
+      return null;
+    }
+
+    if (!disableOverlay) {
+      return (
+        <>
+          {Overlay ? (
+            <Overlay>
+              <ModalContent ref={modalRef} className={className}>
+                {children}
+              </ModalContent>
+            </Overlay>
+          ) : (
+            <div className="fixed flex items-center justify-center w-screen h-screen inset-0 z-50 overflow-y-auto overflow-x-hidden bg-black/30">
+              <ModalContent ref={modalRef} className={className}>
+                {children}
+              </ModalContent>
+            </div>
+          )}
+        </>
+      );
+    }
+
     return (
-      <>
-        {Overlay ? (
-          <Overlay>
-            <ModalContent ref={ref} className={className}>
-              {children}
-            </ModalContent>
-          </Overlay>
-        ) : (
-          <div className="fixed flex items-center justify-center w-screen h-screen inset-0 z-50 overflow-y-auto overflow-x-hidden bg-black/30">
-            <ModalContent ref={ref} className={className}>
-              {children}
-            </ModalContent>
-          </div>
-        )}
-      </>
+      <ModalContent ref={modalRef} className={className}>
+        {children}
+      </ModalContent>
     );
-  }
-
-  return (
-    <ModalContent ref={ref} className={className}>
-      {children}
-    </ModalContent>
-  );
-};
+  },
+);
 
 interface ModalContentProps {
   children: React.ReactNode;
