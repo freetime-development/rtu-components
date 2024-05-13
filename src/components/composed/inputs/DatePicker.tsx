@@ -6,12 +6,12 @@ import {
   BaseDatePicker,
   BaseDatePickerProps,
   Icon,
-  Input,
-  InputProps,
+  InputField,
+  InputFieldProps,
 } from '@/components';
 
 export type DatePickerProps = {
-  inputProps: InputProps & {
+  inputProps: InputFieldProps & {
     defautValue?: string;
   };
   datepickerProps?: Omit<BaseDatePickerProps, 'value' | 'onChange'>;
@@ -72,12 +72,12 @@ export const DatePicker: FC<DatePickerProps> = ({
             inputProps.disabled && 'pointer-events-none opacity-50',
           )}
         >
-          <Input {...props} />
+          <InputField {...props} />
           <BaseDatePicker {...dtProps} />
         </div>
       ) : (
         <div className="relative w-full" ref={ref}>
-          <Input
+          <InputField
             {...dynamicDatepickerInputProps}
             containerClassName={`${open ? 'rounded-b-none' : 'rounded-b-lg'} ${
               dynamicDatepickerInputProps.containerClassName
