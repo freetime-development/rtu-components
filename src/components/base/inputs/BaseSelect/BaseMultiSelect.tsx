@@ -36,7 +36,7 @@ export type BaseMultiSelectProps<O extends Option> = Omit<
     disableClear?: boolean;
     options?: O[];
     selectedOptions?: O[];
-    value: string[];
+    value: O['value'][];
     name: string;
     inputClassName?: string;
     containerClassName?: string;
@@ -44,7 +44,7 @@ export type BaseMultiSelectProps<O extends Option> = Omit<
     optionClassName?: string;
     placeholder?: string;
     error?: boolean;
-    onChange: (value: string[]) => void;
+    onChange: (value: O['value'][]) => void;
     setQuery?: (query: string) => void;
     clear: () => void;
     transitionDuration?: number;
@@ -197,7 +197,7 @@ function MultiSelect<O extends Option>(
                 />
               )}
 
-              <StateButton
+              <StateButton<O>
                 className={twMerge(
                   'hidden cursor-pointer',
                   sideItemVariantsRight,

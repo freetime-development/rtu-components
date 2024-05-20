@@ -184,13 +184,13 @@ export const BaseSelect = forwardRef(
                 }}
               />
 
-              <StateButton
+              <StateButton<O>
                 className={twMerge(
                   'hidden cursor-pointer',
                   sideItemVariantsRight,
                   !disabled && 'flex items-center justify-center',
                 )}
-                value={value as any}
+                value={value}
                 disabled={disabled}
                 disableClear={disableClear}
                 isLoading={isLoading}

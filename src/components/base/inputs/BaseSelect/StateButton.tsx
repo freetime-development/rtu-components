@@ -3,21 +3,22 @@ import { FC } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { LoadingSpinner } from '../../loaders';
 import { Icon } from '../../icons';
+import { Option } from '@/components/types';
 
-interface StateButtonProps {
+type StateButtonProps<O extends Option> = {
   className?: string;
   isLoading?: boolean;
   disabled?: boolean;
   disableClear?: boolean;
-  value?: string | string[] | null;
+  value?: O['value'] | O['value'][] | string | string[] | null;
   onClick: () => void;
   onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
   LoadingIcon?: React.ReactNode;
   ClearIcon?: React.ReactNode;
   DefaultIcon?: React.ReactNode;
-}
+};
 
-export const StateButton: FC<StateButtonProps> = ({
+export const StateButton = <O extends Option>({
   className,
   disabled,
   onClick,
@@ -28,7 +29,7 @@ export const StateButton: FC<StateButtonProps> = ({
   disableClear,
   ClearIcon = <Icon name="cross" />,
   DefaultIcon = <Icon name="arrow-down2" />,
-}) => {
+}: StateButtonProps<O>) => {
   return (
     <Combobox.Button
       className={twMerge(
@@ -54,17 +55,17 @@ export const StateButton: FC<StateButtonProps> = ({
   );
 };
 
-interface RenderIconProps {
-  value: StateButtonProps['value'];
-  disabled: StateButtonProps['disabled'];
-  disableClear: StateButtonProps['disableClear'];
-  loading: StateButtonProps['isLoading'];
-  ClearIcon: StateButtonProps['ClearIcon'];
-  DefaultIcon: StateButtonProps['DefaultIcon'];
-  LoadingIcon: StateButtonProps['LoadingIcon'];
+interface RenderIconProps<O extends Option> {
+  value: StateButtonProps<O>['value'];
+  disabled: StateButtonProps<O>['disabled'];
+  disableClear: StateButtonProps<O>['disableClear'];
+  loading: StateButtonProps<O>['isLoading'];
+  ClearIcon: StateButtonProps<O>['ClearIcon'];
+  DefaultIcon: StateButtonProps<O>['DefaultIcon'];
+  LoadingIcon: StateButtonProps<O>['LoadingIcon'];
 }
 
-function RenderIcon({
+function RenderIcon<O extends Option>({
   value,
   disabled,
   disableClear,
@@ -72,7 +73,7 @@ function RenderIcon({
   ClearIcon,
   DefaultIcon,
   LoadingIcon,
-}: RenderIconProps) {
+}: RenderIconProps<O>) {
   if (disabled) {
     return null;
   } else if (loading) {
