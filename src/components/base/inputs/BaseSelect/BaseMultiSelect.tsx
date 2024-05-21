@@ -53,7 +53,7 @@ export type BaseMultiSelectProps<O extends Option> = Omit<
     DefaultIcon?: ReactNode;
     renderOption?: (option: O) => ReactNode;
     handleRemove: (value: O['value']) => void;
-    renderSelectedOptions?: <O extends Option>(
+    renderSelectedOptions?: (
       selectedOptions: O[],
       handleRemove: (value: O['value']) => void,
     ) => ReactNode;
