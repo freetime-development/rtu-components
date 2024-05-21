@@ -6,7 +6,7 @@ export function useSelect<O extends Option>(
   name: string,
   initialQuery = '',
   options: O[] = [],
-  onChange: (value: O['value'] | O['value'] | string | string[]) => void,
+  onChange: (value: O['value'] | O['value'][] | string | string[]) => void,
   categories?: Category[],
   onQueryChange?: (value: string) => void,
   async = false,
