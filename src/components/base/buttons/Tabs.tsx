@@ -2,7 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import { cva } from 'class-variance-authority';
 import { Option } from '@/components';
 
-type TabOption = Omit<Option, 'value'> & { value: string | number };
+export type TabOption = Omit<Option, 'value'> & { value: string | number };
 
 export type TabProps<O = void> = O extends void
   ? DefaultTabProps
