@@ -57,6 +57,7 @@ export type BaseMultiSelectProps<O extends Option> = Omit<
       selectedOptions: O[],
       handleRemove: (value: O['value']) => void,
     ) => ReactNode;
+    showSelectedOptionsWhenOpen?: boolean;
   };
 
 const selectedSelectSizeVariants = cva('', {
@@ -99,6 +100,7 @@ function MultiSelect<O extends Option>(
     renderSelectedOptions,
     handleRemove,
     size,
+    showSelectedOptionsWhenOpen = false,
   }: BaseMultiSelectProps<O>,
   ref: ForwardedRef<HTMLInputElement>,
 ) {
@@ -155,7 +157,9 @@ function MultiSelect<O extends Option>(
       multiple
     >
       {({ open }) => {
-        const showSelectedOptions = !open && selectedOptions?.length;
+        const showSelectedOptions =
+          (showSelectedOptionsWhenOpen || !open) && selectedOptions?.length;
+
         return (
           <>
             <Combobox.Button
