@@ -180,7 +180,9 @@ export const BaseSelect = forwardRef(
                 )}
                 placeholder={placeholder}
                 displayValue={(value: string) => {
-                  return options?.find(o => o.value === value)?.label || '';
+                  return (
+                    options?.find(o => o.value === value)?.label || value || ''
+                  );
                 }}
               />
 
