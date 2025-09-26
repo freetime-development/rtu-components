@@ -1,9 +1,3 @@
-@import './icomoon';
-@import './animation';
-@import './rc_tooltip';
-@import './rt_datepicker';
-@import './transition';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,10 +15,15 @@
     height: 100vh;
     overflow-x: hidden;
   }
-
 }
 
 @layer components {
+  @import './icomoon';
+  @import './animation';
+  @import './rc_tooltip';
+  @import './rt_datepicker';
+  @import './transition';
+
   /* Hide scrollbar */
   .hide-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
@@ -41,3 +40,4 @@
     @apply h-0;
   }
 }
+

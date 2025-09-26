@@ -4,6 +4,15 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      keyframes: {
+        shimmer: {
+          '0%': { backgroundPosition: '150% 0' },
+          '100%': { backgroundPosition: '-150% 0' },
+        },
+      },
+      animation: {
+        shimmer: 'shimmer 2s linear infinite',
+      },
       colors: {
         primary: {
           DEFAULT: '#9E77ED',

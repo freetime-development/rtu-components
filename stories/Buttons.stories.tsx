@@ -37,6 +37,7 @@ export const Buttons: Story = {
           </div>
         </>
       </Button>,
+
       <Button
         key={2}
         variant="custom"
@@ -67,6 +68,18 @@ export const Buttons: Story = {
             </Button>
           </div>
         </>
+      </Button>,
+
+      <Button
+        key={2}
+        variant="custom"
+        size="normal"
+        className={twMerge('bg-secondary overflow-hidden w-32')}
+      >
+        <div className="bg-clip-text flex items-center gap-1 animate-shimmer bg-[linear-gradient(-45deg,rgba(255,255,255,0.4),rgba(255,255,255,1),rgba(255,255,255,0.4))] bg-[length:300%_100%]">
+          <Icon name="pause2" className="text-transparent" />
+          <span className="text-transparent">Text</span>
+        </div>
       </Button>,
     ],
   },
