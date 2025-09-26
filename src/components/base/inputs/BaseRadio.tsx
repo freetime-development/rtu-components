@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import type { ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { VariantProps, cva } from 'class-variance-authority';
 import { BaseInputProps } from './BaseInput';
@@ -13,7 +14,7 @@ export type BaseRadioProps = Omit<BaseInputProps, 'value' | 'size'> &
     inputClassName?: string;
     value: string | null | number;
     error?: boolean;
-    renderLabel?: (className?: string) => JSX.Element;
+    renderLabel?: (className?: string) => ReactNode;
   };
 
 export type InputVariantProps = VariantProps<typeof inputSizeVariants>;

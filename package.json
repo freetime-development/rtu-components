@@ -62,9 +62,9 @@
     "uuid": "latest"
   },
   "peerDependencies": {
-    "react": "latest",
-    "react-dom": "latest",
-    "react-hook-form": "latest"
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0",
+    "react-hook-form": "^7.0.0"
   },
   "peerDependenciesMeta": {
     "react": {
@@ -95,7 +95,6 @@
     "@types/luxon": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
-    "@types/react-datepicker": "latest",
     "@types/uuid": "latest",
     "chromatic": "latest",
     "husky": "latest",
@@ -105,6 +104,7 @@
     "react-dom": "latest",
     "rimraf": "latest",
     "storybook-addon-pseudo-states": "latest",
+    "tailwindcss": "^3.4.14",
     "typescript": "latest"
   },
   "sideEffects": [],

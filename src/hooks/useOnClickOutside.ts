@@ -1,8 +1,9 @@
 /* eslint-disable consistent-return */
-import { RefObject, useEffect } from 'react';
+import type { RefObject } from 'react';
+import { useEffect } from 'react';
 
-export function useOnClickOutside(
-  ref: RefObject<HTMLDivElement>,
+export function useOnClickOutside<T extends HTMLElement>(
+  ref: RefObject<T | null>,
   onClick: () => void,
   disabled = false,
 ) {
@@ -10,14 +11,18 @@ export function useOnClickOutside(
     if (disabled) {
       return;
     }
-    function handleClickOutside(event: any) {
-      if (ref.current && !ref.current.contains(event.target)) {
+    function handleClickOutside(event: MouseEvent | TouchEvent) {
+      const target = event.target as Node | null;
+
+      if (ref.current && target && !ref.current.contains(target)) {
         onClick();
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
     };
   }, [ref, onClick, disabled]);
 }

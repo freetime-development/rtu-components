@@ -52,7 +52,7 @@ export const DateTimePicker = ({
   const error = useFormError(name);
   const { field } = useController({ name, defaultValue, rules });
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => setOpen(null));
 
   const onFocusDate = () => {

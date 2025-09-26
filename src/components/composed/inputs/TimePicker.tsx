@@ -29,7 +29,7 @@ export const TimePicker = (props: TimePickerProps) => {
     open,
   };
 
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(wrapperRef, () => setOpen(false));
 
   const onFocus = () => {

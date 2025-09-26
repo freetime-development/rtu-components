@@ -1,4 +1,4 @@
-import { debounce } from 'debounce';
+import debounce from 'debounce';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Category, Option } from '@/components/types';
 

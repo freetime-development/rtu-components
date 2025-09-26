@@ -24,7 +24,7 @@ export const DatePicker: FC<DatePickerProps> = ({
   isStatic = false,
 }) => {
   const { defaultValue = '', ...restInputProps } = inputProps;
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const { field } = useController({ name: inputProps.name, defaultValue });
 
