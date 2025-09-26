@@ -1,20 +1,23 @@
 {
-  "extends": "@modern-js/tsconfig/base",
-  "declaration": true,
   "compilerOptions": {
+    "target": "ES2019",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "declaration": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
     "isolatedModules": true
   },
-  "include": [
-    "src",
-    // "tailwind.config.ts"
-  ],
-  "exclude": [
-    "**/node_modules"
-  ]
+  "include": ["src"],
+  "exclude": ["**/node_modules"]
 }
