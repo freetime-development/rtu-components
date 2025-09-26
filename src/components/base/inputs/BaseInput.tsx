@@ -1,6 +1,7 @@
 import type { VariantProps } from 'class-variance-authority';
 import { cva } from 'class-variance-authority';
 import { forwardRef } from 'react';
+import type { ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
 import {
   ComponentVariantState,
@@ -14,8 +15,8 @@ export type BaseInputProps = Omit<
   'onChange' | 'onFocus' | 'size' | 'ref'
 > &
   InputVariantProps & {
-    renderLeft?: (className: string, error?: boolean) => JSX.Element;
-    renderRight?: (className: string, error?: boolean) => JSX.Element;
+    renderLeft?: (className: string, error?: boolean) => ReactNode;
+    renderRight?: (className: string, error?: boolean) => ReactNode;
     name: string;
     containerClassName?: string;
     error?: boolean;

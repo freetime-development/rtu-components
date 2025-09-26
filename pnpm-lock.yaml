@@ -110,9 +110,6 @@ importers:
       '@types/react':
         specifier: latest
         version: 19.1.13
-      '@types/react-datepicker':
-        specifier: latest
-        version: 7.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@types/uuid':
         specifier: latest
         version: 11.0.0
@@ -3983,10 +3980,6 @@ packages:
 
   '@types/range-parser@1.2.7':
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
-
-  '@types/react-datepicker@7.0.0':
-    resolution: {integrity: sha512-4tWwOUq589tozyQPBVEqGNng5DaZkomx5IVNuur868yYdgjH6RaL373/HKiVt1IDoNNXYiTGspm1F7kjrarM8Q==}
-    deprecated: This is a stub types definition. react-datepicker provides its own type definitions, so you do not need this installed.
 
   '@types/react-helmet@6.1.11':
     resolution: {integrity: sha512-0QcdGLddTERotCXo3VFlUSWO3ztraw8nZ6e3zJSgG7apwV5xt+pJUS8ewPBqT4NYB1optGLprNQzFleIY84u/g==}
@@ -15788,13 +15781,6 @@ snapshots:
   '@types/qs@6.14.0': {}
 
   '@types/range-parser@1.2.7': {}
-
-  '@types/react-datepicker@7.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
-    dependencies:
-      react-datepicker: 8.7.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-    transitivePeerDependencies:
-      - react
-      - react-dom
 
   '@types/react-helmet@6.1.11':
     dependencies:

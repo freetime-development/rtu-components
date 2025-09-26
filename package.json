@@ -95,7 +95,6 @@
     "@types/luxon": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
-    "@types/react-datepicker": "latest",
     "@types/uuid": "latest",
     "chromatic": "latest",
     "husky": "latest",

@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import type { ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Content } from './Content';
 import {
@@ -20,7 +21,7 @@ export type BaseFileInputProps = PropsWithChildren &
     renderPreview?: (
       files: File[],
       removeFile: (id: string) => void,
-    ) => JSX.Element;
+    ) => ReactNode;
     disablePreview?: boolean;
     /** Merges existing selection with new files */
     aggregate?: boolean;

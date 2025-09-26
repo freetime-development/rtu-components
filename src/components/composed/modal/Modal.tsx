@@ -31,9 +31,12 @@ export const Modal = forwardRef<HTMLDivElement | null, ModalProps>(
     },
     ref,
   ) => {
-    const modalRef = useRef<HTMLDivElement | null>(null);
+    const modalRef = useRef<HTMLDivElement>(null);
 
-    useImperativeHandle(ref, () => modalRef.current as HTMLDivElement);
+    useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
+      ref,
+      () => modalRef.current,
+    );
     useOnClickOutside(modalRef, onClose, disableClickOutside);
 
     if (!isOpen) {

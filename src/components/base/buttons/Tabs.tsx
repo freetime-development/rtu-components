@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { cva } from 'class-variance-authority';
 import { Option } from '@/components';
@@ -16,7 +17,7 @@ type GenericTabProps<O extends TabOption> = {
     isSelected: boolean,
     isFirst: boolean,
     isLast: boolean,
-  ) => JSX.Element;
+  ) => ReactNode;
   onClick: (value: O['value']) => void;
 } & Omit<DefaultTabProps, 'options' | 'value' | 'onClick' | 'renderOption'>;
 
@@ -28,7 +29,7 @@ type DefaultTabProps = {
     isSelected: boolean,
     isFirst: boolean,
     isLast: boolean,
-  ) => JSX.Element;
+  ) => ReactNode;
   onClick: (value: TabOption['value']) => void;
   containerClassName?: string;
   className?: string;

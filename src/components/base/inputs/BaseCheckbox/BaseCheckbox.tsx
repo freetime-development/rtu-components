@@ -19,7 +19,7 @@ export type BaseCheckboxProps = Omit<
     error?: boolean;
     containerClassName?: string;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-    renderLabel?: (className?: string) => JSX.Element;
+    renderLabel?: (className?: string) => ReactNode;
     renderCheckedIcon?: (defaultClassName: string) => ReactNode;
   };
 type CheckboxVariantProps = VariantProps<typeof checkboxSizeVariants>;

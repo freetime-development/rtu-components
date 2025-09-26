@@ -1,24 +1,30 @@
 import { DateTime } from 'luxon';
 import { FC, useEffect, useState } from 'react';
-import ReactDatePicker, {
+import ReactDatePicker from 'react-datepicker';
+import type {
+  DatePickerProps as ReactDatePickerProps,
   ReactDatePickerCustomHeaderProps,
-  ReactDatePickerProps,
 } from 'react-datepicker';
 import { Button, Icon } from '@/components';
 
 export type {
-  ReactDatePickerProps,
+  DatePickerProps as ReactDatePickerProps,
   ReactDatePickerCustomHeaderProps,
-  CalendarContainerProps,
 } from 'react-datepicker';
+
+type SingleDatePickerProps = Exclude<
+  ReactDatePickerProps,
+  { selectsRange: true } | { selectsMultiple: true }
+>;
 
 const defaultFormat = 'yyyy-MM-dd';
 
 export interface BaseDatePickerProps
-  extends Omit<ReactDatePickerProps, 'onChange'> {
+  extends Omit<SingleDatePickerProps, 'onChange' | 'selected' | 'value'> {
   skipFilterDays?: boolean;
   onChange: (value: string) => void;
   dateFormat?: string;
+  value?: string;
 }
 
 function getValidDate(value?: string, format: string = defaultFormat) {
@@ -31,12 +37,26 @@ function getValidDate(value?: string, format: string = defaultFormat) {
 }
 
 export const BaseDatePicker: FC<BaseDatePickerProps> = props => {
-  const { value, onChange, ...rest } = props;
-  const dateFormat = props.dateFormat || defaultFormat;
+  const {
+    value,
+    onChange,
+    skipFilterDays: _skipFilterDays,
+    dateFormat: dateFormatProp,
+    ...rest
+  } = props;
+  void _skipFilterDays;
+  const dateFormat = dateFormatProp || defaultFormat;
   const sanitizedDate = getValidDate(value, dateFormat);
   const [date, setDate] = useState<Date | null>(sanitizedDate);
+  const pickerProps = rest as SingleDatePickerProps;
 
-  const handleDatePickerChange = (newDate: Date) => {
+  const handleDatePickerChange = (newDate: Date | null) => {
+    if (!newDate) {
+      onChange('');
+      setDate(null);
+      return;
+    }
+
     const formattedDate = DateTime.fromJSDate(newDate).toFormat(dateFormat);
     onChange(formattedDate);
     setDate(newDate);
@@ -44,11 +64,20 @@ export const BaseDatePicker: FC<BaseDatePickerProps> = props => {
 
   // prevents invalid user input
   useEffect(() => {
-    const sanitizedDate = getValidDate(value, dateFormat);
-    if (sanitizedDate && sanitizedDate !== date) {
-      setDate(sanitizedDate);
-    }
-  }, [value, date]);
+    const nextDate = getValidDate(value, dateFormat);
+
+    setDate(prev => {
+      if (!nextDate) {
+        return prev === null ? prev : null;
+      }
+
+      if (prev && nextDate && prev.getTime() === nextDate.getTime()) {
+        return prev;
+      }
+
+      return nextDate;
+    });
+  }, [value, dateFormat]);
 
   return (
     <ReactDatePicker
@@ -59,7 +88,7 @@ export const BaseDatePicker: FC<BaseDatePickerProps> = props => {
       calendarStartDay={props.calendarStartDay ?? 1}
       dateFormat={dateFormat}
       renderCustomHeader={headerProps => <DatePickerHeader {...headerProps} />}
-      {...rest}
+      {...pickerProps}
     />
   );
 };

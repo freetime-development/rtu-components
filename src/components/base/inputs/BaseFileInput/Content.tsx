@@ -1,13 +1,14 @@
 import { FC } from 'react';
+import type { ReactNode } from 'react';
 import { Preview } from './Preview';
 
 interface ContentProps {
   files: File[];
-  initialView?: React.ReactNode;
+  initialView?: ReactNode;
   renderPreview?: (
     files: File[],
     removeFile: (id: string) => void,
-  ) => JSX.Element;
+  ) => ReactNode;
   removeFile: (id: string) => void;
   disablePreview?: boolean;
 }
