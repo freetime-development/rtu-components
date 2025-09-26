@@ -1,2 +1,0 @@
-patchedDependencies:
-  '@modern-js/plugin-tailwindcss': patches/@modern-js__plugin-tailwindcss.patch
