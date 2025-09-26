@@ -1,6 +1,13 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx}', './stories/**/*.{js,ts,jsx,tsx}'],
+import type { Config } from 'tailwindcss';
+import headlessui from '@headlessui/tailwindcss';
+import neumorphism from 'tailwindcss-neumorphism';
+
+const config: Config = {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}',
+    './stories/**/*.{js,ts,jsx,tsx}',
+    './playground/src/**/*.{js,ts,jsx,tsx}',
+  ],
   darkMode: 'class',
   theme: {
     extend: {
@@ -101,8 +108,7 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('@headlessui/tailwindcss')({ prefix: 'ui' }),
-    require('tailwindcss-neumorphism'),
-  ],
+  plugins: [headlessui({ prefix: 'ui' }), neumorphism],
 };
+
+export default config;

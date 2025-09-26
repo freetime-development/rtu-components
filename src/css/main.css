@@ -4,9 +4,7 @@
 @import './rt_datepicker' layer(components);
 @import './transition' layer(components);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 @layer base {
   * {

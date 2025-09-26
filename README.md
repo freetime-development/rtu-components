@@ -28,10 +28,23 @@ Run and debug the module:
 pnpm dev
 ```
 
+Launch the component playground:
+
+```
+pnpm playground
+```
+
 Build the module for production:
 
 ```
 pnpm build
+```
+
+Compile or watch the Tailwind bundle with the Tailwind CSS v4 CLI:
+
+```
+pnpm build-css
+pnpm build-css:watch
 ```
 
 For more information, see the [Modern.js Module documentation](https://modernjs.dev/module-tools/en).
