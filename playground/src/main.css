@@ -1,0 +1,9 @@
+@import '../../src/css/main.css';
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  @apply antialiased bg-gray-50 text-gray-900;
+}
