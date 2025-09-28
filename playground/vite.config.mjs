@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import tailwindcss from '@tailwindcss/vite';
 
 const playgroundDir = dirname(fileURLToPath(import.meta.url));
 

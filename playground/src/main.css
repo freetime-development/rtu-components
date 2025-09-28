@@ -1,9 +1,22 @@
 @import '../../src/css/main.css';
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
 }
 
 body {
-  @apply antialiased bg-gray-50 text-gray-900;
+  @apply antialiased;
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+}
+
+code {
+  border-radius: 0.375rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.875rem;
+  padding: 0.125rem 0.375rem;
 }

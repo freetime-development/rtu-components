@@ -1,10 +1,84 @@
-@import './icomoon' layer(components);
+@source "../**/*.{js,jsx,ts,tsx}";
+@source "../../stories/**/*.{js,jsx,ts,tsx}";
+@source "../../playground/src/**/*.{js,jsx,ts,tsx}";
+
+@custom-variant dark (&:where(.dark &));
+@custom-variant ui-open (&[data-headlessui-state~="open"], :where([data-headlessui-state~="open"]) &);
+@custom-variant ui-not-open (
+  &[data-headlessui-state]:not([data-headlessui-state~="open"]),
+  :where([data-headlessui-state]:not([data-headlessui-state~="open"])) &:not([data-headlessui-state])
+);
+@custom-variant ui-checked (&[data-headlessui-state~="checked"], :where([data-headlessui-state~="checked"]) &);
+
+@custom-variant ui-not-checked (
+  &[data-headlessui-state]:not([data-headlessui-state~="checked"]),
+  :where([data-headlessui-state]:not([data-headlessui-state~="checked"])) &:not([data-headlessui-state])
+);
+@custom-variant ui-selected (&[data-headlessui-state~="selected"], :where([data-headlessui-state~="selected"]) &);
+@custom-variant ui-not-selected (
+  &[data-headlessui-state]:not([data-headlessui-state~="selected"]),
+  :where([data-headlessui-state]:not([data-headlessui-state~="selected"])) &:not([data-headlessui-state])
+);
+@custom-variant ui-active (&[data-headlessui-state~="active"], :where([data-headlessui-state~="active"]) &);
+@custom-variant ui-not-active (
+  &[data-headlessui-state]:not([data-headlessui-state~="active"]),
+  :where([data-headlessui-state]:not([data-headlessui-state~="active"])) &:not([data-headlessui-state])
+);
+@custom-variant ui-disabled (&[data-headlessui-state~="disabled"], :where([data-headlessui-state~="disabled"]) &);
+@custom-variant ui-not-disabled (
+  &[data-headlessui-state]:not([data-headlessui-state~="disabled"]),
+  :where([data-headlessui-state]:not([data-headlessui-state~="disabled"])) &:not([data-headlessui-state])
+);
+@custom-variant ui-focus-visible (:where([data-headlessui-focus-visible]) &:focus);
+@custom-variant ui-not-focus-visible (&:focus:where(:not([data-headlessui-focus-visible] &)));
+
+@import './colors.css';
+@import './icomoon.css';
 @import './animation' layer(components);
 @import './rc_tooltip' layer(components);
 @import './rt_datepicker' layer(components);
 @import './transition' layer(components);
-
 @import 'tailwindcss';
+
+@keyframes move {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+
+@keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes hue {
+  0%   { filter: hue-rotate(0deg); }
+  50%  { filter: hue-rotate(20deg); }
+  100% { filter: hue-rotate(0deg); }
+}
+
+@utility animate-hue {
+  animation: hue 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: -150% 0;
+  }
+}
+
+@utility animate-gradient {
+  animation: gradient 1s linear infinite;
+}
+
+@utility animate-move {
+  animation: move 4s linear infinite;
+}
+@utility animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}
 
 @layer base {
   * {
@@ -38,4 +112,3 @@
     @apply h-0;
   }
 }
-

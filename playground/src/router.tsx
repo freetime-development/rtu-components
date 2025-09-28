@@ -64,7 +64,7 @@ const pages: PageDefinition[] = Object.entries(pageModules).map(([filePath, modu
   const { meta } = module;
   const title = meta?.title ?? deriveTitleFromPath(path);
   const description = meta?.description;
-  const order = meta?.order ?? (path === '/' ? -Infinity : Number.POSITIVE_INFINITY);
+  const order = meta?.order ?? (path === '/' ? -Infinity : Infinity);
 
   return {
     path,

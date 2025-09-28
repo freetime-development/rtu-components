@@ -4,6 +4,9 @@ import { RouterProvider } from 'react-router-dom';
 
 import router from './router';
 import './main.css';
+import { initializeTheme } from './theme';
+
+initializeTheme();
 
 const container = document.getElementById('root');
 
